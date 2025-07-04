@@ -4,8 +4,8 @@ services:
       env: python
       plan: free
       buildCommand: ./build.sh
+      workingDir: src
       startCommand: daphne -b 0.0.0.0 -p 10000 coverence.asgi:application
-      workingDir: src/coverence
       autoDeploy: true
       envVars:
           - key: DJANGO_SETTINGS_MODULE
