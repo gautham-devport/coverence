@@ -3,9 +3,11 @@ services:
       name: coverence-backend
       env: python
       plan: free
-      buildCommand: pip install -r src/coverence/requirements.txt && python manage.py collectstatic --noinput
+      buildCommand: >
+          cd src/coverence &&
+          pip install -r requirements.txt &&
+          python manage.py collectstatic --noinput
       startCommand: daphne -b 0.0.0.0 -p 10000 coverence.asgi:application
-      workingDir: src/coverence
       autoDeploy: true
       envVars:
           - key: DJANGO_SETTINGS_MODULE
