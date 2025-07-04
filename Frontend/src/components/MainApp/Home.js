@@ -1,0 +1,55 @@
+import React from "react";
+import Sidebar from "./Sidebar";
+import styled, { createGlobalStyle } from "styled-components";
+import { Outlet } from "react-router-dom";
+
+const Home = () => {
+    return (
+        <>
+            <GlobalStyle />
+            <HomeContainer>
+                <Sidebar />
+                <MainContent>
+                    <Outlet />
+                </MainContent>
+            </HomeContainer>
+        </>
+    );
+};
+
+export default Home;
+
+const GlobalStyle = createGlobalStyle`
+
+/* @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap'); */
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        height: 100%;
+        width: 100%;
+        background-color: #000;
+    }
+`;
+
+const HomeContainer = styled.section`
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background: #080808;
+    background-size: cover;
+    color: #fff;
+`;
+
+const MainContent = styled.div`
+    width: 100%;
+    /* border-radius: 0px 20px 20px 0px; */
+    background: #0a0a0a;
+    color: #fff;
+    overflow-y: hidden;
+    /* border: 1px solid #191919; */
+`;
