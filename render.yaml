@@ -3,8 +3,10 @@ services:
       name: coverence-backend
       env: python
       plan: free
-      buildCommand: pip install -r src/coverence/requirements.txt
-      startCommand: PYTHONPATH=src daphne -b 0.0.0.0 -p 10000 coverence.asgi:application
+      buildCommand: |
+          pip install -r src/coverence/requirements.txt
+          python manage.py collectstatic --noinput
+      startCommand: daphne -b 0.0.0.0 -p 10000 coverence.asgi:application
       workingDir: src/coverence
       autoDeploy: true
       envVars:
