@@ -1,6 +1,8 @@
 from pathlib import Path
 from datetime import timedelta
 from pillow_heif import register_heif_opener
+import os
+import urllib.parse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,12 +14,12 @@ register_heif_opener()
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!8(jr$b@j-s^c!x08*s#laji8-1nmu$+r9h@5!ym3n^1e##$4o'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(",")
 
 
 # Application definition
@@ -43,11 +45,14 @@ INSTALLED_APPS = [
 ASGI_APPLICATION = 'coverence.asgi.application'
 
 
+redis_url = os.environ.get("REDIS_URL", "redis://127.0.0.1:6379")
+url = urllib.parse.urlparse(redis_url)
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [(url.hostname, url.port)],
         },
     },
 }
@@ -152,9 +157,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -165,39 +171,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-# JAZZMIN_SETTINGS = {
-#     "show_ui_builder": False,
-# }
-
-# JAZZMIN_UI_TWEAKS = {
-#     "navbar_small_text": True,
-#     "footer_small_text": True,
-#     "body_small_text": False,
-#     "brand_small_text": True,
-#     "brand_colour": False,
-#     "accent": "accent-info",
-#     "navbar": "navbar-success navbar-dark",
-#     "no_navbar_border": True,
-#     "navbar_fixed": False,
-#     "layout_boxed": False,
-#     "footer_fixed": False,
-#     "sidebar_fixed": False,
-#     "sidebar": "sidebar-dark-success",
-#     "sidebar_nav_small_text": False,
-#     "sidebar_disable_expand": False,
-#     "sidebar_nav_child_indent": False,
-#     "sidebar_nav_compact_style": False,
-#     "sidebar_nav_legacy_style": False,
-#     "sidebar_nav_flat_style": False,
-#     "theme": "united",
-#     "dark_mode_theme": None,
-#     "button_classes": {
-#         "primary": "btn-outline-primary",
-#         "secondary": "btn-outline-secondary",
-#         "info": "btn-info",
-#         "warning": "btn-warning",
-#         "danger": "btn-danger",
-#         "success": "btn-success"
-#     },
-#     "actions_sticky_top": False
-# }
