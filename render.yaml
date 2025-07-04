@@ -5,8 +5,7 @@ services:
       plan: free
       buildCommand: >
           cd src/coverence &&
-          pip install -r requirements.txt &&
-          python manage.py collectstatic --noinput
+          pip install -r requirements.txt
       startCommand: daphne -b 0.0.0.0 -p 10000 coverence.asgi:application
       autoDeploy: true
       envVars:
