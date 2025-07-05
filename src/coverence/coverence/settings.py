@@ -69,10 +69,10 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://coverence-r586.vercel.app', 
+    'https://coverence-r586.vercel.app'
+    , 
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
