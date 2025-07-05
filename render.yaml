@@ -13,7 +13,7 @@ services:
           - key: SECRET_KEY
             value: django-insecure-!8(jr$b@j-s^c!x08*s#laji8-1nmu$+r9h@5!ym3n^1e##$4o
           - key: DEBUG
-            value: False
+            value: false
           - key: ALLOWED_HOSTS
             value: coverence-backend.onrender.com
           - key: REDIS_URL
