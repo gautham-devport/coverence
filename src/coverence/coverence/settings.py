@@ -69,11 +69,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000', 
+    'https://coverence-r586.vercel.app', 
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
+    "https://coverence-r586.vercel.app",
 ]
 
 REST_FRAMEWORK = {
