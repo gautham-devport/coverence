@@ -175,7 +175,7 @@ const Chat = () => {
 
     useEffect(() => {
         const socket = new WebSocket(
-            `wss://coverence-backend.onrender.com/chat/${receiverId}/?token=${token}`
+            `wss://coverence-backend.onrender.com/ws/chat/${receiverId}/?token=${token}`
         );
 
         socket.onopen = () => console.log("Chat WebSocket connected");
