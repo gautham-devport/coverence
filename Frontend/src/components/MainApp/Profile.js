@@ -105,7 +105,7 @@ const Profile = () => {
                     >
                         {user.profile_image ? (
                             <ProfileImage
-                                src={user.profile_image}
+                                src={`https://coverence-backend.onrender.com${user.profile_image}`}
                                 alt="Profile"
                             />
                         ) : (
