@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import UserProfile, Follow, Notification
 
+
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
@@ -12,17 +15,28 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     profile = UserProfileSerializer(required=False)
+    profile_image = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'email', 'password', 'profile']
+        fields = ['id', 'first_name', 'last_name', 'email', 'password', 'profile', 'profile_image']
         extra_kwargs = {'password': {'write_only': True}}
+
+    def get_profile_image(self, obj):
+        try:
+            profile = obj.userprofile
+            if profile.profile_image:
+                request = self.context.get('request')
+                return request.build_absolute_uri(profile.profile_image.url) if request else profile.profile_image.url
+            return None
+        except Exception as e:
+            print("Error fetching profile_image:", e)
+            return None
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile', {})
         password = validated_data.pop('password', None)
 
-        # Username same as email
         user = User(**validated_data)
         user.username = validated_data.get('email')
 
@@ -30,7 +44,6 @@ class UserSerializer(serializers.ModelSerializer):
             user.set_password(password)
         user.save()
 
-        # ⚠️ Do NOT manually create UserProfile here — signal will handle it
         return user
 
     def update(self, instance, validated_data):
@@ -39,13 +52,13 @@ class UserSerializer(serializers.ModelSerializer):
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.save()
 
-        # Ensure profile exists (safety check)
         profile, _ = UserProfile.objects.get_or_create(user=instance)
         for attr, value in profile_data.items():
             setattr(profile, attr, value)
         profile.save()
 
         return instance
+
     
 
 
