@@ -15,9 +15,12 @@ const FollowersModal = ({ userId, onClose }) => {
         const token = localStorage.getItem("token");
 
         axios
-            .get(`http://127.0.0.1:8000/api/users/${userId}/followerslist/`, {
-                headers: { Authorization: `Bearer ${token}` },
-            })
+            .get(
+                `https://coverence-backend.onrender.com/api/users/${userId}/followerslist/`,
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            )
             .then((res) => setFollowers(res.data))
             .catch(() => setError("Failed to fetch followers."));
     }, [userId]);
@@ -31,7 +34,7 @@ const FollowersModal = ({ userId, onClose }) => {
         const token = localStorage.getItem("token");
         try {
             await axios.post(
-                `http://127.0.0.1:8000/api/users/${followerId}/follow/`,
+                `https://coverence-backend.onrender.com/api/users/${followerId}/follow/`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` },

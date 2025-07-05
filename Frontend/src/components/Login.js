@@ -68,7 +68,7 @@ const Login = () => {
 
         try {
             const loginResponse = await axios.post(
-                "http://127.0.0.1:8000/api/users/login/",
+                "https://coverence-backend.onrender.com/api/users/login/",
                 {
                     username: lowercaseEmail,
                     password: formData.password,
@@ -80,7 +80,7 @@ const Login = () => {
             localStorage.setItem("refresh", refresh);
 
             const profileResponse = await axios.get(
-                "http://127.0.0.1:8000/api/users/profile/",
+                "https://coverence-backend.onrender.com/api/users/profile/",
                 { headers: { Authorization: `Bearer ${access}` } }
             );
 

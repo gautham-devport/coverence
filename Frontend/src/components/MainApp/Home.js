@@ -21,7 +21,7 @@ export default Home;
 
 const GlobalStyle = createGlobalStyle`
 
-/* @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap'); */
+
 
     * {
         margin: 0;
@@ -47,9 +47,7 @@ const HomeContainer = styled.section`
 
 const MainContent = styled.div`
     width: 100%;
-    /* border-radius: 0px 20px 20px 0px; */
     background: #0a0a0a;
     color: #fff;
     overflow-y: hidden;
-    /* border: 1px solid #191919; */
 `;

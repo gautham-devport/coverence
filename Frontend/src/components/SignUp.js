@@ -67,7 +67,7 @@ const SignUp = () => {
         if (!errors.email && formData.email) {
             try {
                 const response = await axios.post(
-                    "http://127.0.0.1:8000/api/users/signup/",
+                    "https://coverence-backend.onrender.com/api/users/signup/",
                     {
                         first_name: formData.firstName,
                         last_name: formData.lastName,

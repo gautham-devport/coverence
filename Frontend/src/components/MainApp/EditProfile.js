@@ -26,7 +26,7 @@ const EditProfile = () => {
             try {
                 const token = localStorage.getItem("token");
                 const response = await axios.get(
-                    "http://127.0.0.1:8000/api/users/profile/",
+                    "https://coverence-backend.onrender.com/api/users/profile/",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -105,12 +105,16 @@ const EditProfile = () => {
         }
 
         try {
-            await axios.put("http://127.0.0.1:8000/api/users/profile/", data, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "multipart/form-data",
-                },
-            });
+            await axios.put(
+                "https://coverence-backend.onrender.com/api/users/profile/",
+                data,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
             setMessage("Profile updated");
             setIsSaved(true);
 

@@ -10,7 +10,7 @@ export const WebSocketProvider = ({ children }) => {
         if (!userId || !token) return;
 
         const ws = new WebSocket(
-            `ws://127.0.0.1:8000/ws/notifications/${userId}/?token=${token}`
+            `wss://coverence-backend.onrender.com/ws/notifications/${userId}/?token=${token}`
         );
 
         ws.onopen = () => console.log("✅ Notification WebSocket connected");

@@ -17,11 +17,14 @@ const FollowingModal = ({ userId, onClose }) => {
         const token = localStorage.getItem("token");
 
         axios
-            .get(`http://127.0.0.1:8000/api/users/${userId}/followinglist/`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            .get(
+                `https://coverence-backend.onrender.com/api/users/${userId}/followinglist/`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
             .then((res) => {
                 setFollowers(res.data);
                 setError("");
@@ -46,7 +49,7 @@ const FollowingModal = ({ userId, onClose }) => {
         try {
             const token = localStorage.getItem("token");
             await axios.delete(
-                `http://127.0.0.1:8000/api/users/${id}/unfollow/`,
+                `https://coverence-backend.onrender.com/api/users/${id}/unfollow/`,
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }

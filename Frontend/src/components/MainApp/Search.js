@@ -44,7 +44,7 @@ const Search = () => {
 
         try {
             const response = await axios.get(
-                `http://127.0.0.1:8000/api/users/search/?q=${searchQuery}`,
+                `https://coverence-backend.onrender.com/api/users/search/?q=${searchQuery}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,

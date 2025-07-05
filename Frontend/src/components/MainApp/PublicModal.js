@@ -28,8 +28,8 @@ const PublicModal = ({ userId, loggedInUserId, type, onClose }) => {
                     : {};
                 const url =
                     type === "followers"
-                        ? `http://127.0.0.1:8000/api/users/${userId}/followerslist/`
-                        : `http://127.0.0.1:8000/api/users/${userId}/followinglist/`;
+                        ? `https://coverence-backend.onrender.com/api/users/${userId}/followerslist/`
+                        : `https://coverence-backend.onrender.com/api/users/${userId}/followinglist/`;
 
                 const res = await axios.get(url, { headers });
                 const allUsers = res.data;
@@ -78,7 +78,7 @@ const PublicModal = ({ userId, loggedInUserId, type, onClose }) => {
         const token = localStorage.getItem("token");
         try {
             await axios.post(
-                `http://127.0.0.1:8000/api/users/${targetUserId}/follow/`,
+                `https://coverence-backend.onrender.com/api/users/${targetUserId}/follow/`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` },

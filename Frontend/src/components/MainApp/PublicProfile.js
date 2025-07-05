@@ -35,10 +35,10 @@ const PublicProfile = () => {
 
                 const [profileRes, statsRes] = await Promise.all([
                     axios.get(
-                        `http://127.0.0.1:8000/api/users/${userId}/public-profile/`
+                        `https://coverence-backend.onrender.com/api/users/${userId}/public-profile/`
                     ),
                     axios.get(
-                        `http://127.0.0.1:8000/api/users/${userId}/follow-stats/`,
+                        `https://coverence-backend.onrender.com/api/users/${userId}/follow-stats/`,
                         { headers }
                     ),
                 ]);
@@ -67,7 +67,7 @@ const PublicProfile = () => {
             if (!token) return navigate("/login");
 
             await axios.post(
-                `http://127.0.0.1:8000/api/users/${userId}/follow/`,
+                `https://coverence-backend.onrender.com/api/users/${userId}/follow/`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -91,7 +91,7 @@ const PublicProfile = () => {
             if (!token) return navigate("/login");
 
             await axios.delete(
-                `http://127.0.0.1:8000/api/users/${userId}/unfollow/`,
+                `https://coverence-backend.onrender.com/api/users/${userId}/unfollow/`,
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }

@@ -20,7 +20,7 @@ const HomePage = () => {
             const token = localStorage.getItem("token");
             try {
                 const response = await axios.get(
-                    "http://127.0.0.1:8000/api/users/profile/",
+                    "https://coverence-backend.onrender.com/api/users/profile/",
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }

@@ -31,7 +31,7 @@ const Notification = () => {
 
             try {
                 const res = await axios.get(
-                    "http://127.0.0.1:8000/api/users/notifications/",
+                    "https://coverence-backend.onrender.com/api/users/notifications/",
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -50,7 +50,7 @@ const Notification = () => {
     const handleFollow = async (userId, index) => {
         try {
             await axios.post(
-                `http://127.0.0.1:8000/api/users/${userId}/follow/`,
+                `https://coverence-backend.onrender.com/api/users/${userId}/follow/`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` },

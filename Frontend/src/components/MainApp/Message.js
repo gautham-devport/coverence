@@ -25,9 +25,12 @@ const Message = () => {
 
         const fetchChats = () => {
             axios
-                .get("http://127.0.0.1:8000/api/chat/recent/", {
-                    headers: { Authorization: `Bearer ${token}` },
-                })
+                .get(
+                    "https://coverence-backend.onrender.com/api/chat/recent/",
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                )
                 .then((res) => {
                     const sorted = res.data.chats.sort((a, b) => {
                         return (

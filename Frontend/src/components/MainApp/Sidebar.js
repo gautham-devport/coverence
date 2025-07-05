@@ -56,7 +56,7 @@ const Sidebar = () => {
                 if (!token) return;
 
                 const response = await axios.get(
-                    "http://127.0.0.1:8000/api/users/profile/",
+                    "https://coverence-backend.onrender.com/api/users/profile/",
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ const Sidebar = () => {
 
             try {
                 const res = await axios.get(
-                    "http://127.0.0.1:8000/api/users/notifications/unseen-count/",
+                    "https://coverence-backend.onrender.com/api/users/notifications/unseen-count/",
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -115,7 +115,7 @@ const Sidebar = () => {
 
             try {
                 const res = await axios.get(
-                    "http://127.0.0.1:8000/api/chat/recent/",
+                    "https://coverence-backend.onrender.com/api/chat/recent/",
                     {
                         headers: { Authorization: `Bearer ${token}` },
                     }
@@ -135,7 +135,7 @@ const Sidebar = () => {
             if (!token) return;
 
             await axios.post(
-                "http://127.0.0.1:8000/api/users/notifications/mark-seen/",
+                "https://coverence-backend.onrender.com/api/users/notifications/mark-seen/",
                 {},
                 {
                     headers: {
@@ -159,7 +159,7 @@ const Sidebar = () => {
         if (!token || !userId) return;
 
         const ws = new WebSocket(
-            `ws://127.0.0.1:8000/ws/notifications/${userId}/?token=${token}`
+            `wss://coverence-backend.onrender.com/ws/notifications/${userId}/?token=${token}`
         );
 
         ws.onmessage = (event) => {
@@ -221,7 +221,7 @@ const Sidebar = () => {
 
         try {
             const res = await axios.get(
-                "http://127.0.0.1:8000/api/chat/recent/",
+                "https://coverence-backend.onrender.com/api/chat/recent/",
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }

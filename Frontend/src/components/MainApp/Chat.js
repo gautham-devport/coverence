@@ -105,7 +105,7 @@ const Chat = () => {
     const markMessagesAsSeen = useCallback(async () => {
         try {
             await axios.post(
-                `http://127.0.0.1:8000/api/chat/${receiverId}/mark-seen/`,
+                `https://coverence-backend.onrender.com/api/chat/${receiverId}/mark-seen/`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -145,7 +145,7 @@ const Chat = () => {
         const fetchHistory = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/chat/${receiverId}/messages/`,
+                    `https://coverence-backend.onrender.com/api/chat/${receiverId}/messages/`,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setMessages(response.data);
@@ -160,7 +160,7 @@ const Chat = () => {
         const loadReceiverInfo = async () => {
             try {
                 const response = await axios.get(
-                    `http://127.0.0.1:8000/api/users/${receiverId}/public-profile/`,
+                    `https://coverence-backend.onrender.com/api/users/${receiverId}/public-profile/`,
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
                 setReceiverInfo(response.data);
@@ -175,7 +175,7 @@ const Chat = () => {
 
     useEffect(() => {
         const socket = new WebSocket(
-            `ws://127.0.0.1:8000/ws/chat/${receiverId}/?token=${token}`
+            `wss://coverence-backend.onrender.com/chat/${receiverId}/?token=${token}`
         );
 
         socket.onopen = () => console.log("Chat WebSocket connected");
