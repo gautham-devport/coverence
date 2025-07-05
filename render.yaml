@@ -11,12 +11,12 @@ services:
           - key: DJANGO_SETTINGS_MODULE
             value: coverence.settings
           - key: SECRET_KEY
-            value: django-insecure-!8(jr$b@j-s^c!x08*s#laji8-1nmu$+r9h@5!ym3n^1e##$4o
+            value: your-secret-key
           - key: DEBUG
-            value: false
+            value: False
           - key: ALLOWED_HOSTS
             value: coverence-backend.onrender.com
           - key: REDIS_URL
-            value: redis://default:LwW8o9g09EvBfQHrrDnxEe2ERBZusBJJ@redis-10112.c11.us-east-1-2.ec2.redns.redis-cloud.com:10112
+            value: your-redis-url
           - key: PORT
             value: 10000
