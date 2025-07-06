@@ -21,17 +21,18 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'first_name', 'last_name', 'email', 'password', 'profile', 'profile_image']
         extra_kwargs = {'password': {'write_only': True}}
+        
 
     def get_profile_image(self, obj):
         try:
             profile = obj.userprofile
             if profile.profile_image:
-                request = self.context.get('request')
-                return request.build_absolute_uri(profile.profile_image.url) if request else profile.profile_image.url
+                return str(profile.profile_image)
             return None
         except Exception as e:
             print("Error fetching profile_image:", e)
             return None
+
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile', {})
