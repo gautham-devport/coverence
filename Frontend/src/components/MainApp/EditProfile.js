@@ -13,9 +13,10 @@ const EditProfile = () => {
         skill_known: "",
         skill_wanted: "",
         available_time: "",
-        profile_image: "",
+        profile_image: "", // this will hold cloudinary URL
+        previewImage: "", // for local preview only
     });
-    const [profileImage, setProfileImage] = useState(null);
+    const [profileImage, setProfileImage] = useState(null); // File object to upload
     const [message, setMessage] = useState("");
     const [isSaved, setIsSaved] = useState(false);
     const [isConverting, setIsConverting] = useState(false);
@@ -33,7 +34,7 @@ const EditProfile = () => {
                         },
                     }
                 );
-                setFormData(response.data);
+                setFormData((prev) => ({ ...prev, ...response.data }));
             } catch (error) {
                 console.error("Failed to fetch profile", error);
             }
@@ -50,6 +51,8 @@ const EditProfile = () => {
         const file = e.target.files[0];
         if (!file) return;
 
+        let finalFile = file;
+
         if (
             file.type === "image/heic" ||
             file.name.toLowerCase().endsWith(".heic")
@@ -65,28 +68,25 @@ const EditProfile = () => {
                 const convertedBlob = Array.isArray(conversionResult)
                     ? conversionResult[0]
                     : conversionResult;
-                const convertedFile = new File(
+
+                finalFile = new File(
                     [convertedBlob],
                     file.name.replace(/\.heic$/i, ".jpg"),
-                    {
-                        type: "image/jpeg",
-                    }
+                    { type: "image/jpeg" }
                 );
-
-                setProfileImage(convertedFile);
-                const previewUrl = URL.createObjectURL(convertedBlob);
-                setFormData((prev) => ({ ...prev, profile_image: previewUrl }));
             } catch (error) {
                 console.error("HEIC conversion failed", error);
                 setMessage("Failed to process HEIC image");
-            } finally {
                 setIsConverting(false);
+                return;
             }
-        } else {
-            setProfileImage(file);
-            const previewUrl = URL.createObjectURL(file);
-            setFormData((prev) => ({ ...prev, profile_image: previewUrl }));
+            setIsConverting(false);
         }
+
+        setProfileImage(finalFile);
+
+        const previewUrl = URL.createObjectURL(finalFile);
+        setFormData((prev) => ({ ...prev, previewImage: previewUrl }));
     };
 
     const handleSubmit = async (e) => {
@@ -115,20 +115,25 @@ const EditProfile = () => {
                     },
                 }
             );
+
+            // Fetch updated data after upload
+            const response = await axios.get(
+                "https://coverence-backend.onrender.com/api/users/profile/",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            setFormData(response.data);
+            setProfileImage(null);
             setMessage("Profile updated");
             setIsSaved(true);
-
-            setTimeout(() => {
-                window.location.reload();
-            }, 100);
         } catch (error) {
             console.error("Update failed", error);
             setMessage("Failed to update profile.");
         }
     };
-
-    const imageExists =
-        formData.profile_image && !formData.profile_image.includes("drime.jpg");
 
     return (
         <>
@@ -148,9 +153,13 @@ const EditProfile = () => {
                                 justifyContent: "space-between",
                             }}
                         >
-                            {imageExists && (
+                            {(formData.previewImage ||
+                                formData.profile_image) && (
                                 <ProfilePreview
-                                    src={formData.profile_image}
+                                    src={
+                                        formData.previewImage ||
+                                        formData.profile_image
+                                    }
                                     alt="Profile"
                                 />
                             )}
