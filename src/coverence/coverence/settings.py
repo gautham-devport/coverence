@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'users',
     'chat',
 
+    'cloudinary',
+    'cloudinary_storage',
+    'storages',
+
 ]
 
 
@@ -97,6 +101,17 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=10),  
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
+
+
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dsljowlpr',
+    'API_KEY': '232539966896988',
+    'API_SECRET': 'W7x3hPgTYP7FPxkHx4opj9FwmUo',  
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 
@@ -167,10 +182,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
