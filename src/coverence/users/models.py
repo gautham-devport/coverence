@@ -4,6 +4,7 @@ from PIL import Image
 from pillow_heif import register_heif_opener
 import os
 from django.utils import timezone
+from cloudinary.models import CloudinaryField
 
 
 register_heif_opener()
@@ -11,36 +12,13 @@ register_heif_opener()
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
-    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    profile_image = CloudinaryField('image', blank=True, null=True)
     skill_known = models.CharField(max_length=255, blank=True)
     skill_wanted = models.CharField(max_length=255, blank=True)
     available_time = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.user.username
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  
-
-        if self.profile_image:
-            image_path = self.profile_image.path
-            file_ext = os.path.splitext(image_path)[1].lower()
-
-            if file_ext in ['.heic', '.heif']:
-                
-                img = Image.open(image_path)
-                jpg_path = image_path.rsplit('.', 1)[0] + '.jpg'
-                img.convert('RGB').save(jpg_path, format='JPEG')
-
-               
-                self.profile_image.name = self.profile_image.name.rsplit('.', 1)[0] + '.jpg'
-
-                
-                if os.path.exists(image_path):
-                    os.remove(image_path)
-
-                
-                super().save(*args, **kwargs)
 
 
 

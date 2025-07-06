@@ -14,7 +14,10 @@ register_heif_opener()
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# SECRET_KEY = os.environ.get("SECRET_KEY")
+
+SECRET_KEY = os.environ.get("SECRET_KEY", "4(uf85ihcyz-jcftprybm#-v3c)*1@q$b2@=h6yvc1exr20ozc")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
