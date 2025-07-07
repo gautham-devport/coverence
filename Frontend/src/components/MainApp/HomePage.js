@@ -91,6 +91,7 @@ const SectionTitle = styled.div`
     padding: 48px 18px 45px 13px;
     @media (max-width: 480px) {
         display: none;
+        background: rgba(0, 0, 0, 0.85);
     }
 `;
 
@@ -178,8 +179,8 @@ const ProfileImage = styled.img`
 `;
 
 const ProfileImagePlaceholder = styled.div`
-    width: 32px;
-    height: 32px;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
     background-color: #525252;
 `;
