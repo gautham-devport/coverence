@@ -61,12 +61,15 @@ const HomePage = () => {
                     </MenuButton>
                     <Heading2>Home</Heading2>
                 </div>
-                {imageExists && (
+
+                {imageExists ? (
                     <ProfileImage
                         onClick={handleEditClick}
                         src={formData.profile_image}
                         alt="Profile"
                     />
+                ) : (
+                    <ProfileImagePlaceholder />
                 )}
             </SectionTitle2>
         </>
@@ -164,6 +167,7 @@ const ProfileImage = styled.img`
     width: 32px;
     height: 32px;
     display: inline-block;
+    object-fit: cover;
     border-radius: 50%;
 
     @media (max-width: 480px) {
@@ -171,4 +175,11 @@ const ProfileImage = styled.img`
         height: 32px;
         margin-top: -1px;
     }
+`;
+
+const ProfileImagePlaceholder = styled.div`
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #525252;
 `;

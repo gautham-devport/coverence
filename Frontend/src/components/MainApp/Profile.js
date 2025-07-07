@@ -473,7 +473,7 @@ const EditButton = styled.button`
         background-color: #fff;
     }
     @media (max-width: 480px) {
-        font-size: 6px;
+        font-size: 6.5px;
         padding: 4px 7px;
         border-radius: 7px;
         margin-bottom: -5px;

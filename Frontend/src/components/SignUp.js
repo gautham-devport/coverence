@@ -191,6 +191,10 @@ const FullContainer = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 480px) {
+        background: #fff;
+    }
 `;
 
 const FormContainer = styled.form`
@@ -209,10 +213,11 @@ const FormContainer = styled.form`
     }
 
     @media (max-width: 480px) {
-        width: 92%;
-        height: 72%;
-        padding: 15px 18px 22px;
-        transform: scale(0.97);
+        width: 100%;
+        height: 100%;
+        transform: scale(1);
+        border-radius: 0px;
+        background-color: hsl(208.31deg 12.59% 23.45% / 7%);
     }
 `;
 
@@ -222,14 +227,15 @@ const FormName = styled.h2`
     font-weight: 700;
     margin-bottom: 8px;
     @media (max-width: 480px) {
-        font-size: 25px;
+        margin: 1rem 0rem 2rem 0rem;
     }
 `;
 
 const FormGroup = styled.div`
     margin-bottom: 15px;
+
     @media (max-width: 480px) {
-        margin-bottom: 6px;
+        margin-bottom: 14px;
     }
 `;
 const Label = styled.label`
@@ -239,7 +245,7 @@ const Label = styled.label`
     margin-bottom: 8px;
     margin-left: 2px;
     @media (max-width: 480px) {
-        font-size: 15px;
+        font-size: 16px;
         font-family: "Figtree", sans-serif;
         font-weight: 600;
     }
@@ -279,7 +285,7 @@ const Input = styled.input`
 
     @media (max-width: 480px) {
         height: 38px;
-        font-size: 13px;
+        font-size: 16px;
         padding: 13px 18px;
     }
 `;
@@ -308,7 +314,7 @@ const Input4 = styled.input`
     border: none;
     @media (max-width: 480px) {
         height: 38px;
-        font-size: 13px;
+        font-size: 16px;
         padding: 13px 18px;
     }
 `;
@@ -340,7 +346,7 @@ const SignUpButton = styled.button`
     }
 
     @media (max-width: 480px) {
-        font-size: 12px;
+        font-size: 14px;
         padding: 10px;
         border-radius: 12px;
     }
@@ -362,8 +368,8 @@ const LoginInfo = styled.h5`
     font-family: "Figtree", sans-serif;
 
     @media (max-width: 480px) {
-        margin-top: 10px;
-        font-size: 13px;
+        margin-top: 16px;
+        font-size: 15px;
     }
 `;
 const LoginRedirect = styled(Link)`

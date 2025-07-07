@@ -162,6 +162,10 @@ const FullContainer = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 480px) {
+        background-position: -56rem 0rem;
+    }
 `;
 
 const FormContainer = styled.form`
@@ -180,10 +184,11 @@ const FormContainer = styled.form`
     }
 
     @media (max-width: 480px) {
-        width: 92%;
-        height: 60%;
-        padding: 15px 18px 22px;
-        transform: scale(0.97);
+        width: 100%;
+        height: 100%;
+        transform: scale(1);
+        border-radius: 0px;
+        background-color: hsl(208.31deg 12.59% 23.45% / 21%);
     }
 `;
 
@@ -192,8 +197,10 @@ const FormName = styled.h2`
     text-align: center;
     font-weight: 700;
     margin-bottom: 18px;
+
     @media (max-width: 480px) {
-        font-size: 25px;
+        font-size: 30px;
+        margin: 1rem 0rem 3rem 0rem;
     }
 `;
 
@@ -255,9 +262,13 @@ const Input = styled.input`
     outline: none;
     border: 1px solid #36393926;
 
+    &::placeholder {
+        color: rgb(115, 115, 115);
+    }
+
     @media (max-width: 480px) {
         height: 38px;
-        font-size: 13px;
+        font-size: 16px;
         padding: 13px 18px;
     }
 `;
@@ -288,9 +299,13 @@ const Input4 = styled.input`
     outline: none;
     border: none;
 
+    &::placeholder {
+        color: rgb(115, 115, 115);
+    }
+
     @media (max-width: 480px) {
         height: 38px;
-        font-size: 13px;
+        font-size: 16px;
         padding: 13px 18px;
     }
 `;
@@ -325,7 +340,7 @@ const SignUpButton = styled.button`
     }
 
     @media (max-width: 480px) {
-        font-size: 12px;
+        font-size: 14px;
         padding: 10px;
         border-radius: 12px;
     }
@@ -349,8 +364,8 @@ const SignUpInfo = styled.h5`
     font-family: "Figtree", sans-serif;
 
     @media (max-width: 480px) {
-        margin-top: 10px;
-        font-size: 13px;
+        margin-top: 20px;
+        font-size: 15px;
     }
 `;
 

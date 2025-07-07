@@ -67,12 +67,15 @@ const Settings = () => {
                             justifyContent: "space-between",
                         }}
                     >
-                        {imageExists && (
+                        {imageExists ? (
                             <ProfilePreview
                                 src={formData.profile_image}
                                 alt="Profile"
                             />
+                        ) : (
+                            <ProfileImagePlaceholder />
                         )}
+
                         <div style={{ marginTop: "-10px" }}>
                             <FullName>
                                 {formData.first_name} {formData.last_name}
@@ -201,6 +204,19 @@ const ProfilePreview = styled.img`
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #343434;
+
+    @media (max-width: 480px) {
+        width: 50px;
+        height: 50px;
+    }
+`;
+
+const ProfileImagePlaceholder = styled.div`
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 3px solid #343434;
+    background-color: rgb(112 112 112);
 
     @media (max-width: 480px) {
         width: 50px;

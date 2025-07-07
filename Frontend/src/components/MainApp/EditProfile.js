@@ -154,8 +154,7 @@ const EditProfile = () => {
                                 justifyContent: "space-between",
                             }}
                         >
-                            {(formData.previewImage ||
-                                formData.profile_image) && (
+                            {formData.previewImage || formData.profile_image ? (
                                 <ProfilePreview
                                     src={
                                         formData.previewImage ||
@@ -163,6 +162,8 @@ const EditProfile = () => {
                                     }
                                     alt="Profile"
                                 />
+                            ) : (
+                                <ProfileImagePlaceholder />
                             )}
                             <div style={{ marginTop: "-10px" }}>
                                 <FullName>
@@ -393,6 +394,19 @@ const ProfilePreview = styled.img`
     }
 `;
 
+const ProfileImagePlaceholder = styled.div`
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 3px solid #343434;
+    background-color: rgb(112 112 112);
+
+    @media (max-width: 480px) {
+        width: 58px;
+        height: 58px;
+    }
+`;
+
 const FullName = styled.div`
     font-size: 30px;
     font-weight: bold;
@@ -472,7 +486,6 @@ const Input = styled.input`
         padding: 8px 11px;
         font-size: 12px;
         border-radius: 11px;
-        border: 1px solid #51515196;
     }
 
     &:focus {
@@ -506,7 +519,7 @@ const Input2 = styled.textarea`
 
     &::placeholder {
         color: rgb(88, 88, 88);
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 400;
     }
 
@@ -521,6 +534,7 @@ const Input2 = styled.textarea`
         margin-top: -2px;
         height: 6rem;
         border: 1px solid #51515163;
+        border-radius: 20px;
     }
 `;
 
