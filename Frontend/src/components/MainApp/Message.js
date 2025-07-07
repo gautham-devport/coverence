@@ -294,9 +294,12 @@ const SearchInput = styled.input`
         color: rgb(61, 61, 61);
         font-weight: 600;
         font-family: "Figtree", sans-serif;
+
+        @media (max-width: 480px) {
+            font-size: 15px;
+        }
     }
     @media (max-width: 480px) {
-        margin-bottom: 1.4rem;
         padding: 11px 46px;
     }
 `;
@@ -315,7 +318,7 @@ const UserCard = styled.div`
         background: #1a1a1a;
     }
     @media (max-width: 480px) {
-        height: 76px;
+        height: 78px;
         background: #171717b0;
         border: 1px solid #2e2e2e87;
         margin-bottom: 1.1rem;
@@ -363,7 +366,7 @@ const Name = styled.div`
     font-size: 20px;
     font-weight: 700;
     @media (max-width: 480px) {
-        font-size: 16px;
+        font-size: 17px;
     }
 `;
 
@@ -386,7 +389,8 @@ const Preview = styled.div`
     font-weight: 600;
     font-family: "Figtree", sans-serif;
     @media (max-width: 480px) {
-        font-size: 13px;
+        font-size: 14px;
+        color: #d5d5d5c2;
     }
 `;
 

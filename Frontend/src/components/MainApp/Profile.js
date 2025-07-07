@@ -105,7 +105,7 @@ const Profile = () => {
                     >
                         {user.profile_image ? (
                             <ProfileImage
-                                src={`https://coverence-backend.onrender.com${user.profile_image}`}
+                                src={user.profile_image}
                                 alt="Profile"
                             />
                         ) : (
@@ -448,7 +448,7 @@ const Field2 = styled.p`
         }
 
         @media (max-width: 480px) {
-            font-size: 6px;
+            font-size: 7px;
             padding: 3px 7px;
             margin-right: 6px;
             border-radius: 6px;

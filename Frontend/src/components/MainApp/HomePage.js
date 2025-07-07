@@ -167,8 +167,8 @@ const ProfileImage = styled.img`
     border-radius: 50%;
 
     @media (max-width: 480px) {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
         margin-top: -1px;
     }
 `;

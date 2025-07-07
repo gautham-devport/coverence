@@ -129,6 +129,7 @@ const EditProfile = () => {
             setProfileImage(null);
             setMessage("Profile updated");
             setIsSaved(true);
+            window.location.reload();
         } catch (error) {
             console.error("Update failed", error);
             setMessage("Failed to update profile.");
@@ -221,7 +222,7 @@ const EditProfile = () => {
                         placeholder="Write your Bio"
                     />
 
-                    <Title2>Profession or Skill You Know</Title2>
+                    <Title2>Profession</Title2>
                     <Input
                         type="text"
                         name="skill_known"
@@ -230,7 +231,7 @@ const EditProfile = () => {
                         placeholder="Type your known Skill"
                     />
 
-                    <Title2>Skill You Wanted to Learn</Title2>
+                    <Title2>Something you want to learn</Title2>
                     <Input
                         type="text"
                         name="skill_wanted"
@@ -298,7 +299,7 @@ const Container = styled.div`
         @media (max-width: 480px) {
             width: 96%;
             margin: 0px auto;
-            padding-left: 9px;
+            padding: 8px;
         }
     }
 
@@ -401,6 +402,7 @@ const FullName = styled.div`
 
     @media (max-width: 480px) {
         font-size: 17px;
+        margin-left: 8px;
     }
 `;
 
@@ -412,7 +414,8 @@ const SkillName = styled.div`
     color: #313131;
 
     @media (max-width: 480px) {
-        font-size: 14px;
+        font-size: 11px;
+        margin-left: 10px;
     }
 `;
 
@@ -432,9 +435,9 @@ const UploadLabel = styled.label`
     }
 
     @media (max-width: 480px) {
-        font-size: 8px;
+        font-size: 9px;
         padding: 7px 6px;
-        border-radius: 9px;
+        border-radius: 8px;
     }
 `;
 
@@ -466,9 +469,10 @@ const Input = styled.input`
     font-weight: 600;
 
     &::placeholder {
-        color: rgb(88, 88, 88);
-        font-size: 15px;
-        font-weight: 400;
+        padding: 8px 11px;
+        font-size: 12px;
+        border-radius: 11px;
+        border: 1px solid #51515196;
     }
 
     &:focus {
@@ -476,9 +480,10 @@ const Input = styled.input`
     }
 
     @media (max-width: 480px) {
-        padding: 11px 14px;
+        padding: 8px 11px;
         font-size: 12px;
-        border-radius: 13px;
+        border-radius: 11px;
+        margin-bottom: 26px;
     }
 `;
 
@@ -512,8 +517,10 @@ const Input2 = styled.textarea`
     }
 
     @media (max-width: 480px) {
-        font-size: 14px;
-        margin-top: 2px;
+        font-size: 11px;
+        margin-top: -2px;
+        height: 6rem;
+        border: 1px solid #51515163;
     }
 `;
 
@@ -541,7 +548,9 @@ const Button = styled.button`
     }
 
     @media (max-width: 480px) {
-        font-size: 12px;
+        font-size: 13px;
+        padding: 11px 2px;
+        margin: 15px 0px 40px;
     }
 `;
 

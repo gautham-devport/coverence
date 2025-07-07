@@ -425,6 +425,7 @@ const ResPSidebarContainer = styled.div`
         z-index: 999;
         background: #12121282;
         backdrop-filter: blur(12px);
+        overflow-y: hidden;
     }
 `;
 
@@ -469,6 +470,7 @@ const SidebarContainer = styled.div`
 
     @media (max-width: 480px) {
         width: 80%;
+        overflow-y: auto;
         position: absolute;
         z-index: 999;
         background: #0b0b0bed;
