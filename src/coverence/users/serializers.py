@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
         try:
             profile = obj.userprofile
             if profile.profile_image:
-                return str(profile.profile_image)
+                return profile.profile_image.url
             return None
         except Exception as e:
             print("Error fetching profile_image:", e)
