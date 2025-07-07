@@ -423,7 +423,7 @@ const ResPSidebarContainer = styled.div`
         height: 100vh;
         position: absolute;
         z-index: 999;
-        background: #12121282;
+        background: #0a0a0a82;
         backdrop-filter: blur(12px);
         overflow-y: hidden;
     }
@@ -473,7 +473,7 @@ const SidebarContainer = styled.div`
         overflow-y: auto;
         position: absolute;
         z-index: 999;
-        background: #0b0b0bed;
+        background: #000;
         backdrop-filter: blur(21px);
         padding: 0px 69px;
         animation: ${(props) =>

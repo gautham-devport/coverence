@@ -89,9 +89,9 @@ const SectionTitle = styled.div`
     z-index: 9;
     backdrop-filter: blur(36px);
     padding: 48px 18px 45px 13px;
+
     @media (max-width: 480px) {
         display: none;
-        background: rgba(0, 0, 0, 0.85);
     }
 `;
 
@@ -129,7 +129,7 @@ const SectionTitle2 = styled.div`
         align-items: center;
         justify-content: space-between;
         position: fixed;
-        background: #0a0a0a;
+        background: #000;
         z-index: 9;
         backdrop-filter: blur(36px);
         padding: 35px 20px 35px 20px;

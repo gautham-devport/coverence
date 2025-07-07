@@ -333,8 +333,9 @@ const Avatar = styled.img`
     margin-right: 10px;
     margin-left: 8px;
     border: 1px solid #5f5f5f36;
+
     @media (max-width: 480px) {
-        width: 52px;
+        width: 62px;
         height: 52px;
     }
 `;

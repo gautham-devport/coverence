@@ -573,6 +573,11 @@ const TypingIndicator = styled.div`
         border-bottom-right-radius: 25px;
         transform: rotate(30deg);
     }
+
+    @media (max-width: 480px) {
+        padding: 15px 17px;
+        border-radius: 16px;
+    }
 `;
 
 const Dot = styled.span`
@@ -603,6 +608,11 @@ const Dot = styled.span`
         30% {
             transform: translateY(-4px);
         }
+    }
+
+    @media (max-width: 480px) {
+        width: 5.5px;
+        height: 5.5px;
     }
 `;
 
