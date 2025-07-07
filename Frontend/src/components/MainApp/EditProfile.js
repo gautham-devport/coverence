@@ -96,12 +96,12 @@ const EditProfile = () => {
         const data = new FormData();
         data.append("first_name", formData.first_name);
         data.append("last_name", formData.last_name);
-        data.append("bio", formData.bio);
-        data.append("skill_known", formData.skill_known);
-        data.append("skill_wanted", formData.skill_wanted);
-        data.append("available_time", formData.available_time);
+        data.append("profile.bio", formData.bio);
+        data.append("profile.skill_known", formData.skill_known);
+        data.append("profile.skill_wanted", formData.skill_wanted);
+        data.append("profile.available_time", formData.available_time);
         if (profileImage) {
-            data.append("profile_image", profileImage);
+            data.append("profile.profile_image", profileImage);
         }
 
         try {
