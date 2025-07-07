@@ -47,7 +47,11 @@ class ProfileView(APIView):
 
         serializer = UserProfileSerializer(profile)
 
-        # 🛠️ Add follow stats here
+        # Fix incomplete Cloudinary URL if needed
+        profile_image = serializer.data.get("profile_image")
+        if profile_image and not profile_image.startswith("http"):
+            profile_image = f"https://res.cloudinary.com/dsljowlpr/{profile_image}"
+
         followers_count = user.followers.count()
         following_count = user.following.count()
 
@@ -57,12 +61,12 @@ class ProfileView(APIView):
             "last_name": user.last_name,
             "email": user.email,
             "bio": serializer.data.get("bio"),
-            "profile_image": serializer.data.get("profile_image"),
+            "profile_image": profile_image,
             "skill_known": serializer.data.get("skill_known"),
             "skill_wanted": serializer.data.get("skill_wanted"),
             "available_time": serializer.data.get("available_time"),
-            "followers_count": followers_count,       
-            "following_count": following_count         
+            "followers_count": followers_count,
+            "following_count": following_count
         })
 
     def put(self, request):
@@ -74,13 +78,12 @@ class ProfileView(APIView):
         user.last_name = request.data.get("last_name", user.last_name)
         user.save()
 
-        # Update profile fields
+        # Update Profile fields
         profile.bio = request.data.get("bio", profile.bio)
         profile.skill_known = request.data.get("skill_known", profile.skill_known)
         profile.skill_wanted = request.data.get("skill_wanted", profile.skill_wanted)
         profile.available_time = request.data.get("available_time", profile.available_time)
 
-        # ✅ Important: assign image if present
         if request.FILES.get("profile_image"):
             profile.profile_image = request.FILES["profile_image"]
 
