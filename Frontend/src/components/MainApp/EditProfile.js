@@ -540,6 +540,7 @@ const Input = styled.input`
         font-size: 16px;
         border-radius: 12px;
         margin-bottom: 26px;
+        font-weight: 500;
     }
 `;
 const Input3 = styled.input`

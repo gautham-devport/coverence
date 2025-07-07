@@ -295,6 +295,9 @@ const Input = styled.input`
         height: 38px;
         font-size: 16px;
         padding: 13px 18px;
+        &::placeholder {
+            font-weight: 400;
+        }
     }
 `;
 const DupiInput = styled.div`
@@ -324,6 +327,10 @@ const Input4 = styled.input`
         height: 38px;
         font-size: 16px;
         padding: 13px 18px;
+
+        &::placeholder {
+            font-weight: 400;
+        }
     }
 `;
 const PasswordContainer = styled.div``;

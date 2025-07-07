@@ -129,7 +129,7 @@ const SectionTitle2 = styled.div`
         align-items: center;
         justify-content: space-between;
         position: fixed;
-        background: #000;
+        background: #050505;
         z-index: 9;
         backdrop-filter: blur(36px);
         padding: 35px 20px 35px 20px;
