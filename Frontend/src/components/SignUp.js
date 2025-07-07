@@ -193,7 +193,7 @@ const FullContainer = styled.section`
     align-items: center;
 
     @media (max-width: 480px) {
-        background: #fff;
+        background-position: -60rem 0rem;
     }
 `;
 

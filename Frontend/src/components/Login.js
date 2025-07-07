@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import bgImage from "../assets/images/blurry-bg.png";
@@ -13,6 +12,7 @@ const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [errors, setErrors] = useState({ email: "", password: "" });
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // <-- Spinner state
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -46,6 +46,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true); // show spinner
 
         const emailHasCaps = /[A-Z]/.test(formData.email);
         if (emailHasCaps) {
@@ -53,7 +54,8 @@ const Login = () => {
                 ...errors,
                 email: "Email must not contain capital letters",
             });
-            return; // Stop submission
+            setIsLoading(false);
+            return;
         }
 
         if (!formData.email || !formData.password) {
@@ -61,6 +63,7 @@ const Login = () => {
                 email: "Email required",
                 password: "Password required",
             });
+            setIsLoading(false);
             return;
         }
 
@@ -85,14 +88,13 @@ const Login = () => {
             );
 
             localStorage.setItem("userId", profileResponse.data.id);
-            console.log("User profile after login:", profileResponse.data);
-
             const redirectPath =
                 window.innerWidth <= 480 ? "/home/homepage" : "/home";
             window.location.href = redirectPath;
         } catch (error) {
             console.error("Login failed:", error.response?.data);
             setErrors({ password: "Invalid email or password" });
+            setIsLoading(false);
         }
     };
 
@@ -141,7 +143,11 @@ const Login = () => {
                         <ErrorText>{errors.password}</ErrorText>
                     )}
                 </FormGroup>
-                <SignUpButton type="submit">Login</SignUpButton>
+
+                <SignUpButton type="submit" disabled={isLoading}>
+                    Login
+                    {isLoading && <Spinner />}
+                </SignUpButton>
 
                 <SignUpInfo>
                     Don’t have an account?
@@ -188,7 +194,7 @@ const FormContainer = styled.form`
         height: 100%;
         transform: scale(1);
         border-radius: 0px;
-        background-color: hsl(208.31deg 12.59% 23.45% / 21%);
+        background-color: #fff;
     }
 `;
 
@@ -335,6 +341,9 @@ const SignUpButton = styled.button`
     cursor: pointer;
     font-weight: 500;
     margin-top: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
         background-color: #242425fa;
     }
@@ -377,5 +386,27 @@ const SignUpRedirect = styled(Link)`
     &:hover {
         border-bottom: 2px solid #1d6ff3;
         cursor: pointer;
+    }
+`;
+
+const Spinner = styled.div`
+    margin-left: 12px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: white;
+    border-right-color: white;
+    border-bottom-color: white;
+
+    animation: spin 0.8s linear infinite;
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 `;

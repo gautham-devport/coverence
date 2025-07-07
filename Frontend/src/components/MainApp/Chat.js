@@ -543,7 +543,7 @@ const MessageArea = styled.div`
     }
 
     @media (max-width: 480px) {
-        padding: 82px 4px 135px 15px;
+        padding: 82px 10px 135px 15px;
     }
 `;
 
@@ -764,13 +764,13 @@ const MessageInput = styled.input`
         font-family: "Figtree", sans-serif;
 
         @media (max-width: 480px) {
-            font-size: 14px;
+            font-size: 16px;
         }
     }
 
     @media (max-width: 480px) {
-        font-size: 14px;
-        padding: 8px 35px 10px 28px;
+        font-size: 16px;
+        padding: 6px 35px 8px 28px;
     }
 `;
 
