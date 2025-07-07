@@ -20,6 +20,7 @@ const EditProfile = () => {
     const [message, setMessage] = useState("");
     const [isSaved, setIsSaved] = useState(false);
     const [isConverting, setIsConverting] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -91,6 +92,7 @@ const EditProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true); // start spinner
 
         const token = localStorage.getItem("token");
         const data = new FormData();
@@ -116,23 +118,22 @@ const EditProfile = () => {
                 }
             );
 
-            // Fetch updated data after upload
             const response = await axios.get(
                 "https://coverence-backend.onrender.com/api/users/profile/",
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                    headers: { Authorization: `Bearer ${token}` },
                 }
             );
             setFormData(response.data);
-            setProfileImage(null);
             setMessage("Profile updated");
             setIsSaved(true);
-            window.location.reload();
+            setProfileImage(null);
+            setIsLoading(false); // stop spinner
+            window.location.reload(); // optional
         } catch (error) {
             console.error("Update failed", error);
             setMessage("Failed to update profile.");
+            setIsLoading(false); // stop spinner
         }
     };
 
@@ -268,12 +269,13 @@ const EditProfile = () => {
                         placeholder="eg: 7pm to 9pm"
                     />
 
-                    <Button type="submit" disabled={isConverting}>
+                    <Button type="submit" disabled={isConverting || isLoading}>
                         {isConverting
                             ? "Processing..."
                             : isSaved
                             ? "Saved"
                             : "Save Changes"}
+                        {isLoading && <Spinner />}
                     </Button>
                 </form>
                 {message && <Message>{message}</Message>}
@@ -293,6 +295,7 @@ const Container = styled.div`
     font-family: "Karla", sans-serif;
     position: relative;
     overflow-y: auto;
+
     &::-webkit-scrollbar {
         width: 6px;
     }
@@ -323,11 +326,14 @@ const Container = styled.div`
     }
 
     @media (max-width: 480px) {
+        height: 100dvh;
         padding: 0;
 
         &::-webkit-scrollbar {
             width: 3px;
         }
+
+        -webkit-overflow-scrolling: touch;
     }
 `;
 
@@ -619,6 +625,9 @@ const Button = styled.button`
     font-family: "Figtree", sans-serif;
     cursor: pointer;
     transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
         color: #000;
@@ -629,6 +638,28 @@ const Button = styled.button`
         font-size: 13px;
         padding: 11px 2px;
         margin: 15px 0px 40px;
+    }
+`;
+
+const Spinner = styled.div`
+    margin-left: 12px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: black;
+    border-right-color: black;
+    border-bottom-color: black;
+
+    animation: spin 0.8s linear infinite;
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 `;
 
