@@ -420,7 +420,7 @@ export default Sidebar;
 const ResPSidebarContainer = styled.div`
     @media (max-width: 480px) {
         width: 100%;
-        height: 100vh;
+        height: 100dvh;
         position: absolute;
         z-index: 999;
         background: #0a0a0a82;
@@ -464,16 +464,17 @@ const SidebarContainer = styled.div`
 
     @media (max-width: 768px) {
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         overflow-x: hidden;
         padding: 8px 10px;
     }
 
     @media (max-width: 480px) {
-        width: 80%;
+        width: 78%;
         overflow-y: auto;
         position: absolute;
         z-index: 999;
-        background: #000;
+        background: #090909;
         backdrop-filter: blur(21px);
         padding: 0px 69px;
         animation: ${(props) =>

@@ -231,7 +231,7 @@ const Container = styled.div`
     width: 68%;
     margin: 0 auto;
     @media (max-width: 480px) {
-        width: 88%;
+        width: 90%;
     }
 `;
 
@@ -348,8 +348,8 @@ const NotificationItem = styled.li`
 
     @media (max-width: 480px) {
         width: 100%;
-        padding: 9px;
-        border-radius: 19px;
+        padding: 12px 10px;
+        border-radius: 18px;
     }
 `;
 
@@ -446,6 +446,7 @@ const FollowButton = styled.button`
 
     @media (max-width: 480px) {
         font-size: 8px;
+        padding: 6.6px 13.8px;
     }
 `;
 

@@ -156,6 +156,10 @@ const MenuButton = styled.button`
         filter: invert(28%) sepia(98%) saturate(1200%) hue-rotate(180deg)
             brightness(110%) contrast(95%);
         transform: scaleX(-1);
+
+        @media (max-width: 480px) {
+            width: 24px;
+        }
     }
     &:hover {
         opacity: 0.9;
