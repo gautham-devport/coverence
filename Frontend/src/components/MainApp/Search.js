@@ -346,8 +346,8 @@ const Input = styled.input`
         font-weight: 600;
     }
     @media (max-width: 480px) {
-        padding: 9px 20px;
-        font-size: 15px;
+        padding: 7px 20px;
+        font-size: 16px;
     }
 `;
 

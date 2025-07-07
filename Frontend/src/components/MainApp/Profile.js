@@ -323,6 +323,7 @@ const TopRow = styled.div`
     @media (max-width: 480px) {
         padding: 78px 20px 2px 20px;
         justify-content: center;
+        transform: scale(1.1);
     }
 `;
 

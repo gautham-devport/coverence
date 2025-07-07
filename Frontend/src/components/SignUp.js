@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../App.css";
 import styled from "styled-components";
 import bgImage from "../assets/images/blurry-bg.png";
@@ -12,6 +11,7 @@ import Mail from "../assets/images/mail.png";
 
 const SignUp = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // Spinner state
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -53,6 +53,7 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true); // Show spinner
         validateEmail(formData.email);
 
         const emailHasCaps = /[A-Z]/.test(formData.email);
@@ -61,7 +62,8 @@ const SignUp = () => {
                 ...errors,
                 email: "Email must not contain capital letters.",
             });
-            return; // Don't proceed to signup
+            setIsLoading(false);
+            return;
         }
 
         if (!errors.email && formData.email) {
@@ -102,7 +104,10 @@ const SignUp = () => {
                         email: "Email already exists. Please use a different one.",
                     });
                 }
+                setIsLoading(false);
             }
+        } else {
+            setIsLoading(false);
         }
     };
 
@@ -114,7 +119,6 @@ const SignUp = () => {
         <FullContainer>
             <FormContainer onSubmit={handleSubmit} noValidate>
                 <FormName>Sign Up</FormName>
-                {/* Add noValidate here */}
                 <FormGroup>
                     <Label>First Name</Label>
                     <Input
@@ -171,7 +175,10 @@ const SignUp = () => {
                         </DupiInput>
                     </PasswordContainer>
                 </FormGroup>
-                <SignUpButton type="submit">Sign Up</SignUpButton>
+                <SignUpButton type="submit" disabled={isLoading}>
+                    Sign Up
+                    {isLoading && <Spinner />}
+                </SignUpButton>
                 <LoginInfo>
                     Already have an account?
                     <LoginRedirect to="/login">Login</LoginRedirect>
@@ -193,7 +200,7 @@ const FullContainer = styled.section`
     align-items: center;
 
     @media (max-width: 480px) {
-        background-position: -60rem 0rem;
+        background: #fff;
     }
 `;
 
@@ -217,7 +224,8 @@ const FormContainer = styled.form`
         height: 100%;
         transform: scale(1);
         border-radius: 0px;
-        background-color: hsl(208.31deg 12.59% 23.45% / 7%);
+        /* background-color: hsl(208.31deg 12.59% 23.45% / 7%); */
+        background-color: hsl(208.31deg 12.59% 23.45% / 0%);
     }
 `;
 
@@ -341,6 +349,10 @@ const SignUpButton = styled.button`
     cursor: pointer;
     font-weight: 500;
     margin-top: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &:hover {
         background-color: #242425fa;
     }
@@ -380,5 +392,27 @@ const LoginRedirect = styled(Link)`
     &:hover {
         border-bottom: 2px solid #1d6ff3;
         cursor: pointer;
+    }
+`;
+
+const Spinner = styled.div`
+    margin-left: 12px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: white;
+    border-right-color: white;
+    border-bottom-color: white;
+
+    animation: spin 0.8s linear infinite;
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 `;

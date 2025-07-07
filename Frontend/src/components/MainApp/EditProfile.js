@@ -186,12 +186,7 @@ const EditProfile = () => {
                         disabled={isConverting}
                     />
 
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                    >
+                    <FullName1>
                         <div style={{ width: "48%" }}>
                             <Title2>First Name</Title2>
                             <Input
@@ -212,7 +207,30 @@ const EditProfile = () => {
                                 placeholder="Last Name"
                             />
                         </div>
-                    </div>
+                    </FullName1>
+
+                    <FullName2>
+                        <div style={{ width: "100%" }}>
+                            <Title2>First Name</Title2>
+                            <Input3
+                                type="text"
+                                name="first_name"
+                                value={formData.first_name}
+                                onChange={handleChange}
+                                placeholder="First Name"
+                            />
+                        </div>
+                        <div style={{ width: "100%" }}>
+                            <Title2>Last Name</Title2>
+                            <Input3
+                                type="text"
+                                name="last_name"
+                                value={formData.last_name}
+                                onChange={handleChange}
+                                placeholder="Last Name"
+                            />
+                        </div>
+                    </FullName2>
 
                     <Title2>Bio</Title2>
                     <Input2
@@ -468,6 +486,24 @@ const Title2 = styled.h2`
     }
 `;
 
+const FullName1 = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 480px) {
+        display: none;
+    }
+`;
+
+const FullName2 = styled.div`
+    display: none;
+
+    @media (max-width: 480px) {
+        display: flex;
+        flex-direction: column;
+    }
+`;
+
 const Input = styled.input`
     display: block;
     width: 100%;
@@ -475,17 +511,18 @@ const Input = styled.input`
     padding: 14px 14px;
     font-size: 16px;
     border-radius: 15px;
-    /* border: 1px solid #000000;
-    background: #252525a8; */
     border: 1px solid #3d3d3d70;
     background: #272727a8;
     color: #d1d1d1;
     font-weight: 600;
 
     &::placeholder {
-        padding: 8px 11px;
         font-size: 12px;
-        border-radius: 11px;
+        font-weight: 500;
+
+        @media (max-width: 480px) {
+            font-size: 13px;
+        }
     }
 
     &:focus {
@@ -494,8 +531,36 @@ const Input = styled.input`
 
     @media (max-width: 480px) {
         padding: 8px 11px;
-        font-size: 12px;
-        border-radius: 11px;
+        font-size: 16px;
+        border-radius: 12px;
+        margin-bottom: 26px;
+    }
+`;
+const Input3 = styled.input`
+    display: block;
+    width: 100%;
+    margin-bottom: 34px;
+    padding: 14px 14px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid #3d3d3d70;
+    background: #272727a8;
+    color: #d1d1d1;
+    font-weight: 600;
+
+    &::placeholder {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    @media (max-width: 480px) {
+        padding: 9px 11px;
+        font-size: 16px;
+        border-radius: 12px;
         margin-bottom: 26px;
     }
 `;
@@ -519,7 +584,6 @@ const Input2 = styled.textarea`
 
     &::placeholder {
         color: rgb(88, 88, 88);
-        font-size: 12px;
         font-weight: 400;
     }
 
@@ -530,7 +594,7 @@ const Input2 = styled.textarea`
     }
 
     @media (max-width: 480px) {
-        font-size: 11px;
+        font-size: 16px;
         margin-top: -2px;
         height: 6rem;
         border: 1px solid #51515163;

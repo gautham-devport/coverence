@@ -526,7 +526,7 @@ const NavButton = styled.button`
     &.logout {
         font-weight: 600;
         color: #fff;
-        margin-bottom: 1rem;
+        margin-bottom: 5rem;
     }
 
     &.logout:hover {

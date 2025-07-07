@@ -36,7 +36,7 @@ const HomePage = () => {
     const imageExists =
         formData.profile_image && !formData.profile_image.includes("drime.jpg");
 
-    const handleEditClick = () => {
+    const handleProfileClick = () => {
         navigate("/home/profile");
     };
 
@@ -64,12 +64,12 @@ const HomePage = () => {
 
                 {imageExists ? (
                     <ProfileImage
-                        onClick={handleEditClick}
+                        onClick={handleProfileClick}
                         src={formData.profile_image}
                         alt="Profile"
                     />
                 ) : (
-                    <ProfileImagePlaceholder />
+                    <ProfileImagePlaceholder onClick={handleProfileClick} />
                 )}
             </SectionTitle2>
         </>
