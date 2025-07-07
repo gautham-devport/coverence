@@ -67,19 +67,27 @@ class ProfileView(APIView):
 
     def put(self, request):
         user = request.user
-        profile, created = UserProfile.objects.get_or_create(user=user)
+        profile, _ = UserProfile.objects.get_or_create(user=user)
 
-        # Update basic fields
+        # Update User fields
         user.first_name = request.data.get("first_name", user.first_name)
         user.last_name = request.data.get("last_name", user.last_name)
         user.save()
 
         # Update profile fields
-        serializer = UserProfileSerializer(profile, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message": "Profile updated successfully"}, status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        profile.bio = request.data.get("bio", profile.bio)
+        profile.skill_known = request.data.get("skill_known", profile.skill_known)
+        profile.skill_wanted = request.data.get("skill_wanted", profile.skill_wanted)
+        profile.available_time = request.data.get("available_time", profile.available_time)
+
+        # ✅ Important: assign image if present
+        if request.FILES.get("profile_image"):
+            profile.profile_image = request.FILES["profile_image"]
+
+        profile.save()
+
+        return Response({"message": "Profile updated successfully"}, status=status.HTTP_200_OK)
+
     
 
 
