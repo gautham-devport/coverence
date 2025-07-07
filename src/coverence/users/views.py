@@ -57,7 +57,7 @@ class ProfileView(APIView):
             "last_name": user.last_name,
             "email": user.email,
             "bio": serializer.data.get("bio"),
-            "profile_image": request.build_absolute_uri(serializer.data.get("profile_image")) if serializer.data.get("profile_image") else None,
+            "profile_image": serializer.data.get("profile_image"),
             "skill_known": serializer.data.get("skill_known"),
             "skill_wanted": serializer.data.get("skill_wanted"),
             "available_time": serializer.data.get("available_time"),
