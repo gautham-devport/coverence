@@ -463,7 +463,7 @@ const SidebarContainer = styled.div`
     transition: transform 0.3s ease, opacity 0.3s ease;
 
     &::-webkit-scrollbar {
-        width: 8px;
+        width: 5px;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -517,11 +517,10 @@ const Title = styled.h1`
         margin-top: 22px;
     }
     @media (max-width: 480px) {
-        font-size: 2.1rem;
+        font-size: 2.7rem;
         margin-bottom: 2rem;
         margin-top: 24px;
         font-weight: bold;
-        font-family: "Anton", sans-serif;
     }
 `;
 
