@@ -463,7 +463,7 @@ const SidebarContainer = styled.div`
     transition: transform 0.3s ease, opacity 0.3s ease;
 
     &::-webkit-scrollbar {
-        width: 6px;
+        width: 8px;
     }
 
     &::-webkit-scrollbar-thumb {

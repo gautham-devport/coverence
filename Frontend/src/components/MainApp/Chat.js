@@ -654,6 +654,9 @@ const MessageBubble = styled.div`
         max-width: 380px;
         margin-top: -3px;
         line-height: 1.3;
+        font-family: "Figtree", sans-serif;
+        font-weight: 500;
+
         @media (max-width: 480px) {
             max-width: 218px;
             font-size: 13px;
