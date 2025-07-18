@@ -402,6 +402,7 @@ const ImageRow = styled.div`
         height: 5rem;
         margin-bottom: 30px;
         border-radius: 23px;
+        padding: 10px 14px 10px 19px;
     }
 `;
 
@@ -523,7 +524,7 @@ const Input = styled.input`
     font-weight: 600;
 
     &::placeholder {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
 
         @media (max-width: 480px) {
@@ -558,6 +559,7 @@ const Input3 = styled.input`
     &::placeholder {
         font-size: 13px;
         font-weight: 400;
+        color: #656565cb;
     }
 
     &:focus {

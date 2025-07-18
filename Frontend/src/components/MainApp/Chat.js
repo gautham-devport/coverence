@@ -543,7 +543,7 @@ const MessageArea = styled.div`
     }
 
     @media (max-width: 480px) {
-        padding: 82px 10px 135px 15px;
+        padding: 82px 14px 135px 15px;
     }
 `;
 
@@ -677,7 +677,7 @@ const MessageBubble = styled.div`
         border-bottom-right-radius: ${(props) =>
             props.isOwn ? "0px" : "25px"};
         transform: ${(props) =>
-            props.isOwn ? "rotate(-11deg)" : "rotate(30deg)"};
+            props.isOwn ? "rotate(-11deg)" : "rotate(23deg)"};
     }
 `;
 

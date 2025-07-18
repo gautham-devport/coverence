@@ -423,7 +423,7 @@ const ResPSidebarContainer = styled.div`
         height: 100dvh;
         position: absolute;
         z-index: 999;
-        background: #0a0a0a82;
+        background: #1a1a1a82;
         backdrop-filter: blur(12px);
         overflow-y: hidden;
     }
@@ -459,8 +459,21 @@ const SidebarContainer = styled.div`
     justify-content: space-between;
     padding: 8px 20px;
     background: #0e0e0e;
-    overflow-y: auto;
+    overflow-y: hidden;
     transition: transform 0.3s ease, opacity 0.3s ease;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #8b8b8b;
+        border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
 
     @media (max-width: 768px) {
         overflow-y: auto;
@@ -497,10 +510,18 @@ const Title = styled.h1`
         font-size: 2.5rem;
         margin-bottom: 3rem;
     }
+
     @media (max-width: 768px) {
         font-size: 1.9rem;
         margin-bottom: 3rem;
         margin-top: 22px;
+    }
+    @media (max-width: 480px) {
+        font-size: 2.1rem;
+        margin-bottom: 2rem;
+        margin-top: 24px;
+        font-weight: bold;
+        font-family: "Anton", sans-serif;
     }
 `;
 
