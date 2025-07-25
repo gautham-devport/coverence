@@ -173,7 +173,9 @@ const PublicProfile = () => {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "space-between",
+                            alignItems: "center",
                             maxHeight: isMobile ? "unset" : "12rem",
+                            gap: isMobile ? "7px" : "12px",
                         }}
                     >
                         <div
@@ -345,26 +347,28 @@ const MenuButton = styled.button`
 const ProfileContainer = styled.div`
     width: 88%;
     margin: auto;
-    padding: 5rem 9rem;
+    padding: 4.5rem 9rem;
     color: white;
     border-bottom: 1px solid #2c2c2c;
 
     @media (max-width: 480px) {
-        /* display: flex;
-        flex-direction: column;
-        align-items: center; */
         margin: auto;
         padding: 0px;
         color: white;
         border-bottom: none;
-        padding: 78px 20px 2px 20px;
+        padding: 102px 20px 2px 20px;
+        transform: scale(1.28);
     }
 `;
 
 const TopRow = styled.div`
     display: flex;
-    height: 12rem;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 2rem;
+
     @media (max-width: 480px) {
+        margin-right: 0;
         height: unset;
     }
 `;
@@ -375,13 +379,12 @@ const ProfileImage = styled.img`
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 1rem;
-    margin-right: 3rem;
 
     @media (max-width: 480px) {
         width: 78px;
         height: 78px;
-        margin-right: 12px;
-        margin-bottom: 20px;
+        margin-right: 5px;
+        margin-bottom: 10px;
     }
 `;
 
@@ -402,8 +405,8 @@ const ProfileImagePlaceholder = styled.div`
 
 const Name = styled.h2`
     font-size: 32px;
-    margin-right: 2rem;
     font-weight: 700;
+
     @media (max-width: 480px) {
         font-size: 17px;
         margin-right: 12px;
@@ -415,6 +418,7 @@ const Name = styled.h2`
 const FollowStats = styled.div`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 18px;
     span {
         color: #8f8f8f;
@@ -430,46 +434,54 @@ const FollowStats = styled.div`
 
 const PostCount = styled.div`
     display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
     font-size: 18px;
     font-weight: 500;
-    &:hover span {
-        color: rgb(169, 169, 169);
+    color: #878787;
+
+    span {
+        color: #fff;
     }
     @media (max-width: 480px) {
-        font-size: 14px;
+        font-size: 12px;
     }
 `;
 
 const FollowCount = styled.div`
     display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
     font-size: 18px;
     font-weight: 500;
-    &:hover span {
-        color: rgb(169, 169, 169);
+    color: #878787;
+
+    span {
+        color: #fff;
     }
     @media (max-width: 480px) {
-        font-size: 14px;
+        font-size: 12px;
     }
 `;
 
 const Field2 = styled.p`
     span {
         font-size: 14px;
-        margin-right: 22px;
+        margin-right: 13px;
         margin-left: -2px;
         padding: 0.3rem 0.8rem;
         background: #202020;
         text-align: center;
-        border-radius: 8px;
+        border-radius: 12px;
         font-weight: 500;
         p {
             display: inline-block;
             font-weight: 600;
         }
         @media (max-width: 480px) {
-            font-size: 6px;
+            font-size: 8px;
             padding: 3px 7px;
             margin-right: 6px;
             border-radius: 6px;
@@ -479,17 +491,19 @@ const Field2 = styled.p`
 
 const Field3 = styled.p`
     span {
-        font-size: 12px;
+        font-size: 13px;
         display: inline-block;
         background: #eb922b;
-        padding: 2px 5px;
-        border-radius: 5px;
+        padding: 4px 7px;
+        border-radius: 9px;
         color: #000;
         text-align: center;
-        margin-top: 6px;
+
         @media (max-width: 480px) {
-            font-size: 6px;
+            font-size: 7.2px;
+            padding: 3px 7px;
             font-weight: 600;
+            border-radius: 8px;
         }
     }
 `;
@@ -499,7 +513,6 @@ const FollowButton = styled.button`
     color: white;
     border: none;
     margin-top: 4px;
-    margin-bottom: 19px;
     border-radius: 8px;
     font-weight: 600;
     font-size: 13px;
@@ -521,28 +534,27 @@ const UnfollowButton = styled(FollowButton)`
         font-size: 8px;
         padding: 4px 12px;
         border-radius: 6px;
-        margin-bottom: 6px;
     }
 `;
 
 const MessageButton = styled.button`
     border: none;
     margin-top: 4px;
-    margin-bottom: 19px;
     border-radius: 8px;
     font-weight: 600;
     font-size: 13px;
-    padding: 7px 25px;
+    padding: 8px 18px;
     cursor: pointer;
     margin-left: 1rem;
+    color: #000;
 
     @media (max-width: 480px) {
         font-size: 8px;
         padding: 4px 15px;
         margin-left: 6px;
         border-radius: 7px;
-        margin-bottom: 6px;
         margin-top: 10px;
+        color: #000;
     }
 `;
 
@@ -553,13 +565,23 @@ const ErrorMessage = styled.p`
 `;
 
 const Field = styled.p`
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #b9b9b9;
+    margin: 26px auto;
+    max-width: 26rem;
+    line-height: 1.3;
+    font-family: "Figtree", sans-serif;
+
     div {
         margin-top: 4px;
         white-space: pre-wrap;
     }
+
     @media (max-width: 480px) {
-        font-size: 11px;
-        margin-left: 8px;
+        font-size: 11.6px;
+        max-width: 12.9rem;
+        margin: 11px auto;
+        font-weight: 500;
     }
 `;

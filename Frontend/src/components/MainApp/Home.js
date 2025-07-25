@@ -50,4 +50,5 @@ const MainContent = styled.div`
     background: rgb(5, 5, 5);
     color: #fff;
     overflow-y: hidden;
+    overflow-x: hidden;
 `;

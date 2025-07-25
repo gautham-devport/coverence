@@ -128,6 +128,10 @@ const Option = styled.li`
     }
     &:hover {
         background-color: #87878717;
+
+        @media (max-width: 480px) {
+            background-color: unset;
+        }
     }
 
     img {

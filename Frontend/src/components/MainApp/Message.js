@@ -417,4 +417,8 @@ const Badge = styled.div`
     border-radius: 999px;
     padding: 2px 6px;
     background-color: #ff3b30;
+
+    @media (max-width: 480px) {
+        top: -26px;
+    }
 `;

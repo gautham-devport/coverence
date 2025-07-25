@@ -348,8 +348,8 @@ const NotificationItem = styled.li`
 
     @media (max-width: 480px) {
         width: 100%;
-        padding: 12px 10px;
-        border-radius: 18px;
+        padding: 14px 10px;
+        border-radius: 19px;
     }
 `;
 

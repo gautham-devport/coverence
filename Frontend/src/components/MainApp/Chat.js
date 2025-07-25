@@ -530,7 +530,7 @@ const MessageArea = styled.div`
     background-color: #0b0b0b;
     position: relative;
     &::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
     }
 
     &::-webkit-scrollbar-thumb {
