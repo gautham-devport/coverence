@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Menu from "../../assets/Icons/paragraph.png";
 import ArrowLeft from "../../assets/Icons/headarrowright.png";
+import SearchIcon from "../../assets/Icons/search.png";
 import { useSidebar } from "../context/SidebarContext";
 
 const HomePage = () => {
@@ -36,6 +37,10 @@ const HomePage = () => {
     const imageExists =
         formData.profile_image && !formData.profile_image.includes("drime.jpg");
 
+    const handleSearch = () => {
+        navigate("/home/search");
+    };
+
     const handleProfileClick = () => {
         navigate("/home/profile");
     };
@@ -62,15 +67,26 @@ const HomePage = () => {
                     <Heading2>Home</Heading2>
                 </div>
 
-                {imageExists ? (
-                    <ProfileImage
-                        onClick={handleProfileClick}
-                        src={formData.profile_image}
-                        alt="Profile"
-                    />
-                ) : (
-                    <ProfileImagePlaceholder onClick={handleProfileClick} />
-                )}
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                    }}
+                >
+                    <SearchButton onClick={handleSearch}>
+                        <img src={SearchIcon} alt="Back" />
+                    </SearchButton>
+
+                    {imageExists ? (
+                        <ProfileImage
+                            onClick={handleProfileClick}
+                            src={formData.profile_image}
+                            alt="Profile"
+                        />
+                    ) : (
+                        <ProfileImagePlaceholder onClick={handleProfileClick} />
+                    )}
+                </div>
             </SectionTitle2>
         </>
     );
@@ -161,6 +177,19 @@ const Heading2 = styled.h2`
 
     @media (max-width: 480px) {
         font-size: 25px;
+    }
+`;
+
+const SearchButton = styled.button`
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 23px;
+    img {
+        width: 21px;
+        height: 22px;
+        filter: invert(1);
+        margin-top: 2px;
     }
 `;
 

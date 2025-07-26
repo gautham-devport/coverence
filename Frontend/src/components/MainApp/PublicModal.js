@@ -193,6 +193,10 @@ const ModalOverlay = styled.div`
     justify-content: center;
     align-items: center;
     z-index: 999;
+
+    @media (max-width: 480px) {
+        height: 100vh;
+    }
 `;
 
 const ModalBox = styled.div`
@@ -225,9 +229,9 @@ const ModalBox = styled.div`
     }
 
     @media (max-width: 480px) {
-        width: 78%;
-        height: 42%;
-        margin-bottom: 0px;
+        width: 72%;
+        height: 36%;
+        margin-bottom: 52px;
         margin-left: 0px;
     }
 `;
