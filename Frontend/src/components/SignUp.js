@@ -200,7 +200,7 @@ const FullContainer = styled.section`
     align-items: center;
 
     @media (max-width: 480px) {
-        background: #fff;
+        background: #000;
     }
 `;
 
@@ -224,7 +224,7 @@ const FormContainer = styled.form`
         height: 100%;
         transform: scale(1);
         border-radius: 0px;
-        /* background-color: hsl(208.31deg 12.59% 23.45% / 7%); */
+        box-shadow: unset;
         background-color: hsl(208.31deg 12.59% 23.45% / 0%);
     }
 `;
@@ -234,8 +234,11 @@ const FormName = styled.h2`
     text-align: center;
     font-weight: 700;
     margin-bottom: 8px;
+
     @media (max-width: 480px) {
-        margin: 1rem 0rem 2rem 0rem;
+        font-size: 32px;
+        margin: 2rem 0rem 1.8rem 0rem;
+        color: #fff;
     }
 `;
 
@@ -252,7 +255,9 @@ const Label = styled.label`
     font-weight: 500;
     margin-bottom: 8px;
     margin-left: 2px;
+
     @media (max-width: 480px) {
+        color: #e9e9e9;
         font-size: 16px;
         font-family: "Figtree", sans-serif;
         font-weight: 600;
@@ -263,20 +268,25 @@ const MailImg = styled.img`
     height: 17px;
     margin-left: 6px;
     margin-bottom: -3px;
+
     @media (max-width: 480px) {
         width: 14px;
         height: 14px;
         margin-left: 4px;
+        filter: invert(74%);
+        display: none;
     }
 `;
 const PadloackImg = styled.img`
     width: 13px;
     height: 13px;
     margin-left: 6px;
+
     @media (max-width: 480px) {
         width: 10px;
         height: 10px;
         margin-left: 4px;
+        filter: invert(45%);
     }
 `;
 const Input = styled.input`
@@ -295,7 +305,9 @@ const Input = styled.input`
         height: 38px;
         font-size: 16px;
         padding: 13px 18px;
+
         &::placeholder {
+            color: #888888d1;
             font-weight: 400;
         }
     }
@@ -323,6 +335,7 @@ const Input4 = styled.input`
     background-color: hsl(193.54deg 63.2% 41.37% / 0%);
     outline: none;
     border: none;
+
     @media (max-width: 480px) {
         height: 38px;
         font-size: 16px;
@@ -330,6 +343,7 @@ const Input4 = styled.input`
 
         &::placeholder {
             font-weight: 400;
+            color: #888888d1;
         }
     }
 `;
@@ -362,12 +376,18 @@ const SignUpButton = styled.button`
 
     &:hover {
         background-color: #242425fa;
+
+        @media (max-width: 480px) {
+            background-color: #0b8efad2;
+        }
     }
 
     @media (max-width: 480px) {
-        font-size: 14px;
+        background-color: #1197ffe3;
+        font-size: 15px;
         padding: 10px;
         border-radius: 12px;
+        margin-top: 24px;
     }
 `;
 const ErrorText = styled.p`
@@ -389,6 +409,7 @@ const LoginInfo = styled.h5`
     @media (max-width: 480px) {
         margin-top: 16px;
         font-size: 15px;
+        color: #7e7e7e;
     }
 `;
 const LoginRedirect = styled(Link)`

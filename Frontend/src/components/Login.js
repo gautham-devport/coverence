@@ -170,7 +170,7 @@ const FullContainer = styled.section`
     align-items: center;
 
     @media (max-width: 480px) {
-        background-position: -56rem 0rem;
+        background: #000;
     }
 `;
 
@@ -194,7 +194,7 @@ const FormContainer = styled.form`
         height: 100%;
         transform: scale(1);
         border-radius: 0px;
-        background-color: #fff;
+        background-color: #000;
     }
 `;
 
@@ -205,8 +205,9 @@ const FormName = styled.h2`
     margin-bottom: 18px;
 
     @media (max-width: 480px) {
-        font-size: 30px;
-        margin: 1rem 0rem 3rem 0rem;
+        font-size: 32px;
+        margin: 2.5rem 0rem 3rem 0rem;
+        color: #fff;
     }
 `;
 
@@ -228,6 +229,7 @@ const Label = styled.label`
         font-size: 15px;
         font-family: "Figtree", sans-serif;
         font-weight: 600;
+        color: #e9e9e9;
     }
 `;
 
@@ -253,6 +255,7 @@ const PadloackImg = styled.img`
         width: 10px;
         height: 10px;
         margin-left: 4px;
+        filter: invert(45%);
     }
 `;
 
@@ -269,7 +272,8 @@ const Input = styled.input`
     border: 1px solid #36393926;
 
     &::placeholder {
-        color: rgb(115, 115, 115);
+        color: #888888d1;
+        font-weight: 400;
     }
 
     @media (max-width: 480px) {
@@ -306,7 +310,8 @@ const Input4 = styled.input`
     border: none;
 
     &::placeholder {
-        color: rgb(115, 115, 115);
+        color: #888888d1;
+        font-weight: 400;
     }
 
     @media (max-width: 480px) {
@@ -344,14 +349,21 @@ const SignUpButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+
     &:hover {
         background-color: #242425fa;
+
+        @media (max-width: 480px) {
+            background-color: #0b8efad2;
+        }
     }
 
     @media (max-width: 480px) {
-        font-size: 14px;
+        background-color: #1197ffe3;
+        font-size: 15px;
         padding: 10px;
         border-radius: 12px;
+        margin-top: 24px;
     }
 `;
 
@@ -373,8 +385,9 @@ const SignUpInfo = styled.h5`
     font-family: "Figtree", sans-serif;
 
     @media (max-width: 480px) {
-        margin-top: 20px;
+        margin-top: 16px;
         font-size: 15px;
+        color: #7e7e7e;
     }
 `;
 
