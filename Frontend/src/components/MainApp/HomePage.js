@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Menu from "../../assets/Icons/paragraph.png";
 import ArrowLeft from "../../assets/Icons/headarrowright.png";
@@ -88,6 +88,39 @@ const HomePage = () => {
                     )}
                 </div>
             </SectionTitle2>
+
+            <Content>
+                <WelcomTitle>
+                    Hey, {formData.first_name} {formData.last_name}
+                </WelcomTitle>
+                <HomeCard>
+                    <MainTitle>Coverence</MainTitle>
+                    <Sub>Discover. Connect. Chat.</Sub>
+                    <span>
+                        Coverence is a social platform where users can
+                        seamlessly interact and build meaningful connections.
+                    </span>
+                    <Features>
+                        <li>
+                            <h4>Explore profiles</h4>
+                        </li>
+                        <li>
+                            <h4>Chat instantly</h4>
+                        </li>
+                        <li>
+                            <h4>Follow & connect</h4>
+                        </li>
+                    </Features>
+                    <EndContent>
+                        Whether you're discovering new Person or staying in
+                        touch with friends,
+                        <b>
+                            Coverence brings profiles and conversations together
+                            seamlessly.
+                        </b>
+                    </EndContent>
+                </HomeCard>
+            </Content>
         </>
     );
 };
@@ -145,7 +178,7 @@ const SectionTitle2 = styled.div`
         align-items: center;
         justify-content: space-between;
         position: fixed;
-        background: #050505;
+        background: #0505054f;
         z-index: 9;
         backdrop-filter: blur(36px);
         padding: 35px 20px 35px 20px;
@@ -213,4 +246,152 @@ const ProfileImagePlaceholder = styled.div`
     height: 33px;
     border-radius: 50%;
     background-color: #525252;
+`;
+
+const Content = styled.div`
+    height: 100vh;
+    padding: 6rem 4.3rem 4rem;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 7px;
+        @media (max-width: 480px) {
+            width: 3.5px;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #8b8b8b;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    @media (max-width: 480px) {
+        padding: 5rem 1.3rem 2rem;
+    }
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    
+  }
+  to {
+    opacity: 1;
+    
+  }
+`;
+
+const WelcomTitle = styled.h2`
+    font-size: 26px;
+    font-weight: 500;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 26px;
+    font-family: "Figtree", sans-serif;
+    animation: ${fadeIn} 2.4s ease-out forwards;
+
+    @media (max-width: 480px) {
+        font-size: 19px;
+        margin-top: 10px;
+        margin-bottom: 28px;
+    }
+`;
+
+const HomeCard = styled.div`
+    width: 64%;
+    padding: 36px;
+    background-color: #232323;
+    border-radius: 36px;
+    border: 1px solid #303030;
+    margin: 0 auto;
+    margin-top: 10px;
+
+    span {
+        font-size: 29px;
+        font-weight: 600;
+        margin-bottom: 25px;
+        display: block;
+
+        @media (max-width: 480px) {
+            font-size: 25px;
+            margin-bottom: 26px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        padding: 30px;
+    }
+`;
+
+const MainTitle = styled.h2`
+    font-size: 38px;
+    text-align: center;
+    font-weight: 700;
+    font-family: "Figtree", sans-serif;
+`;
+
+const Sub = styled.h3`
+    font-size: 22px;
+    font-weight: 600;
+    text-align: center;
+    color: #008fff;
+    margin-top: 8px;
+    margin-left: 12px;
+    margin-bottom: 40px;
+    font-family: "Figtree", sans-serif;
+
+    @media (max-width: 480px) {
+        font-size: 19px;
+        margin-bottom: 34px;
+    }
+`;
+
+const Features = styled.ul`
+    li {
+        font-size: 22px;
+        font-weight: 600;
+        text-align: center;
+        color: #008fff;
+        background: #040404;
+        padding: 15px 17px;
+        border-radius: 22px;
+        border: 1px solid #282828;
+        margin-bottom: 15px;
+        font-family: "Figtree", sans-serif;
+
+        @media (max-width: 480px) {
+            font-size: 17px;
+            margin-bottom: 13px;
+            padding: 11px 17px;
+            border-radius: 17px;
+        }
+    }
+`;
+
+const EndContent = styled.p`
+    font-size: 19px;
+    color: #646464ff;
+    font-weight: 500;
+    line-height: 1.5;
+    font-family: "Figtree", sans-serif;
+    margin-top: 17px;
+    margin-bottom: 48px;
+    padding: 0px 22px;
+
+    @media (max-width: 480px) {
+        font-size: 16px;
+        padding: 0px 5px;
+        margin-bottom: 10px;
+    }
+
+    b {
+        color: #fff;
+        margin-left: 3px;
+        font-weight: 500;
+    }
 `;

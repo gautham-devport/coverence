@@ -89,7 +89,7 @@ const Login = () => {
 
             localStorage.setItem("userId", profileResponse.data.id);
             const redirectPath =
-                window.innerWidth <= 480 ? "/home/homepage" : "/home";
+                window.innerWidth <= 480 ? "/home/homepage" : "/home/homepage";
             window.location.href = redirectPath;
         } catch (error) {
             console.error("Login failed:", error.response?.data);
@@ -264,7 +264,7 @@ const Input = styled.input`
     height: 43px;
     padding: 22px 18px;
     margin-bottom: 4px;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 500;
     border-radius: 12px;
     background-color: hsl(193.54deg 12.52% 80.07% / 46%);

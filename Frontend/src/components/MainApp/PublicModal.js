@@ -230,8 +230,8 @@ const ModalBox = styled.div`
 
     @media (max-width: 480px) {
         width: 69%;
-        height: 34%;
-        margin-bottom: 85px;
+        height: 33%;
+        margin-bottom: 87px;
         margin-left: 0px;
     }
 `;

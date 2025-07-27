@@ -327,8 +327,9 @@ const SearchBar = styled.div`
     gap: 10px;
     margin-bottom: 20px;
     position: relative;
+
     @media (max-width: 480px) {
-        margin-bottom: 12px;
+        margin-bottom: 13px;
     }
 `;
 
@@ -342,11 +343,17 @@ const Input = styled.input`
     font-weight: 600;
     color: #fff;
     font-size: 16px;
+
     &::placeholder {
         font-weight: 600;
+
+        @media (max-width: 480px) {
+            font-weight: 500;
+        }
     }
+
     @media (max-width: 480px) {
-        padding: 7px 20px;
+        padding: 9px 20px;
         font-size: 16px;
     }
 `;

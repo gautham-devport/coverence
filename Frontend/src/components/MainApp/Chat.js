@@ -631,7 +631,7 @@ const StickyDateHeading = styled.div`
 
     @media (max-width: 480px) {
         padding: 5px 13px;
-        font-size: 8.18px;
+        font-size: 8.22px;
         background-color: #1e1e1e63;
         backdrop-filter: blur(8px);
     }
@@ -718,7 +718,7 @@ const InputArea = styled.div`
     @media (max-width: 480px) {
         width: 100%;
         height: 9%;
-        padding: 29px 10px 32px 10px;
+        padding: 27px 10px 32px 10px;
     }
 `;
 
