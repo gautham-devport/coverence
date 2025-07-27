@@ -183,7 +183,6 @@ const Container = styled.div`
         height: 100vh;
         padding: 0px;
         margin-top: 0px;
-        transform: scale(0.9);
     }
 `;
 
@@ -269,11 +268,22 @@ const SearchIconCont = styled.span`
     position: relative;
     top: 34px;
     left: 16px;
+
+    @media (max-width: 480px) {
+        top: 62px;
+        left: 22px;
+    }
+
     img {
         width: 18px;
         height: 18px;
         display: inline-block;
         filter: invert(18%);
+
+        @media (max-width: 480px) {
+            width: 18px;
+            height: 18px;
+        }
     }
 `;
 
@@ -289,6 +299,7 @@ const SearchInput = styled.input`
     background: #adadad;
     color: rgba(12, 12, 12, 0.91);
     margin-bottom: 2rem;
+
     &::placeholder {
         font-size: 16px;
         color: rgb(61, 61, 61);
@@ -296,11 +307,13 @@ const SearchInput = styled.input`
         font-family: "Figtree", sans-serif;
 
         @media (max-width: 480px) {
-            font-size: 15px;
+            font-size: 16px;
         }
     }
     @media (max-width: 480px) {
-        padding: 11px 46px;
+        width: 96%;
+        padding: 10px 46px;
+        margin: 30px auto 20px;
     }
 `;
 
@@ -322,6 +335,7 @@ const UserCard = styled.div`
         background: #171717b0;
         border: 1px solid #2e2e2e87;
         margin-bottom: 1.1rem;
+        border-radius: unset;
     }
 `;
 

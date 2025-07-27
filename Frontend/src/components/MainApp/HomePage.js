@@ -176,7 +176,8 @@ const Heading2 = styled.h2`
     font-family: "Figtree", sans-serif;
 
     @media (max-width: 480px) {
-        font-size: 25px;
+        font-size: 26px;
+        font-weight: 800;
     }
 `;
 

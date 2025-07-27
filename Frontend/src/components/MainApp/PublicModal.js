@@ -229,9 +229,9 @@ const ModalBox = styled.div`
     }
 
     @media (max-width: 480px) {
-        width: 72%;
-        height: 36%;
-        margin-bottom: 52px;
+        width: 69%;
+        height: 34%;
+        margin-bottom: 85px;
         margin-left: 0px;
     }
 `;
@@ -243,6 +243,10 @@ const ModalHeader = styled.div`
     align-items: center;
     border-bottom: 1px solid #6b6b6b;
     font-family: "Figtree", sans-serif;
+
+    @media (max-width: 480px) {
+        padding: 0.4rem 1.5rem;
+    }
 `;
 
 const ModalTitle = styled.h2`
@@ -251,7 +255,7 @@ const ModalTitle = styled.h2`
     text-align: center;
 
     @media (max-width: 480px) {
-        font-size: 22px;
+        font-size: 20px;
     }
 `;
 
@@ -266,6 +270,11 @@ const CloseButton = styled.span`
         width: 14px;
         height: 14px;
         filter: invert(1);
+
+        @media (max-width: 480px) {
+            width: 12px;
+            height: 12px;
+        }
     }
 `;
 
@@ -327,6 +336,7 @@ const UserCard = styled.div`
     @media (max-width: 480px) {
         padding: 0.6rem 0.5rem;
         font-size: 12px;
+        gap: 0.7rem;
     }
 `;
 
@@ -337,8 +347,8 @@ const UserImage = styled.img`
     object-fit: cover;
 
     @media (max-width: 480px) {
-        width: 35px;
-        height: 35px;
+        width: 31px;
+        height: 31px;
     }
 `;
 
@@ -359,21 +369,29 @@ const SearchInput = styled.input`
     outline: none;
     background-color: #404040fa;
     color: #fff;
+
     &::placeholder {
         color: #ccc;
         font-weight: 500;
         font-size: 15px;
+
+        @media (max-width: 480px) {
+            font-size: 12px;
+        }
     }
 
     @media (max-width: 480px) {
+        font-size: 12px;
         padding: 6px 16px;
-        &::placeholder {
-            font-size: 13px;
-        }
+        margin-bottom: 0;
     }
 `;
 
-const UserName = styled.div``;
+const UserName = styled.div`
+    @media (max-width: 480px) {
+        font-size: 11px;
+    }
+`;
 
 const UserSkill = styled.div`
     font-size: 14px;
@@ -381,7 +399,7 @@ const UserSkill = styled.div`
     font-weight: 500;
 
     @media (max-width: 480px) {
-        font-size: 11px;
+        font-size: 10px;
     }
 `;
 

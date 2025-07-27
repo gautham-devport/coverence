@@ -272,7 +272,7 @@ const Input = styled.input`
     border: 1px solid #36393926;
 
     &::placeholder {
-        color: #888888d1;
+        color: #767676d1;
         font-weight: 400;
     }
 
@@ -310,7 +310,7 @@ const Input4 = styled.input`
     border: none;
 
     &::placeholder {
-        color: #888888d1;
+        color: #767676d1;
         font-weight: 400;
     }
 

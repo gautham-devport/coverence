@@ -421,7 +421,7 @@ const ResPSidebarContainer = styled.div`
     @media (max-width: 480px) {
         width: 100%;
         height: 100dvh;
-        position: absolute;
+        position: fixed;
         z-index: 999;
         background: #1a1a1a82;
         backdrop-filter: blur(12px);
@@ -483,11 +483,11 @@ const SidebarContainer = styled.div`
     }
 
     @media (max-width: 480px) {
-        width: 78%;
+        width: 80.5%;
         overflow-y: auto;
         position: absolute;
         z-index: 999;
-        background: #090909;
+        background: #000;
         backdrop-filter: blur(21px);
         padding: 0px 69px;
         animation: ${(props) =>
@@ -498,13 +498,13 @@ const SidebarContainer = styled.div`
 
 const Title = styled.h1`
     color: #fff;
-    font-size: 3.5rem;
-    font-family: "Dancing Script", cursive;
+    font-size: 2.5rem;
     text-align: center;
     font-weight: 600;
-    margin-top: 8px;
+    margin-top: 12px;
     margin-bottom: 4rem;
     margin-right: 8px;
+    font-family: "Outfit";
 
     @media (max-width: 1024px) {
         font-size: 2.5rem;
@@ -517,10 +517,12 @@ const Title = styled.h1`
         margin-top: 22px;
     }
     @media (max-width: 480px) {
-        font-size: 2.7rem;
-        margin-bottom: 2rem;
+        font-size: 2.1rem;
+        margin-bottom: 3rem;
         margin-top: 24px;
         font-weight: bold;
+        font-family: "Figtree", sans-serif;
+        font-family: "Outfit";
     }
 `;
 

@@ -236,6 +236,7 @@ const ProfileContainer = styled.div`
     padding: 4.6rem 9rem;
     color: white;
     border-bottom: 1px solid #2c2c2c;
+
     @media (max-width: 480px) {
         margin: auto;
         padding: 0px;
@@ -329,7 +330,7 @@ const TopRow = styled.div`
     @media (max-width: 480px) {
         padding: 99px 20px 2px 20px;
         justify-content: center;
-        transform: scale(1.3);
+        transform: scale(1.33);
         margin-right: 0;
     }
 `;

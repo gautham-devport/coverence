@@ -47,7 +47,7 @@ const HomeContainer = styled.section`
 
 const MainContent = styled.div`
     width: 100%;
-    background: rgb(5, 5, 5);
+    background: #000;
     color: #fff;
     overflow-y: hidden;
     overflow-x: hidden;
