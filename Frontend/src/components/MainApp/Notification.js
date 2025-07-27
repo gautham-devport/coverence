@@ -350,6 +350,7 @@ const NotificationItem = styled.li`
         width: 100%;
         padding: 14px 10px;
         border-radius: 19px;
+        transform: scale(1.03);
     }
 `;
 
@@ -375,7 +376,8 @@ const ProfileImage = styled.img`
     @media (max-width: 480px) {
         width: 42px;
         height: 42px;
-        margin-right: -4px;
+        margin-right: -3px;
+        margin-left: 6px;
         border: 1px solid #545454;
     }
 `;
@@ -409,23 +411,25 @@ const UserName = styled.small`
         display: inline-block;
         color: #d6d6d6;
         font-weight: 700;
-        font-size: 13px;
+        font-size: 13.5px;
     }
 `;
 const Message = styled.small`
     font-size: 15px;
+
     @media (max-width: 480px) {
-        font-size: 12px;
-        color: #b0b0b0;
+        font-size: 13px;
+        color: #c9c9c9;
     }
 `;
 const TimeText = styled.small`
     color: #999;
     margin-left: 12px;
+
     @media (max-width: 480px) {
-        font-size: 9px;
+        font-size: 10.6px;
         margin-left: 0;
-        color: #555555;
+        color: #5d5d5d;
     }
 `;
 
@@ -438,6 +442,7 @@ const FollowButton = styled.button`
     font-size: 12px;
     cursor: pointer;
     font-weight: 600;
+    margin-right: 5px;
     transition: background 0.2s;
 
     &:hover {
@@ -459,6 +464,7 @@ const FollowingButton = styled.button`
     font-size: 13px;
     font-weight: 600;
     cursor: default;
+    margin-right: 5px;
 
     @media (max-width: 480px) {
         font-size: 8px;

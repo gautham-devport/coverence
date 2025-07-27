@@ -91,7 +91,10 @@ const HomePage = () => {
 
             <Content>
                 <WelcomTitle>
-                    Hey, {formData.first_name} {formData.last_name}
+                    Hey,{" "}
+                    <b>
+                        {formData.first_name} {formData.last_name}
+                    </b>
                 </WelcomTitle>
                 <HomeCard>
                     <MainTitle>Coverence</MainTitle>
@@ -102,13 +105,13 @@ const HomePage = () => {
                     </span>
                     <Features>
                         <li>
-                            <h4>Explore profiles</h4>
+                            <h4>Explore profiles .</h4>
                         </li>
                         <li>
-                            <h4>Chat instantly</h4>
+                            <h4>Follow & connect .</h4>
                         </li>
                         <li>
-                            <h4>Follow & connect</h4>
+                            <h4>Chat instantly .</h4>
                         </li>
                     </Features>
                     <EndContent>
@@ -270,7 +273,7 @@ const Content = styled.div`
     }
 
     @media (max-width: 480px) {
-        padding: 5rem 1.3rem 2rem;
+        padding: 5rem 1rem 2rem;
     }
 `;
 
@@ -287,15 +290,23 @@ const fadeIn = keyframes`
 
 const WelcomTitle = styled.h2`
     font-size: 26px;
-    font-weight: 500;
+    font-weight: 600;
+    color: #a0a0a0;
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 26px;
     font-family: "Figtree", sans-serif;
     animation: ${fadeIn} 2.4s ease-out forwards;
 
+    b {
+        color: #fff;
+        font-weight: 700;
+    }
+
     @media (max-width: 480px) {
-        font-size: 19px;
+        font-size: 20px;
+        font-weight: 500;
+        margin-left: 15px;
         margin-top: 10px;
         margin-bottom: 28px;
     }
@@ -305,10 +316,13 @@ const HomeCard = styled.div`
     width: 64%;
     padding: 36px;
     background-color: #232323;
-    border-radius: 36px;
+    border-radius: 45px;
     border: 1px solid #303030;
     margin: 0 auto;
     margin-top: 10px;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6),
+        0 1px 2px rgba(255, 255, 255, 0.05);
 
     span {
         font-size: 29px;
@@ -324,7 +338,7 @@ const HomeCard = styled.div`
 
     @media (max-width: 480px) {
         width: 100%;
-        padding: 30px;
+        padding: 27px 30px;
     }
 `;
 
@@ -377,21 +391,23 @@ const EndContent = styled.p`
     font-size: 19px;
     color: #646464ff;
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.4;
     font-family: "Figtree", sans-serif;
     margin-top: 17px;
     margin-bottom: 48px;
     padding: 0px 22px;
 
     @media (max-width: 480px) {
-        font-size: 16px;
+        font-size: 17px;
         padding: 0px 5px;
         margin-bottom: 10px;
     }
 
     b {
         color: #fff;
+        margin-top: 22px;
         margin-left: 3px;
         font-weight: 500;
+        color: #cecece;
     }
 `;

@@ -270,7 +270,7 @@ const SearchIconCont = styled.span`
     left: 16px;
 
     @media (max-width: 480px) {
-        top: 64px;
+        top: 65px;
         left: 22px;
     }
 
@@ -313,7 +313,7 @@ const SearchInput = styled.input`
     @media (max-width: 480px) {
         width: 96%;
         padding: 10px 46px;
-        margin: 32px auto 23px;
+        margin: 32px auto 25px;
     }
 `;
 
@@ -331,7 +331,7 @@ const UserCard = styled.div`
         background: #1a1a1a;
     }
     @media (max-width: 480px) {
-        height: 78px;
+        height: 82px;
         background: #17171794;
         border-top: 1px solid #2e2e2e87;
         border-bottom: 1px solid #2e2e2e87;
@@ -397,6 +397,7 @@ const Time = styled.div`
     font-family: "Figtree", sans-serif;
     @media (max-width: 480px) {
         font-size: 10px;
+        margin-right: 12px;
     }
 `;
 
