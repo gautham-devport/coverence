@@ -402,7 +402,7 @@ const Time = styled.div`
     font-family: "Figtree", sans-serif;
     @media (max-width: 480px) {
         font-size: 10px;
-        margin-right: 12px;
+        margin-right: 14px;
         margin-top: 10px;
     }
 `;
@@ -413,9 +413,16 @@ const Preview = styled.div`
     margin-top: 4px;
     font-weight: 600;
     font-family: "Figtree", sans-serif;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 530px;
+
     @media (max-width: 480px) {
         font-size: 14px;
         color: #d5d5d5c2;
+        max-width: 220px;
     }
 `;
 
@@ -443,7 +450,7 @@ const Badge = styled.div`
     background-color: #ff3b30;
 
     @media (max-width: 480px) {
-        top: -12px;
+        top: -10px;
         right: -8px;
         transform: scale(0.78);
     }

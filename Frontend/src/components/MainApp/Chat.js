@@ -576,7 +576,7 @@ const TypingIndicator = styled.div`
 
     @media (max-width: 480px) {
         padding: 15px 17px;
-        border-radius: 16px;
+        border-radius: 20px;
     }
 `;
 
