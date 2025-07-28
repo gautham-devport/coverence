@@ -360,8 +360,8 @@ const ProfileImagePlaceholder = styled.div`
     @media (max-width: 480px) {
         width: 78px;
         height: 78px;
-        margin-right: 18px;
-        margin-bottom: 20px;
+        margin-right: 5px;
+        margin-bottom: 10px;
     }
 `;
 

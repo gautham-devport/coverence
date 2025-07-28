@@ -228,7 +228,7 @@ const FullContainer = styled.div`
 const Container = styled.div`
     width: 68%;
     height: 100%;
-    margin-left: 5rem;
+    margin-left: 7rem;
     margin-right: 10px;
     margin-top: 5.8rem;
     @media (max-width: 480px) {

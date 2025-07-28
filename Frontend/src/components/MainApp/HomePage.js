@@ -255,6 +255,7 @@ const Content = styled.div`
     height: 100vh;
     padding: 6rem 4.3rem 4rem;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
         width: 7px;

@@ -337,7 +337,7 @@ const UserCard = styled.div`
         border-bottom: 1px solid #2e2e2e87;
         border-right: unset;
         border-left: unset;
-        margin-bottom: 1.1rem;
+        margin-bottom: 0rem;
         border-radius: unset;
     }
 `;
@@ -365,6 +365,11 @@ const ProfileImagePlaceholder = styled.span`
     margin-right: 10px;
     margin-left: 8px;
     background-color: #2d2d2d;
+
+    @media (max-width: 480px) {
+        width: 67px;
+        height: 53px;
+    }
 `;
 
 const Info = styled.div`
@@ -398,6 +403,7 @@ const Time = styled.div`
     @media (max-width: 480px) {
         font-size: 10px;
         margin-right: 12px;
+        margin-top: 10px;
     }
 `;
 
@@ -437,6 +443,8 @@ const Badge = styled.div`
     background-color: #ff3b30;
 
     @media (max-width: 480px) {
-        top: -26px;
+        top: -12px;
+        right: -8px;
+        transform: scale(0.78);
     }
 `;
