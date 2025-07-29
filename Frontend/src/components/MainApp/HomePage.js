@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Menu from "../../assets/Icons/paragraph.png";
 import ArrowLeft from "../../assets/Icons/headarrowright.png";
 import SearchIcon from "../../assets/Icons/search.png";
+import messageicon from "../../assets/Icons/chat-bubble.png";
 import { useSidebar } from "../context/SidebarContext";
 
 const HomePage = () => {
@@ -15,6 +16,7 @@ const HomePage = () => {
     });
     const navigate = useNavigate();
     const { setShowSidebar } = useSidebar();
+    const [unseenMessagesCount, setUnseenMessagesCount] = useState(0);
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -34,6 +36,27 @@ const HomePage = () => {
         fetchProfile();
     }, []);
 
+    useEffect(() => {
+        const fetchUnseenMessages = async () => {
+            const token = localStorage.getItem("token");
+            if (!token) return;
+
+            try {
+                const res = await axios.get(
+                    "https://coverence-backend.onrender.com/api/chat/recent/",
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                );
+                setUnseenMessagesCount(res.data.total_unseen_messages || 0);
+            } catch (err) {
+                console.error("Error fetching unseen messages", err);
+            }
+        };
+
+        fetchUnseenMessages();
+    }, []);
+
     const imageExists =
         formData.profile_image && !formData.profile_image.includes("drime.jpg");
 
@@ -43,6 +66,10 @@ const HomePage = () => {
 
     const handleProfileClick = () => {
         navigate("/home/profile");
+    };
+
+    const handleMessgaesClick = () => {
+        navigate("/home/message");
     };
 
     return (
@@ -123,6 +150,16 @@ const HomePage = () => {
                         </b>
                     </EndContent>
                 </HomeCard>
+
+                <Messages onClick={handleMessgaesClick}>
+                    <MessageIcon>
+                        <img src={messageicon} alt="" />
+                    </MessageIcon>
+                    {unseenMessagesCount > 0 && (
+                        <UnseenCount>{unseenMessagesCount}</UnseenCount>
+                    )}
+                    <h5>Messages</h5>
+                </Messages>
             </Content>
         </>
     );
@@ -411,4 +448,61 @@ const EndContent = styled.p`
         font-weight: 500;
         color: #cecece;
     }
+`;
+
+const Messages = styled.button`
+    display: none;
+
+    @media (max-width: 480px) {
+        outline: none;
+        border: none;
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 24px;
+        background: #e3e3e366;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 24px;
+        gap: 11px;
+
+        &:hover {
+            background: #a8a8a8ff;
+        }
+
+        h5 {
+            color: #000;
+            font-size: 18.4px;
+            font-family: "Figtree", sans-serif;
+        }
+    }
+`;
+
+const MessageIcon = styled.div`
+    img {
+        width: 22px;
+        height: 22px;
+        margin-bottom: -6px;
+        font-weight: 500;
+    }
+`;
+const UnseenCount = styled.div`
+    min-width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 37px;
+    top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 9.6px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 2px 6px;
+    background-color: #ff3b30;
 `;

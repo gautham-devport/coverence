@@ -624,7 +624,7 @@ const RedBubble = styled.div`
     display: flex;
     align-items: center;
     position: fixed;
-    top: 20rem;
+    top: 19.1rem;
     left: 13rem;
     animation: ${slideInFromLeft} 0.6s ease-out forwards;
 

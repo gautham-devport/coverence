@@ -284,7 +284,7 @@ const Input = styled.input`
 `;
 
 const DupiInput = styled.div`
-    display: flex;
+    /* display: flex; */
     align-items: center;
     width: 100%;
     height: 43px;
@@ -299,7 +299,7 @@ const DupiInput = styled.div`
 `;
 
 const Input4 = styled.input`
-    width: 85%;
+    width: 100%;
     height: 100%;
     padding: 0px 18px;
     font-size: 17px;
@@ -324,6 +324,9 @@ const Input4 = styled.input`
 const PasswordContainer = styled.div``;
 
 const ViewImage = styled.img`
+    position: fixed;
+    margin-top: 10px;
+    right: 40px;
     width: 18px;
     height: 20px;
     margin-left: 20px;

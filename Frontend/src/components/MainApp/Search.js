@@ -117,7 +117,7 @@ const Search = () => {
                     <BackButton onClick={() => navigate(-1)}>
                         <img src={ArrowLeft} alt="Back" />
                     </BackButton>
-                    <Heading>Search</Heading>
+                    <Heading>Explore Profile's</Heading>
                 </div>
                 <MenuButton onClick={() => setShowSidebar(true)}>
                     <img src={Menu} alt="menu" />
@@ -228,9 +228,9 @@ const FullContainer = styled.div`
 const Container = styled.div`
     width: 68%;
     height: 100%;
-    margin-left: 7rem;
+    margin-left: 8rem;
     margin-right: 10px;
-    margin-top: 5.8rem;
+    margin-top: 5.9rem;
     @media (max-width: 480px) {
         width: 100%;
         margin-top: 4.3rem;

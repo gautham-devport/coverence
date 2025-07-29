@@ -11,6 +11,7 @@ import { WebSocketContext } from "../context/WebSocketProvider";
 const Message = () => {
     const [chatUsers, setChatUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const { setShowSidebar } = useSidebar();
@@ -24,6 +25,7 @@ const Message = () => {
         }
 
         const fetchChats = () => {
+            setLoading(true); // start loading
             axios
                 .get(
                     "https://coverence-backend.onrender.com/api/chat/recent/",
@@ -40,9 +42,12 @@ const Message = () => {
                     });
                     setChatUsers(sorted);
                 })
-                .catch((err) =>
-                    console.error("Failed to load chat users", err)
-                );
+                .catch((err) => {
+                    console.error("Failed to load chat users", err);
+                })
+                .finally(() => {
+                    setLoading(false); // stop loading
+                });
         };
 
         fetchChats();
@@ -103,44 +108,75 @@ const Message = () => {
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
                     </div>
-                    {filteredUsers.map((user) => (
-                        <UserCard
-                            key={user.id}
-                            onClick={() => navigate(`/home/chat/${user.id}`)}
+                    {loading ? (
+                        <div
+                            style={{
+                                padding: "1rem",
+                                textAlign: "center",
+                                color: "#a9a9a9c2",
+                                fontSize: "17px",
+                                fontWeight: "600",
+                                fontFamily: "Figtree, sans-serif",
+                            }}
                         >
-                            {user.profile_image ? (
-                                <Avatar
-                                    src={user.profile_image}
-                                    alt="Profile"
-                                />
-                            ) : (
-                                <ProfileImagePlaceholder />
-                            )}
-                            <Info>
-                                <TopRow>
-                                    <Name>
-                                        {user.first_name} {user.last_name}
-                                    </Name>
-                                    <RightSection>
-                                        {user.last_message?.timestamp && (
-                                            <Time>
-                                                {new Date(
-                                                    user.last_message.timestamp
-                                                ).toLocaleTimeString([], {
-                                                    hour: "2-digit",
-                                                    minute: "2-digit",
-                                                })}
-                                            </Time>
-                                        )}
-                                        {user.unseen_count > 0 && (
-                                            <Badge>{user.unseen_count}</Badge>
-                                        )}
-                                    </RightSection>
-                                </TopRow>
-                                <Preview>{user.last_message?.content}</Preview>
-                            </Info>
-                        </UserCard>
-                    ))}
+                            Messages loading...
+                        </div>
+                    ) : filteredUsers.length === 0 ? (
+                        <div
+                            style={{
+                                padding: "1rem",
+                                textAlign: "center",
+                                color: "#888",
+                            }}
+                        >
+                            No messages found.
+                        </div>
+                    ) : (
+                        filteredUsers.map((user) => (
+                            <UserCard
+                                key={user.id}
+                                onClick={() =>
+                                    navigate(`/home/chat/${user.id}`)
+                                }
+                            >
+                                {user.profile_image ? (
+                                    <Avatar
+                                        src={user.profile_image}
+                                        alt="Profile"
+                                    />
+                                ) : (
+                                    <ProfileImagePlaceholder />
+                                )}
+                                <Info>
+                                    <TopRow>
+                                        <Name>
+                                            {user.first_name} {user.last_name}
+                                        </Name>
+                                        <RightSection>
+                                            {user.last_message?.timestamp && (
+                                                <Time>
+                                                    {new Date(
+                                                        user.last_message.timestamp
+                                                    ).toLocaleTimeString([], {
+                                                        hour: "2-digit",
+                                                        minute: "2-digit",
+                                                    })}
+                                                </Time>
+                                            )}
+                                            {user.unseen_count > 0 && (
+                                                <Badge>
+                                                    {user.unseen_count}
+                                                </Badge>
+                                            )}
+                                        </RightSection>
+                                    </TopRow>
+                                    <Preview>
+                                        {user.last_message?.content}
+                                    </Preview>
+                                </Info>
+                            </UserCard>
+                        ))
+                    )}
                 </Container>
             </div>
         </MainContainer>
