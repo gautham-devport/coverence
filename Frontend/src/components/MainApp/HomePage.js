@@ -359,7 +359,7 @@ const HomeCard = styled.div`
     border: 1px solid #303030;
     margin: 0 auto;
     margin-top: 10px;
-    margin-bottom: 3rem;
+    margin-bottom: 3.2rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6),
         0 1px 2px rgba(255, 255, 255, 0.05);
 
@@ -458,10 +458,10 @@ const Messages = styled.button`
         outline: none;
         border: none;
         position: fixed;
-        bottom: 1.2rem;
+        bottom: 1.4rem;
         left: 50%;
         transform: translateX(-50%);
-        padding: 10px 25px;
+        padding: 10px 28px;
         background: #e3e3e366;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         backdrop-filter: blur(10px);
@@ -469,7 +469,7 @@ const Messages = styled.button`
         justify-content: space-between;
         align-items: center;
         border-radius: 24px;
-        gap: 11px;
+        gap: 12px;
 
         &:hover {
             background: #a8a8a8ff;

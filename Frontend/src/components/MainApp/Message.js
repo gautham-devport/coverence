@@ -368,7 +368,7 @@ const UserCard = styled.div`
     }
     @media (max-width: 480px) {
         height: 82px;
-        background: #17171794;
+        background: #1717178f;
         border-top: 1px solid #2e2e2e87;
         border-bottom: 1px solid #2e2e2e87;
         border-right: unset;
@@ -456,9 +456,9 @@ const Preview = styled.div`
     max-width: 530px;
 
     @media (max-width: 480px) {
-        font-size: 14px;
-        color: #d5d5d5c2;
-        max-width: 220px;
+        font-size: 13px;
+        color: #b0b0b0c2;
+        max-width: 180px;
     }
 `;
 

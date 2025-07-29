@@ -524,13 +524,14 @@ const UserStatus = styled.span`
 
 const MessageArea = styled.div`
     flex: 1;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     padding: 95px 19px 135px 38px;
     background-color: #0b0b0b;
     position: relative;
+
     &::-webkit-scrollbar {
-        width: 6px;
+        width: 5.6px;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -543,6 +544,8 @@ const MessageArea = styled.div`
     }
 
     @media (max-width: 480px) {
+        height: 100dvh;
+        -webkit-overflow-scrolling: touch;
         padding: 82px 14px 135px 15px;
     }
 `;
@@ -661,12 +664,12 @@ const MessageBubble = styled.div`
 
         @media (max-width: 480px) {
             max-width: 218px;
-            font-size: 13px;
+            font-size: 14px;
         }
     }
 
     @media (max-width: 480px) {
-        padding: 8px 18px 4px;
+        padding: 8.5px 18px 4px;
         border-radius: 17px;
     }
 
@@ -688,7 +691,7 @@ const MessageBubble = styled.div`
 
 const TimeText = styled.span`
     display: block;
-    font-size: 9px;
+    font-size: 10px;
     text-align: right;
     color: ${(props) => (props.isOwn ? "#fff" : "#000")};
     margin-top: 2px;
