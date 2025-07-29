@@ -292,7 +292,6 @@ const Content = styled.div`
     height: 100vh;
     padding: 6rem 4.3rem 4rem;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
         width: 7px;
@@ -311,6 +310,7 @@ const Content = styled.div`
     }
 
     @media (max-width: 480px) {
+        -webkit-overflow-scrolling: touch;
         padding: 5rem 1rem 2rem;
     }
 `;
@@ -457,7 +457,7 @@ const Messages = styled.button`
         outline: none;
         border: none;
         position: fixed;
-        bottom: 1rem;
+        bottom: 1.12rem;
         left: 50%;
         transform: translateX(-50%);
         padding: 10px 24px;
