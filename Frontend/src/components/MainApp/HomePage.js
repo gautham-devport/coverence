@@ -291,7 +291,7 @@ const ProfileImagePlaceholder = styled.div`
 const Content = styled.div`
     height: 100vh;
     padding: 6rem 4.3rem 4rem;
-    overflow-y: auto;
+    overflow-y: scroll;
 
     &::-webkit-scrollbar {
         width: 7px;
@@ -310,6 +310,7 @@ const Content = styled.div`
     }
 
     @media (max-width: 480px) {
+        height: 100dvh;
         -webkit-overflow-scrolling: touch;
         padding: 5rem 1rem 2rem;
     }
@@ -457,10 +458,10 @@ const Messages = styled.button`
         outline: none;
         border: none;
         position: fixed;
-        bottom: 1.12rem;
+        bottom: 1.2rem;
         left: 50%;
         transform: translateX(-50%);
-        padding: 10px 24px;
+        padding: 10px 25px;
         background: #e3e3e366;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         backdrop-filter: blur(10px);

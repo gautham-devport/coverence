@@ -438,7 +438,7 @@ const Time = styled.div`
     font-family: "Figtree", sans-serif;
     @media (max-width: 480px) {
         font-size: 10px;
-        margin-right: 14px;
+        margin-right: 16px;
         margin-top: 10px;
     }
 `;
@@ -487,7 +487,7 @@ const Badge = styled.div`
 
     @media (max-width: 480px) {
         top: -10px;
-        right: -8px;
+        right: -4px;
         transform: scale(0.78);
     }
 `;
