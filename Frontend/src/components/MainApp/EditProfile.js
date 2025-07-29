@@ -326,7 +326,7 @@ const Container = styled.div`
     }
 
     @media (max-width: 480px) {
-        /* height: 100dvh; */
+        height: 100dvh;
         padding: 0;
 
         &::-webkit-scrollbar {
