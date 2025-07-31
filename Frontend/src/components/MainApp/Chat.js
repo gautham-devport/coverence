@@ -529,27 +529,22 @@ const MessageArea = styled.div`
     padding: 95px 19px 135px 38px;
     background-color: #0b0b0b;
     position: relative;
-    transform: translateZ(0); /* for iOS smooth scroll */
 
-    @media (min-width: 481px) {
-        &::-webkit-scrollbar {
-            width: 3.5px;
-        }
+    &::-webkit-scrollbar {
+        width: 3.5px;
+    }
 
-        &::-webkit-scrollbar-thumb {
-            background-color: #8b8b8b;
-            border-radius: 4px;
-        }
+    &::-webkit-scrollbar-thumb {
+        background-color: #8b8b8b;
+        border-radius: 4px;
+    }
 
-        &::-webkit-scrollbar-track {
-            background: transparent;
-        }
+    &::-webkit-scrollbar-track {
+        background: transparent;
     }
 
     @media (max-width: 480px) {
-        height: 100vh; /* fallback */
         height: 100dvh;
-        max-height: 100dvh;
         -webkit-overflow-scrolling: touch;
         padding: 82px 14px 135px 15px;
     }
