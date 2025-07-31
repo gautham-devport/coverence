@@ -360,10 +360,10 @@ const SearchInput = styled.input`
         }
     }
     @media (max-width: 480px) {
-        width: 96%;
-        padding: 9px 46px;
+        width: 95%;
+        padding: 8px 46px;
         margin: 28px auto 11px;
-        border-radius: 16px;
+        border-radius: 17px;
     }
 `;
 
@@ -382,7 +382,7 @@ const UserCard = styled.div`
         background: #1a1a1a;
 
         @media (max-width: 480px) {
-            background: #17171764;
+            background: #17171799;
         }
     }
     @media (max-width: 480px) {
