@@ -476,5 +476,6 @@ const FollowingButton = styled.button`
 
     @media (max-width: 480px) {
         font-size: 8px;
+        padding: 6.6px 17.8px;
     }
 `;

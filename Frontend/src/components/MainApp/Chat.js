@@ -424,7 +424,7 @@ const ChatContainer = styled.div`
 
 const ChatHeader = styled.div`
     width: 100%;
-    height: 5rem;
+    /* height: 5rem; */
     display: flex;
     align-items: center;
     justify-items: center;
@@ -432,11 +432,11 @@ const ChatHeader = styled.div`
     background: #ababab6b;
     z-index: 9;
     backdrop-filter: blur(36px);
-    padding: 48px 18px 45px 13px;
+    padding: 21px 18px 19px 13px;
     margin-top: -1px;
 
     @media (max-width: 480px) {
-        padding: 42px 13px 40px 6px;
+        padding: 18.2px 13px 13.2px 6px;
     }
 `;
 
@@ -524,27 +524,32 @@ const UserStatus = styled.span`
 
 const MessageArea = styled.div`
     flex: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     padding: 95px 19px 135px 38px;
     background-color: #0b0b0b;
     position: relative;
+    transform: translateZ(0); /* for iOS smooth scroll */
 
-    &::-webkit-scrollbar {
-        width: 5.6px;
-    }
+    @media (min-width: 481px) {
+        &::-webkit-scrollbar {
+            width: 3.5px;
+        }
 
-    &::-webkit-scrollbar-thumb {
-        background-color: #8b8b8b;
-        border-radius: 4px;
-    }
+        &::-webkit-scrollbar-thumb {
+            background-color: #8b8b8b;
+            border-radius: 4px;
+        }
 
-    &::-webkit-scrollbar-track {
-        background: transparent;
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
     }
 
     @media (max-width: 480px) {
+        height: 100vh; /* fallback */
         height: 100dvh;
+        max-height: 100dvh;
         -webkit-overflow-scrolling: touch;
         padding: 82px 14px 135px 15px;
     }
@@ -721,7 +726,7 @@ const InputArea = styled.div`
     @media (max-width: 480px) {
         width: 100%;
         height: 9%;
-        padding: 27px 10px 32px 10px;
+        padding: 28.5px 10px 33px 10px;
     }
 `;
 
@@ -757,8 +762,8 @@ const AddButton = styled.button`
     @media (max-width: 480px) {
         width: 26px;
         height: 26px;
-        margin-left: 0px;
-        margin-right: 8px;
+        margin-left: 3.5px;
+        margin-right: 8.2px;
     }
 `;
 

@@ -85,7 +85,7 @@ const Message = () => {
                     <BackButton onClick={() => navigate(-1)}>
                         <img src={ArrowLeft} alt="Back" />
                     </BackButton>
-                    <Heading>Messages</Heading>
+                    <Heading>Chats</Heading>
                 </div>
                 <MenuButton onClick={() => setShowSidebar(true)}>
                     <img src={Menu} alt="menu" />
@@ -269,11 +269,12 @@ const BackButton = styled.button`
 
 const Heading = styled.h2`
     display: inline-block;
-    font-weight: 700;
-    font-size: 35px;
+    font-weight: 800;
+    font-size: 37px;
     font-family: "Figtree", sans-serif;
+
     @media (max-width: 480px) {
-        font-size: 30px;
+        font-size: 32px;
     }
 `;
 
@@ -317,8 +318,8 @@ const SearchIconCont = styled.span`
         filter: invert(18%);
 
         @media (max-width: 480px) {
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
         }
     }
 `;
