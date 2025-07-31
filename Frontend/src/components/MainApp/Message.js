@@ -306,7 +306,7 @@ const SearchBox = styled.div`
         width: 100%;
         position: fixed;
         top: 1.8rem;
-        background: #0000007a;
+        background: #000000bf;
         z-index: 8;
         backdrop-filter: blur(36px);
         border-bottom: 1px solid #2e2e2e87;
@@ -377,12 +377,17 @@ const UserCard = styled.div`
     border-radius: 26px;
     margin-bottom: 1.3rem;
     cursor: pointer;
+
     &:hover {
         background: #1a1a1a;
+
+        @media (max-width: 480px) {
+            background: #17171764;
+        }
     }
     @media (max-width: 480px) {
         height: unset;
-        background: #1717177a;
+        background: #17171757;
         padding-top: 15px;
         padding-bottom: 14px;
         border-top: unset;
