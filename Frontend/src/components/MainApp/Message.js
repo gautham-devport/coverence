@@ -297,7 +297,7 @@ const Container = styled.div`
         width: 100%;
         height: unset;
         padding: 0px;
-        margin-top: 6.4rem;
+        margin-top: 6.34rem;
     }
 `;
 
@@ -320,7 +320,7 @@ const SearchIconCont = styled.span`
 
     @media (max-width: 480px) {
         top: 60px;
-        left: 22px;
+        left: 25px;
     }
 
     img {
@@ -363,7 +363,7 @@ const SearchInput = styled.input`
         width: 95%;
         padding: 8px 46px;
         margin: 28px auto 11px;
-        border-radius: 17px;
+        border-radius: 18px;
     }
 `;
 
@@ -382,7 +382,7 @@ const UserCard = styled.div`
         background: #1a1a1a;
 
         @media (max-width: 480px) {
-            background: #17171799;
+            background: #1717178c;
         }
     }
     @media (max-width: 480px) {
