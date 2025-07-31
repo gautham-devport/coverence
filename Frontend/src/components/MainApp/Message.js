@@ -97,7 +97,7 @@ const Message = () => {
                 }}
             >
                 <Container>
-                    <div>
+                    <SearchBox>
                         <SearchIconCont>
                             <img src={SearchIcon} alt="" />
                         </SearchIconCont>
@@ -107,7 +107,7 @@ const Message = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
-                    </div>
+                    </SearchBox>
                     {loading ? (
                         <div
                             style={{
@@ -208,20 +208,6 @@ const MainContainer = styled.div`
     }
 `;
 
-const Container = styled.div`
-    width: 78%;
-    margin: auto;
-    padding: 20px;
-    margin-top: 2rem;
-
-    @media (max-width: 480px) {
-        width: 100%;
-        height: 100vh;
-        padding: 0px;
-        margin-top: 0px;
-    }
-`;
-
 const SectionTitle = styled.div`
     width: 100%;
     height: 4rem;
@@ -301,13 +287,39 @@ const MenuButton = styled.button`
     }
 `;
 
+const Container = styled.div`
+    width: 78%;
+    margin: auto;
+    padding: 20px;
+    margin-top: 2rem;
+
+    @media (max-width: 480px) {
+        width: 100%;
+        height: unset;
+        padding: 0px;
+        margin-top: 6.4rem;
+    }
+`;
+
+const SearchBox = styled.div`
+    @media (max-width: 480px) {
+        width: 100%;
+        position: fixed;
+        top: 1.8rem;
+        background: #0000007a;
+        z-index: 8;
+        backdrop-filter: blur(36px);
+        border-bottom: 1px solid #2e2e2e87;
+    }
+`;
+
 const SearchIconCont = styled.span`
     position: relative;
     top: 34px;
     left: 16px;
 
     @media (max-width: 480px) {
-        top: 65px;
+        top: 60px;
         left: 22px;
     }
 
@@ -349,8 +361,9 @@ const SearchInput = styled.input`
     }
     @media (max-width: 480px) {
         width: 96%;
-        padding: 10px 46px;
-        margin: 32px auto 25px;
+        padding: 9px 46px;
+        margin: 28px auto 11px;
+        border-radius: 16px;
     }
 `;
 
@@ -368,9 +381,11 @@ const UserCard = styled.div`
         background: #1a1a1a;
     }
     @media (max-width: 480px) {
-        height: 82px;
-        background: #1717178a;
-        border-top: 1px solid #2e2e2e87;
+        height: unset;
+        background: #1717177a;
+        padding-top: 15px;
+        padding-bottom: 14px;
+        border-top: unset;
         border-bottom: 1px solid #2e2e2e87;
         border-right: unset;
         border-left: unset;
@@ -389,14 +404,16 @@ const Avatar = styled.img`
     border: 1px solid #5f5f5f36;
 
     @media (max-width: 480px) {
-        width: 62px;
-        height: 52px;
+        width: 63px;
+        height: 53px;
+        margin-right: 14px;
+        margin-left: 14px;
     }
 `;
 
 const ProfileImagePlaceholder = styled.span`
-    width: 63px;
-    height: 58px;
+    width: 62px;
+    height: 57px;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 10px;
@@ -404,8 +421,10 @@ const ProfileImagePlaceholder = styled.span`
     background-color: #2d2d2d;
 
     @media (max-width: 480px) {
-        width: 67px;
-        height: 53px;
+        width: 69px;
+        height: 55px;
+        margin-right: 13px;
+        margin-left: 14px;
     }
 `;
 
@@ -438,9 +457,9 @@ const Time = styled.div`
     font-weight: 600;
     font-family: "Figtree", sans-serif;
     @media (max-width: 480px) {
-        font-size: 10px;
-        margin-right: 16px;
-        margin-top: 10px;
+        font-size: 11px;
+        margin-right: 26px;
+        margin-top: -18px;
     }
 `;
 
@@ -487,8 +506,9 @@ const Badge = styled.div`
     background-color: #ff3b30;
 
     @media (max-width: 480px) {
-        top: -10px;
-        right: -4px;
+        top: -22px;
+        right: -1px;
         transform: scale(0.78);
+        background: #309fff;
     }
 `;
