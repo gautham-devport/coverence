@@ -374,8 +374,8 @@ const ProfileImage = styled.img`
     margin-right: 0.5rem;
     object-fit: cover;
     @media (max-width: 480px) {
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
         margin-right: -3px;
         margin-left: 6px;
         border: 1px solid #545454;
@@ -394,6 +394,14 @@ const PlaceholderImage = styled.div`
     margin-right: 1rem;
     font-weight: bold;
     text-transform: uppercase;
+
+    @media (max-width: 480px) {
+        width: 44px;
+        height: 44px;
+        margin-right: -3px;
+        margin-left: 6px;
+        border: 1px solid #545454;
+    }
 `;
 
 const SkillText = styled.p`

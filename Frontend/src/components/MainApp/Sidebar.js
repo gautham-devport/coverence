@@ -259,16 +259,16 @@ const Sidebar = () => {
         { label: "Settings", path: "/home/settings", icon: settingsIcon },
     ];
 
-    useEffect(() => {
-        if (unseenFollowCount > 0) {
-            setShowRedBubble(true);
-            const timer = setTimeout(() => {
-                setShowRedBubble(false);
-            }, 3500);
+    // useEffect(() => {
+    //     if (unseenFollowCount > 0) {
+    //         setShowRedBubble(true);
+    //         const timer = setTimeout(() => {
+    //             setShowRedBubble(false);
+    //         }, 3500);
 
-            return () => clearTimeout(timer);
-        }
-    }, [unseenFollowCount]);
+    //         return () => clearTimeout(timer);
+    //     }
+    // }, [unseenFollowCount]);
 
     const handleSidebarClose = () => {
         if (isMobile) {
@@ -452,7 +452,6 @@ const slideOutSidebar = keyframes`
 `;
 
 const SidebarContainer = styled.div`
-    /* width: 19%; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -518,8 +517,8 @@ const Title = styled.h1`
     }
     @media (max-width: 480px) {
         font-size: 2.1rem;
-        margin-bottom: 3rem;
-        margin-top: 24px;
+        margin-bottom: 3.2rem;
+        margin-top: 26px;
         font-weight: bold;
         font-family: "Figtree", sans-serif;
         font-family: "Outfit";

@@ -368,7 +368,7 @@ const UserCard = styled.div`
     }
     @media (max-width: 480px) {
         height: 82px;
-        background: #1717178f;
+        background: #1717178a;
         border-top: 1px solid #2e2e2e87;
         border-bottom: 1px solid #2e2e2e87;
         border-right: unset;
