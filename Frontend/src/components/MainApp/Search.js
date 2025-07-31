@@ -235,6 +235,7 @@ const Container = styled.div`
         width: 100%;
         margin-top: 4.42rem;
         margin-left: 12px;
+        padding-bottom: 1rem;
     }
 `;
 
@@ -433,10 +434,27 @@ const Tab = styled.div`
 
 const Results = styled.div`
     width: 100%;
-    height: 85%;
-    overflow-y: scroll;
+    height: 72%;
+    overflow-y: auto;
     &::-webkit-scrollbar {
-        display: none;
+        width: 6px;
+
+        @media (max-width: 480px) {
+            width: 4px;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #8b8b8b;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    @media (max-width: 480px) {
+        height: 76%;
     }
 `;
 
@@ -446,10 +464,14 @@ const UserCard = styled.div`
     gap: 15px;
     padding: 12px 20px;
     border-radius: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     cursor: pointer;
     &:hover {
         background-color: rgb(21, 21, 21);
+    }
+
+    @media (max-width: 480px) {
+        padding: 12px 12px;
     }
 `;
 

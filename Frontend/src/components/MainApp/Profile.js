@@ -356,7 +356,7 @@ const ProfileImagePlaceholder = styled.div`
     border-radius: 50%;
     background-color: #525252;
     margin-bottom: 1rem;
-    margin-right: 3rem;
+    margin-right: 1rem;
     @media (max-width: 480px) {
         width: 78px;
         height: 78px;
