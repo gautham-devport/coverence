@@ -524,7 +524,7 @@ const UserStatus = styled.span`
 
 const MessageArea = styled.div`
     flex: 1;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     padding: 95px 19px 135px 38px;
     background-color: #0b0b0b;
