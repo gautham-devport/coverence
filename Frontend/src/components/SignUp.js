@@ -206,7 +206,7 @@ const FullContainer = styled.section`
 
 const FormContainer = styled.form`
     width: 32.5%;
-    height: 77%;
+    height: 81%;
     background-color: hsl(208.31deg 12.59% 23.45% / 57%);
     backdrop-filter: blur(4px);
     border-radius: 30px;

@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import (
 
 
 def home(request):
-    return HttpResponse("Welcome to the Django API! Go to /admin or /api/users/signup/")
+    return HttpResponse("Welcome to the Coverence API")
 
 urlpatterns = [
     path('admin/', admin.site.urls),

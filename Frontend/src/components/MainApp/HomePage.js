@@ -132,13 +132,10 @@ const HomePage = () => {
                     </span>
                     <Features>
                         <li>
-                            <h4>Explore profiles .</h4>
+                            <h4>Explore profiles</h4>
                         </li>
                         <li>
-                            <h4>Follow & connect .</h4>
-                        </li>
-                        <li>
-                            <h4>Chat instantly .</h4>
+                            <h4>Chat instantly</h4>
                         </li>
                     </Features>
                     <EndContent>
@@ -176,7 +173,7 @@ const SectionTitle = styled.div`
     position: fixed;
     background: #00000040;
     z-index: 9;
-    backdrop-filter: blur(36px);
+    backdrop-filter: blur(85px);
     padding: 48px 18px 45px 13px;
 
     @media (max-width: 480px) {
@@ -213,14 +210,14 @@ const SectionTitle2 = styled.div`
     display: none;
     @media (max-width: 480px) {
         width: 100%;
-        height: 5rem;
+        height: 4.4rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         position: fixed;
-        background: #0505054f;
+        background: #0505057d;
         z-index: 9;
-        backdrop-filter: blur(36px);
+        backdrop-filter: blur(28px);
         padding: 35px 20px 35px 20px;
     }
 `;
@@ -328,14 +325,7 @@ const fadeIn = keyframes`
 `;
 
 const WelcomTitle = styled.h2`
-    font-size: 26px;
-    font-weight: 600;
-    color: #a0a0a0;
-    margin-left: 10px;
-    margin-top: 10px;
-    margin-bottom: 26px;
-    font-family: "Figtree", sans-serif;
-    animation: ${fadeIn} 2.4s ease-out forwards;
+    display: none;
 
     b {
         color: #fff;
@@ -343,20 +333,22 @@ const WelcomTitle = styled.h2`
     }
 
     @media (max-width: 480px) {
+        display: block;
         font-size: 21px;
         font-weight: 500;
         margin-left: 15px;
         margin-top: 2px;
         margin-bottom: 23px;
+        font-family: "Figtree", sans-serif;
+        animation: ${fadeIn} 2.4s ease-out forwards;
     }
 `;
 
 const HomeCard = styled.div`
-    width: 64%;
+    width: 80%;
     padding: 36px;
-    background-color: #222222;
-    border-radius: 43.4px;
-    border: 1px solid #303030;
+    background: linear-gradient(135deg, #b388eb, #2a1f42);
+    border-radius: 0px;
     margin: 0 auto;
     margin-top: 10px;
     margin-bottom: 3.2rem;
@@ -400,35 +392,34 @@ const Sub = styled.h3`
 
     @media (max-width: 480px) {
         font-size: 19px;
-        margin-bottom: 27px;
+        margin-bottom: 24px;
     }
 `;
 
 const Features = styled.ul`
     li {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 600;
         text-align: center;
         color: #008fff;
-        background: #040404;
-        padding: 15px 17px;
-        border-radius: 22px;
-        border: 1px solid #282828;
+        background: #0404048f;
+        padding: 14px 17px;
+        border-radius: 2px;
         margin-bottom: 15px;
         font-family: "Figtree", sans-serif;
 
         @media (max-width: 480px) {
-            font-size: 17px;
+            font-size: 16.5px;
             margin-bottom: 13px;
             padding: 11px 17px;
-            border-radius: 17px;
+            border-radius: 10px;
         }
     }
 `;
 
 const EndContent = styled.p`
     font-size: 19px;
-    color: #646464ff;
+    color: #858585;
     font-weight: 600;
     line-height: 1.4;
     font-family: "Figtree", sans-serif;
@@ -461,15 +452,16 @@ const Messages = styled.button`
         bottom: 1.4rem;
         left: 50%;
         transform: translateX(-50%);
-        padding: 10.8px 28px;
-        background: #e3e3e366;
+        padding: 11.2px 25px;
+        background: #e3e3e363;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(6px);
         display: flex;
         justify-content: space-between;
         align-items: center;
         border-radius: 24px;
         gap: 12px;
+        border: 1px solid #99999957;
 
         &:hover {
             background: #a8a8a8ff;

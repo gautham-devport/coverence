@@ -23,7 +23,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "4(uf85ihcyz-jcftprybm#-v3c)*1@q$b2@=h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,coverence-backend.onrender.com").split(",")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost,coverence-backend.onrender.com").split(",")
 
 
 
