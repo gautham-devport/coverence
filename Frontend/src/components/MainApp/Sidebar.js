@@ -13,10 +13,12 @@ import redtraingle from "../../assets/Icons/redtriangle.png";
 import { useContext } from "react";
 import { useSidebar } from "../context/SidebarContext";
 import { WebSocketContext } from "../context/WebSocketProvider";
+import { AuthContext } from "../context/AuthContext";
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { setUser } = useContext(AuthContext);
     const { showSidebar, setShowSidebar } = useSidebar();
     const [isAnimatingOut, setIsAnimatingOut] = useState(false);
     const isMobile = window.innerWidth <= 480;
@@ -104,7 +106,10 @@ const Sidebar = () => {
         }
 
         localStorage.removeItem("token");
+        localStorage.removeItem("refresh");
         localStorage.removeItem("userId");
+        setUser(null);
+
         navigate("/login");
     };
 
