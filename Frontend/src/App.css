@@ -19,6 +19,8 @@
 body {
     font-family: "Outfit";
     background-color: #000;
+    height: 100%;
+    overflow: hidden;
 }
 a {
     text-decoration: none;
