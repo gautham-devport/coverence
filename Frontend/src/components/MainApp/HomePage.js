@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Menu from "../../assets/Icons/paragraph.png";
 import ArrowLeft from "../../assets/Icons/headarrowright.png";
@@ -100,10 +100,6 @@ const HomePage = () => {
                         alignItems: "center",
                     }}
                 >
-                    {/* <SearchButton onClick={handleSearch}>
-                        <img src={SearchIcon} alt="Back" />
-                    </SearchButton> */}
-
                     {imageExists ? (
                         <ProfileImage
                             onClick={handleProfileClick}
@@ -117,12 +113,6 @@ const HomePage = () => {
             </SectionTitle2>
 
             <Content>
-                {/* <WelcomTitle>
-                    Hey,{" "}
-                    <b>
-                        {formData.first_name} {formData.last_name}
-                    </b>
-                </WelcomTitle> */}
                 <HomeCard>
                     <MainTitle>Coverence</MainTitle>
                     <Sub>Discover. Connect. Chat.</Sub>
@@ -259,19 +249,6 @@ const Heading2 = styled.h2`
     }
 `;
 
-// const SearchButton = styled.button`
-//     background: none;
-//     border: none;
-//     cursor: pointer;
-//     margin-right: 23px;
-//     img {
-//         width: 21px;
-//         height: 22px;
-//         filter: invert(1);
-//         margin-top: 2px;
-//     }
-// `;
-
 const ProfileImage = styled.img`
     width: 32px;
     height: 32px;
@@ -321,37 +298,6 @@ const Content = styled.div`
     }
 `;
 
-// const fadeIn = keyframes`
-//   from {
-//     opacity: 0;
-
-//   }
-//   to {
-//     opacity: 1;
-
-//   }
-// `;
-
-// const WelcomTitle = styled.h2`
-//     display: none;
-
-//     b {
-//         color: #fff;
-//         font-weight: 700;
-//     }
-
-//     @media (max-width: 480px) {
-//         display: block;
-//         font-size: 21px;
-//         font-weight: 500;
-//         margin-left: 15px;
-//         margin-top: 2px;
-//         margin-bottom: 23px;
-//         font-family: "Figtree", sans-serif;
-//         animation: ${fadeIn} 2.4s ease-out forwards;
-//     }
-// `;
-
 const HomeCard = styled.div`
     width: 80%;
     padding: 36px;
@@ -359,7 +305,7 @@ const HomeCard = styled.div`
     border-radius: 0px;
     margin: 0 auto;
     margin-top: 10px;
-    margin-bottom: 3.2rem;
+    margin-bottom: 4rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6),
         0 1px 2px rgba(255, 255, 255, 0.05);
 
@@ -377,7 +323,7 @@ const HomeCard = styled.div`
 
     @media (max-width: 480px) {
         width: 100%;
-        padding: 27px 30px;
+        padding: 27px 30px 60px;
         margin-top: -5px;
         transform: scale(0.99);
     }
@@ -454,10 +400,11 @@ const EndContent = styled.p`
 
 const BottomBar = styled.div`
     display: none;
+
     @media (max-width: 480px) {
         width: 100%;
         position: fixed;
-        bottom: 1.4rem;
+        bottom: 1.2rem;
         left: 50%;
         display: flex;
         align-items: center;
@@ -526,7 +473,7 @@ const ProfileSearch = styled.button`
     justify-content: space-between;
     align-items: center;
     border-radius: 50%;
-    padding: 8px;
+    padding: 9px;
     gap: 12px;
     border: 1px solid #99999957;
     background: #e3e3e363;
