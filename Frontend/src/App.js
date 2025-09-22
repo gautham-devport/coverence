@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     BrowserRouter as Router,
     Route,
@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { SidebarProvider } from "./components/context/SidebarContext";
 import { WebSocketProvider } from "./components/context/WebSocketProvider";
+import { AuthProvider, AuthContext } from "./components/context/AuthContext";
 
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
@@ -21,35 +22,62 @@ import Notification from "./components/MainApp/Notification";
 import Chat from "./components/MainApp/Chat";
 import HomePage from "./components/MainApp/HomePage";
 
+// PrivateRoute component to protect /home routes
+const PrivateRoute = ({ children }) => {
+    const { user, loading } = useContext(AuthContext);
+
+    if (loading) return null; // You can add a spinner here
+    return user ? children : <Navigate to="/login" />;
+};
+
 const App = () => {
     return (
         <WebSocketProvider>
             <SidebarProvider>
-                <Router>
-                    <Routes>
-                        <Route path="/" element={<Navigate to="signup" />} />
+                <AuthProvider>
+                    <Router>
+                        <Routes>
+                            {/* Redirect root to login */}
+                            <Route
+                                path="/"
+                                element={<Navigate to="/login" />}
+                            />
 
-                        <Route path="/signup" element={<SignUp />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/home" element={<Home />}>
-                            <Route path="homepage" element={<HomePage />} />
-                            <Route path="search" element={<Search />} />
-                            <Route path="message" element={<Message />} />
-                            <Route path="profile" element={<Profile />} />
+                            {/* Public routes */}
+                            <Route path="/signup" element={<SignUp />} />
+                            <Route path="/login" element={<Login />} />
+
+                            {/* Protected home routes */}
                             <Route
-                                path="profile/:userId"
-                                element={<PublicProfile />}
-                            />
-                            <Route path="edit" element={<Edit />} />
-                            <Route path="settings" element={<Settings />} />
-                            <Route
-                                path="notification"
-                                element={<Notification />}
-                            />
-                            <Route path="chat/:receiverId" element={<Chat />} />
-                        </Route>
-                    </Routes>
-                </Router>
+                                path="/home"
+                                element={
+                                    <PrivateRoute>
+                                        <Home />
+                                    </PrivateRoute>
+                                }
+                            >
+                                <Route path="homepage" element={<HomePage />} />
+                                <Route path="search" element={<Search />} />
+                                <Route path="message" element={<Message />} />
+                                <Route path="profile" element={<Profile />} />
+                                <Route
+                                    path="profile/:userId"
+                                    element={<PublicProfile />}
+                                />
+                                <Route path="edit" element={<Edit />} />
+                                <Route path="settings" element={<Settings />} />
+                                <Route
+                                    path="notification"
+                                    element={<Notification />}
+                                />
+                                <Route
+                                    path="chat/:receiverId"
+                                    element={<Chat />}
+                                />
+                            </Route>
+                        </Routes>
+                    </Router>
+                </AuthProvider>
             </SidebarProvider>
         </WebSocketProvider>
     );

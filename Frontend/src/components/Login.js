@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -7,56 +7,50 @@ import Padloack from "../assets/images/padlock.png";
 import Mail from "../assets/images/mail.png";
 import visibleEye from "../assets/images/view.png";
 import hiddenEye from "../assets/images/hidden.png";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [errors, setErrors] = useState({ email: "", password: "" });
     const [passwordVisible, setPasswordVisible] = useState(false);
-    const [isLoading, setIsLoading] = useState(false); // <-- Spinner state
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { user, setUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    // Redirect if already logged in
+    useEffect(() => {
+        if (user) navigate("/home/homepage");
+    }, [user, navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
 
-        if (name === "email") {
-            validateEmail(value);
-        } else if (name === "password") {
-            setErrors({ ...errors, password: "" });
-        }
+        if (name === "email") validateEmail(value);
+        else if (name === "password") setErrors({ ...errors, password: "" });
     };
 
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (email === "") {
-            setErrors({ ...errors, email: "" });
-        } else if (/[A-Z]/.test(email)) {
+        if (email === "") setErrors({ ...errors, email: "" });
+        else if (/[A-Z]/.test(email))
             setErrors({
                 ...errors,
                 email: "Email must not contain capital letters",
             });
-        } else if (!emailRegex.test(email)) {
+        else if (!emailRegex.test(email))
             setErrors({
                 ...errors,
                 email: "Please enter a valid email address",
             });
-        } else {
-            setErrors({ ...errors, email: "" });
-        }
+        else setErrors({ ...errors, email: "" });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true); // show spinner
-
-        const emailHasCaps = /[A-Z]/.test(formData.email);
-        if (emailHasCaps) {
-            setErrors({
-                ...errors,
-                email: "Email must not contain capital letters",
-            });
-            setIsLoading(false);
-            return;
-        }
+        setIsLoading(true);
 
         if (!formData.email || !formData.password) {
             setErrors({
@@ -82,15 +76,18 @@ const Login = () => {
             localStorage.setItem("token", access);
             localStorage.setItem("refresh", refresh);
 
+            // Fetch user profile
             const profileResponse = await axios.get(
                 "https://coverence-backend.onrender.com/api/users/profile/",
                 { headers: { Authorization: `Bearer ${access}` } }
             );
 
+            // Store in context
+            setUser(profileResponse.data);
             localStorage.setItem("userId", profileResponse.data.id);
-            const redirectPath =
-                window.innerWidth <= 480 ? "/home/homepage" : "/home/homepage";
-            window.location.href = redirectPath;
+
+            // Redirect
+            navigate("/home/homepage");
         } catch (error) {
             console.error("Login failed:", error.response?.data);
             setErrors({ password: "Invalid email or password" });
@@ -98,14 +95,13 @@ const Login = () => {
         }
     };
 
-    const togglePasswordVisibility = () => {
-        setPasswordVisible(!passwordVisible);
-    };
+    const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
 
     return (
         <FullContainer>
             <FormContainer onSubmit={handleSubmit} noValidate>
-                <FormName>Login </FormName>
+                <FormName>Login</FormName>
+                {/* Email input */}
                 <FormGroup>
                     <Label>Em@il</Label>
                     <MailImg src={Mail} alt="mail" />
@@ -119,6 +115,8 @@ const Login = () => {
                     />
                     {errors.email && <ErrorText>{errors.email}</ErrorText>}
                 </FormGroup>
+
+                {/* Password input */}
                 <FormGroup>
                     <Label>Password</Label>
                     <PadloackImg src={Padloack} alt="lock" />
@@ -144,13 +142,13 @@ const Login = () => {
                     )}
                 </FormGroup>
 
+                {/* Submit button */}
                 <SignUpButton type="submit" disabled={isLoading}>
-                    Login
-                    {isLoading && <Spinner />}
+                    Login {isLoading && <Spinner />}
                 </SignUpButton>
 
                 <SignUpInfo>
-                    Don’t have an account?
+                    Don’t have an account?{" "}
                     <SignUpRedirect to="/signup">Sign up</SignUpRedirect>
                 </SignUpInfo>
             </FormContainer>
