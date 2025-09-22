@@ -545,6 +545,8 @@ const MessageArea = styled.div`
 
     @media (max-width: 480px) {
         height: 95vh;
+        max-height: 100%;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         padding: 82px 14px 135px 15px;
     }
