@@ -100,9 +100,9 @@ const HomePage = () => {
                         alignItems: "center",
                     }}
                 >
-                    <SearchButton onClick={handleSearch}>
+                    {/* <SearchButton onClick={handleSearch}>
                         <img src={SearchIcon} alt="Back" />
-                    </SearchButton>
+                    </SearchButton> */}
 
                     {imageExists ? (
                         <ProfileImage
@@ -117,12 +117,12 @@ const HomePage = () => {
             </SectionTitle2>
 
             <Content>
-                <WelcomTitle>
+                {/* <WelcomTitle>
                     Hey,{" "}
                     <b>
                         {formData.first_name} {formData.last_name}
                     </b>
-                </WelcomTitle>
+                </WelcomTitle> */}
                 <HomeCard>
                     <MainTitle>Coverence</MainTitle>
                     <Sub>Discover. Connect. Chat.</Sub>
@@ -148,15 +148,23 @@ const HomePage = () => {
                     </EndContent>
                 </HomeCard>
 
-                <Messages onClick={handleMessgaesClick}>
-                    <MessageIcon>
-                        <img src={messageicon} alt="" />
-                    </MessageIcon>
-                    {unseenMessagesCount > 0 && (
-                        <UnseenCount>{unseenMessagesCount}</UnseenCount>
-                    )}
-                    <h5>Messages</h5>
-                </Messages>
+                <BottomBar>
+                    <Messages onClick={handleMessgaesClick}>
+                        <MessageIcon>
+                            <img src={messageicon} alt="" />
+                        </MessageIcon>
+                        {unseenMessagesCount > 0 && (
+                            <UnseenCount>{unseenMessagesCount}</UnseenCount>
+                        )}
+                        <h5>Messages</h5>
+                    </Messages>
+
+                    <ProfileSearch onClick={handleSearch}>
+                        <ProfileSearchIcon>
+                            <img src={SearchIcon} alt="" />
+                        </ProfileSearchIcon>
+                    </ProfileSearch>
+                </BottomBar>
             </Content>
         </>
     );
@@ -251,18 +259,18 @@ const Heading2 = styled.h2`
     }
 `;
 
-const SearchButton = styled.button`
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-right: 23px;
-    img {
-        width: 21px;
-        height: 22px;
-        filter: invert(1);
-        margin-top: 2px;
-    }
-`;
+// const SearchButton = styled.button`
+//     background: none;
+//     border: none;
+//     cursor: pointer;
+//     margin-right: 23px;
+//     img {
+//         width: 21px;
+//         height: 22px;
+//         filter: invert(1);
+//         margin-top: 2px;
+//     }
+// `;
 
 const ProfileImage = styled.img`
     width: 32px;
@@ -313,36 +321,36 @@ const Content = styled.div`
     }
 `;
 
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    
-  }
-  to {
-    opacity: 1;
-    
-  }
-`;
+// const fadeIn = keyframes`
+//   from {
+//     opacity: 0;
 
-const WelcomTitle = styled.h2`
-    display: none;
+//   }
+//   to {
+//     opacity: 1;
 
-    b {
-        color: #fff;
-        font-weight: 700;
-    }
+//   }
+// `;
 
-    @media (max-width: 480px) {
-        display: block;
-        font-size: 21px;
-        font-weight: 500;
-        margin-left: 15px;
-        margin-top: 2px;
-        margin-bottom: 23px;
-        font-family: "Figtree", sans-serif;
-        animation: ${fadeIn} 2.4s ease-out forwards;
-    }
-`;
+// const WelcomTitle = styled.h2`
+//     display: none;
+
+//     b {
+//         color: #fff;
+//         font-weight: 700;
+//     }
+
+//     @media (max-width: 480px) {
+//         display: block;
+//         font-size: 21px;
+//         font-weight: 500;
+//         margin-left: 15px;
+//         margin-top: 2px;
+//         margin-bottom: 23px;
+//         font-family: "Figtree", sans-serif;
+//         animation: ${fadeIn} 2.4s ease-out forwards;
+//     }
+// `;
 
 const HomeCard = styled.div`
     width: 80%;
@@ -370,6 +378,8 @@ const HomeCard = styled.div`
     @media (max-width: 480px) {
         width: 100%;
         padding: 27px 30px;
+        margin-top: -5px;
+        transform: scale(0.99);
     }
 `;
 
@@ -442,36 +452,44 @@ const EndContent = styled.p`
     }
 `;
 
-const Messages = styled.button`
+const BottomBar = styled.div`
     display: none;
-
     @media (max-width: 480px) {
-        outline: none;
-        border: none;
+        width: 100%;
         position: fixed;
         bottom: 1.4rem;
         left: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
         transform: translateX(-50%);
         padding: 11.2px 25px;
-        background: #e3e3e363;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        backdrop-filter: blur(6px);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-radius: 24px;
-        gap: 12px;
-        border: 1px solid #99999957;
+    }
+`;
 
-        &:hover {
-            background: #a8a8a8ff;
-        }
+const Messages = styled.button`
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 24px;
+    padding: 11.2px 19px;
+    gap: 12px;
+    border: 1px solid #99999957;
+    background: #e3e3e363;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(6px);
 
-        h5 {
-            color: #000;
-            font-size: 18.8px;
-            font-family: "Figtree", sans-serif;
-        }
+    &:hover {
+        background: #a8a8a8ff;
+    }
+
+    h5 {
+        color: #000;
+        font-size: 18.8px;
+        font-family: "Figtree", sans-serif;
     }
 `;
 
@@ -483,12 +501,13 @@ const MessageIcon = styled.div`
         font-weight: 500;
     }
 `;
+
 const UnseenCount = styled.div`
     min-width: 16px;
     height: 16px;
     position: absolute;
-    left: 37px;
-    top: 4px;
+    left: 30px;
+    top: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -498,4 +517,31 @@ const UnseenCount = styled.div`
     border-radius: 999px;
     padding: 2px 6px;
     background-color: #ff3b30;
+`;
+
+const ProfileSearch = styled.button`
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 50%;
+    padding: 8px;
+    gap: 12px;
+    border: 1px solid #99999957;
+    background: #e3e3e363;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(6px);
+
+    &:hover {
+        background: #a8a8a8ff;
+    }
+`;
+
+const ProfileSearchIcon = styled.div`
+    img {
+        width: 26px;
+        height: 26px;
+        margin-bottom: -4px;
+    }
 `;
