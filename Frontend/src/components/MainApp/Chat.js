@@ -523,7 +523,7 @@ const UserStatus = styled.span`
 `;
 
 const MessageArea = styled.div`
-    flex: 1;
+    height: 98vh;
     overflow-y: scroll;
     overflow-x: hidden;
     padding: 95px 19px 135px 38px;
@@ -544,7 +544,7 @@ const MessageArea = styled.div`
     }
 
     @media (max-width: 480px) {
-        height: 100dvh;
+        height: 95vh;
         -webkit-overflow-scrolling: touch;
         padding: 82px 14px 135px 15px;
     }
