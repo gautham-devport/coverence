@@ -1,16 +1,12 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import UserProfile, Follow, Notification
-
-
+from .models import UserProfile, Notification
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ['bio', 'skill_known', 'skill_wanted', 'available_time', 'profile_image']
-
-
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -21,7 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'first_name', 'last_name', 'email', 'password', 'profile', 'profile_image']
         extra_kwargs = {'password': {'write_only': True}}
-        
 
     def get_profile_image(self, obj):
         try:
@@ -32,7 +27,6 @@ class UserSerializer(serializers.ModelSerializer):
         except Exception as e:
             print("Error fetching profile_image:", e)
             return None
-
 
     def create(self, validated_data):
         profile_data = validated_data.pop('profile', {})
@@ -59,8 +53,6 @@ class UserSerializer(serializers.ModelSerializer):
         profile.save()
 
         return instance
-
-    
 
 
 class UserProfilePublicSerializer(serializers.ModelSerializer):
@@ -101,47 +93,9 @@ class PublicUserSerializer(serializers.ModelSerializer):
             return None
 
 
-class FollowSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Follow
-        fields = ['id', 'follower', 'following', 'created_at']
-        read_only_fields = ['follower', 'created_at']
-
-class UserFollowStatsSerializer(serializers.ModelSerializer):
-    followers_count = serializers.SerializerMethodField()
-    following_count = serializers.SerializerMethodField()
-    is_following = serializers.SerializerMethodField()
-
-    class Meta:
-        model = User
-        fields = ['id', 'followers_count', 'following_count', 'is_following']
-
-    def get_followers_count(self, obj):
-        return obj.followers.count() 
-
-    def get_following_count(self, obj):
-        return obj.following.count() 
-
-    def get_is_following(self, obj):
-        request = self.context.get('request')
-        if request and request.user.is_authenticated:
-            return Follow.objects.filter(follower=request.user, following=obj).exists()
-        return False
-    
-
-
-
 class NotificationSerializer(serializers.ModelSerializer):
     from_user = PublicUserSerializer()
-    is_following_back = serializers.SerializerMethodField()
 
     class Meta:
         model = Notification
-        fields = ['id', 'from_user', 'notification_type', 'created_at', 'is_read', 'is_following_back', 'is_seen']
-
-    def get_is_following_back(self, obj):
-        request_user = self.context['request'].user  
-        from_user = obj.from_user                    
-
-        # Check if logged-in user follows back the from_user
-        return Follow.objects.filter(follower=request_user, following=from_user).exists()
+        fields = ['id', 'from_user', 'notification_type', 'created_at', 'is_read', 'is_seen']

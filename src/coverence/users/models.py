@@ -6,7 +6,6 @@ import os
 from django.utils import timezone
 from cloudinary.models import CloudinaryField
 
-
 register_heif_opener()
 
 class UserProfile(models.Model):
@@ -20,8 +19,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-
-
 class UserActivity(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='activity')
     last_seen = models.DateTimeField(default=timezone.now)
@@ -29,21 +26,8 @@ class UserActivity(models.Model):
     def __str__(self):
         return f"{self.user.username} - Last seen {self.last_seen}"
 
-
-
-class Follow(models.Model):
-    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
-    following = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('follower', 'following') 
-
-
-
 class Notification(models.Model):
     NOTIFICATION_TYPES = [
-        ('follow', 'Follow'),
         ('comment', 'Comment'),
         ('like', 'Like'),
     ]
@@ -57,5 +41,3 @@ class Notification(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-
-

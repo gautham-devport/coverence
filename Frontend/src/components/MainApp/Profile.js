@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import FollowersModal from "./FollowersModal";
-import FollowingModal from "./FollowingModal";
 import { useNavigate } from "react-router-dom";
 import ArrowLeft from "../../assets/Icons/headarrowright.png";
 import Menu from "../../assets/Icons/paragraph.png";
@@ -22,13 +20,6 @@ const Profile = () => {
     });
 
     const [error, setError] = useState("");
-    const [followStats, setFollowStats] = useState({
-        followers_count: 0,
-        following_count: 0,
-    });
-
-    const [showFollowers, setShowFollowers] = useState(false);
-    const [showFollowing, setShowFollowing] = useState(false);
 
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
@@ -55,10 +46,6 @@ const Profile = () => {
                 id: response.data.id || null,
             };
             setUser(userData);
-            setFollowStats({
-                followers_count: response.data.followers_count || 0,
-                following_count: response.data.following_count || 0,
-            });
         } catch (err) {
             console.error("Error fetching user profile:", err);
             setError("Failed to fetch user profile");
@@ -135,38 +122,13 @@ const Profile = () => {
                                 </Name>
                                 <Field3>
                                     {user.available_time ? (
-                                        <>
-                                            <span>{user.available_time}</span>
-                                        </>
+                                        <span>{user.available_time}</span>
                                     ) : (
                                         <div style={{ color: "blue" }}></div>
                                     )}
                                 </Field3>
                             </div>
-                            <div>
-                                <FollowStatsContainer>
-                                    <PostCount>
-                                        <span>0</span> Posts
-                                    </PostCount>
 
-                                    <FollowCount
-                                        onClick={() => setShowFollowers(true)}
-                                    >
-                                        <span>
-                                            {followStats.followers_count}
-                                        </span>{" "}
-                                        Followers
-                                    </FollowCount>
-                                    <FollowCount
-                                        onClick={() => setShowFollowing(true)}
-                                    >
-                                        <span>
-                                            {followStats.following_count}
-                                        </span>{" "}
-                                        Following
-                                    </FollowCount>
-                                </FollowStatsContainer>
-                            </div>
                             <div
                                 style={{
                                     display: "flex",
@@ -174,28 +136,16 @@ const Profile = () => {
                                 }}
                             >
                                 <Field2>
-                                    {user.skill_known ? (
-                                        <>
-                                            <span>{user.skill_known}</span>
-                                        </>
-                                    ) : (
-                                        <div></div>
+                                    {user.skill_known && (
+                                        <span>{user.skill_known}</span>
                                     )}
                                 </Field2>
                                 <Field2>
-                                    {user.skill_wanted ? (
-                                        <>
-                                            <span
-                                                style={{
-                                                    fontWeight: "300",
-                                                }}
-                                            >
-                                                like to learn {""}
-                                                <p>{user.skill_wanted}</p>
-                                            </span>
-                                        </>
-                                    ) : (
-                                        <div></div>
+                                    {user.skill_wanted && (
+                                        <span style={{ fontWeight: "300" }}>
+                                            like to learn{" "}
+                                            <p>{user.skill_wanted}</p>
+                                        </span>
                                     )}
                                 </Field2>
                                 <EditButton onClick={handleEditProfile}>
@@ -210,19 +160,6 @@ const Profile = () => {
                         ))}
                     </Field>
                 </TopRow>
-
-                {showFollowers && (
-                    <FollowersModal
-                        userId={user.id}
-                        onClose={() => setShowFollowers(false)}
-                    />
-                )}
-                {showFollowing && (
-                    <FollowingModal
-                        userId={user.id}
-                        onClose={() => setShowFollowing(false)}
-                    />
-                )}
             </ProfileContainer>
         </>
     );
@@ -395,52 +332,6 @@ const Field3 = styled.p`
     div {
         margin-top: 4px;
         white-space: pre-wrap;
-    }
-`;
-
-const PostCount = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
-    color: #878787;
-
-    span {
-        color: #fff;
-    }
-    @media (max-width: 480px) {
-        font-size: 12px;
-    }
-`;
-
-const FollowStatsContainer = styled.div`
-    display: flex;
-
-    align-items: center;
-    gap: 18px;
-
-    span {
-        color: #fff;
-        margin-right: 2px;
-    }
-    @media (max-width: 480px) {
-        gap: 13px;
-    }
-`;
-
-const FollowCount = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
-    color: #878787;
-
-    @media (max-width: 480px) {
-        font-size: 12px;
     }
 `;
 

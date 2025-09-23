@@ -18,7 +18,6 @@ import Search from "./components/MainApp/Search";
 import PublicProfile from "./components/MainApp/PublicProfile";
 import Message from "./components/MainApp/Message";
 import Settings from "./components/MainApp/Settings";
-import Notification from "./components/MainApp/Notification";
 import Chat from "./components/MainApp/Chat";
 import HomePage from "./components/MainApp/HomePage";
 
@@ -66,10 +65,7 @@ const App = () => {
                                 />
                                 <Route path="edit" element={<Edit />} />
                                 <Route path="settings" element={<Settings />} />
-                                <Route
-                                    path="notification"
-                                    element={<Notification />}
-                                />
+
                                 <Route
                                     path="chat/:receiverId"
                                     element={<Chat />}

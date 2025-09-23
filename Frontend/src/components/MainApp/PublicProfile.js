@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
-import PublicModal from "./PublicModal";
 import ArrowLeft from "../../assets/Icons/headarrowright.png";
 import Menu from "../../assets/Icons/paragraph.png";
 import { useSidebar } from "../context/SidebarContext";
@@ -12,39 +11,17 @@ const PublicProfile = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [error, setError] = useState("");
-    const [followStats, setFollowStats] = useState({
-        followers_count: 0,
-        following_count: 0,
-        is_following: false,
-    });
     const [isLoading, setIsLoading] = useState(true);
-
-    const [showPopup, setShowPopup] = useState(false);
-    const [popupTitle, setPopupTitle] = useState("");
     const { setShowSidebar } = useSidebar();
-
-    const loggedInUserId = localStorage.getItem("userId")?.toString();
 
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const token = localStorage.getItem("token");
-                const headers = token
-                    ? { Authorization: `Bearer ${token}` }
-                    : {};
-
-                const [profileRes, statsRes] = await Promise.all([
-                    axios.get(
-                        `https://coverence-backend.onrender.com/api/users/${userId}/public-profile/`
-                    ),
-                    axios.get(
-                        `https://coverence-backend.onrender.com/api/users/${userId}/follow-stats/`,
-                        { headers }
-                    ),
-                ]);
+                const profileRes = await axios.get(
+                    `https://coverence-backend.onrender.com/api/users/${userId}/public-profile/`
+                );
 
                 setUser(profileRes.data);
-                setFollowStats(statsRes.data);
                 setIsLoading(false);
             } catch (err) {
                 console.error("Error fetching profile:", err);
@@ -60,52 +37,6 @@ const PublicProfile = () => {
             setIsLoading(false);
         }
     }, [userId]);
-
-    const handleFollow = async () => {
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) return navigate("/login");
-
-            await axios.post(
-                `https://coverence-backend.onrender.com/api/users/${userId}/follow/`,
-                {},
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-
-            setFollowStats((prev) => ({
-                ...prev,
-                followers_count: prev.followers_count + 1,
-                is_following: true,
-            }));
-        } catch (err) {
-            console.error("Error following user:", err);
-            if (err.response?.status === 401) navigate("/login");
-        }
-    };
-
-    const handleUnfollow = async () => {
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) return navigate("/login");
-
-            await axios.delete(
-                `https://coverence-backend.onrender.com/api/users/${userId}/unfollow/`,
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-
-            setFollowStats((prev) => ({
-                ...prev,
-                followers_count: prev.followers_count - 1,
-                is_following: false,
-            }));
-        } catch (err) {
-            console.error("Error unfollowing user:", err);
-        }
-    };
 
     const handleMessage = () => {
         const recentChats =
@@ -125,15 +56,6 @@ const PublicProfile = () => {
         navigate(`/home/chat/${user.id}`);
     };
 
-    const openPopup = async (type) => {
-        setShowPopup(true);
-        setPopupTitle(type === "followers" ? "Followers" : "Following");
-    };
-
-    const closePopup = () => {
-        setShowPopup(false);
-    };
-
     if (error) return <ErrorMessage>{error}</ErrorMessage>;
     if (isLoading) return null;
 
@@ -151,10 +73,7 @@ const PublicProfile = () => {
                     <BackButton onClick={() => navigate(-1)}>
                         <img src={ArrowLeft} alt="Back" />
                     </BackButton>
-                    <Heading>
-                        {user.first_name}'s Profile
-                        {/* {user.last_name} */}
-                    </Heading>
+                    <Heading>{user.first_name}'s Profile</Heading>
                 </div>
                 <MenuButton onClick={() => setShowSidebar(true)}>
                     <img src={Menu} alt="menu" />
@@ -189,25 +108,6 @@ const PublicProfile = () => {
                                 {user.first_name} {user.last_name}
                             </Name>
                         </div>
-                        <div>
-                            <FollowStats>
-                                <PostCount>
-                                    <span>0</span> Posts
-                                </PostCount>
-                                <FollowCount
-                                    onClick={() => openPopup("followers")}
-                                >
-                                    <span>{followStats.followers_count}</span>{" "}
-                                    Followers
-                                </FollowCount>
-                                <FollowCount
-                                    onClick={() => openPopup("following")}
-                                >
-                                    <span>{followStats.following_count}</span>{" "}
-                                    Following
-                                </FollowCount>
-                            </FollowStats>
-                        </div>
                         <div style={{ display: "flex", alignItems: "center" }}>
                             <Field2>
                                 {user.skill_known && (
@@ -228,33 +128,11 @@ const PublicProfile = () => {
                             </Field3>
                         </div>
                         <div>
-                            {localStorage.getItem("token") &&
-                                (followStats.is_following ? (
-                                    <UnfollowButton onClick={handleUnfollow}>
-                                        Unfollow
-                                    </UnfollowButton>
-                                ) : (
-                                    <FollowButton onClick={handleFollow}>
-                                        Follow
-                                    </FollowButton>
-                                ))}
                             <MessageButton onClick={handleMessage}>
                                 Message
                             </MessageButton>
                         </div>
                     </div>
-                    {showPopup && (
-                        <PublicModal
-                            userId={userId}
-                            loggedInUserId={loggedInUserId}
-                            type={
-                                popupTitle === "Followers"
-                                    ? "Followers"
-                                    : "Following"
-                            }
-                            onClose={closePopup}
-                        />
-                    )}
                 </TopRow>
                 <Field>
                     {user.bio.split("\n").map((line, index) => (
@@ -415,57 +293,6 @@ const Name = styled.h2`
     }
 `;
 
-const FollowStats = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    span {
-        color: #8f8f8f;
-        margin-right: 1px;
-    }
-
-    @media (max-width: 480px) {
-        margin-top: -4px;
-        margin-bottom: -1px;
-        gap: 13px;
-    }
-`;
-
-const PostCount = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
-    color: #878787;
-
-    span {
-        color: #fff;
-    }
-    @media (max-width: 480px) {
-        font-size: 12px;
-    }
-`;
-
-const FollowCount = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
-    color: #878787;
-
-    span {
-        color: #fff;
-    }
-    @media (max-width: 480px) {
-        font-size: 12px;
-    }
-`;
-
 const Field2 = styled.p`
     span {
         font-size: 14px;
@@ -505,35 +332,6 @@ const Field3 = styled.p`
             font-weight: 600;
             border-radius: 8px;
         }
-    }
-`;
-
-const FollowButton = styled.button`
-    background-color: #3897f0;
-    color: white;
-    border: none;
-    margin-top: 4px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 13px;
-    padding: 7px 25px;
-    cursor: pointer;
-
-    @media (max-width: 480px) {
-        font-size: 9px;
-        padding: 4px 15px;
-        border-radius: 7px;
-        margin-bottom: 6px;
-    }
-`;
-
-const UnfollowButton = styled(FollowButton)`
-    background-color: #ed4956;
-    padding: 7px 18px;
-    @media (max-width: 480px) {
-        font-size: 8px;
-        padding: 4px 12px;
-        border-radius: 6px;
     }
 `;
 
