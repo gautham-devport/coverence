@@ -14,11 +14,13 @@ const HomePage = () => {
         last_name: "",
         profile_image: "",
     });
+
     const navigate = useNavigate();
-    const { setShowSidebar } = useSidebar();
-    const [unseenMessagesCount, setUnseenMessagesCount] = useState(0);
+    const { setShowSidebar, unseenMessagesCount, fetchUnseenMessages } =
+        useSidebar();
 
     useEffect(() => {
+        // Fetch profile
         const fetchProfile = async () => {
             const token = localStorage.getItem("token");
             try {
@@ -33,44 +35,19 @@ const HomePage = () => {
                 console.error("Error fetching profile:", error);
             }
         };
+
         fetchProfile();
-    }, []);
 
-    useEffect(() => {
-        const fetchUnseenMessages = async () => {
-            const token = localStorage.getItem("token");
-            if (!token) return;
-
-            try {
-                const res = await axios.get(
-                    "https://coverence-backend.onrender.com/api/chat/recent/",
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                );
-                setUnseenMessagesCount(res.data.total_unseen_messages || 0);
-            } catch (err) {
-                console.error("Error fetching unseen messages", err);
-            }
-        };
-
-        fetchUnseenMessages();
-    }, []);
+        // Fetch unseen messages initially
+        fetchUnseenMessages?.();
+    }, [fetchUnseenMessages]);
 
     const imageExists =
         formData.profile_image && !formData.profile_image.includes("drime.jpg");
 
-    const handleSearch = () => {
-        navigate("/home/search");
-    };
-
-    const handleProfileClick = () => {
-        navigate("/home/profile");
-    };
-
-    const handleMessgaesClick = () => {
-        navigate("/home/message");
-    };
+    const handleSearch = () => navigate("/home/search");
+    const handleProfileClick = () => navigate("/home/profile");
+    const handleMessagesClick = () => navigate("/home/message");
 
     return (
         <>
@@ -82,24 +59,14 @@ const HomePage = () => {
             </SectionTitle>
 
             <SectionTitle2>
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                    }}
-                >
+                <div style={{ display: "flex", alignItems: "center" }}>
                     <MenuButton onClick={() => setShowSidebar(true)}>
                         <img src={Menu} alt="menu" />
                     </MenuButton>
                     <Heading2>Home</Heading2>
                 </div>
 
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                    }}
-                >
+                <div style={{ display: "flex", alignItems: "center" }}>
                     {imageExists ? (
                         <ProfileImage
                             onClick={handleProfileClick}
@@ -139,7 +106,7 @@ const HomePage = () => {
                 </HomeCard>
 
                 <BottomBar>
-                    <Messages onClick={handleMessgaesClick}>
+                    <Messages onClick={handleMessagesClick}>
                         <MessageIcon>
                             <img src={messageicon} alt="" />
                         </MessageIcon>

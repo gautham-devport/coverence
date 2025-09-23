@@ -14,9 +14,9 @@ const Message = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
-    const { setShowSidebar } = useSidebar();
 
-    const socket = useContext(WebSocketContext); // Global WebSocket
+    const { setShowSidebar, setUnseenMessagesCount } = useSidebar();
+    const socket = useContext(WebSocketContext);
 
     useEffect(() => {
         const shouldRefresh = localStorage.getItem("refreshMessages");
@@ -24,30 +24,32 @@ const Message = () => {
             localStorage.removeItem("refreshMessages");
         }
 
-        const fetchChats = () => {
-            setLoading(true); // start loading
-            axios
-                .get(
+        const fetchChats = async () => {
+            setLoading(true);
+            try {
+                const res = await axios.get(
                     "https://coverence-backend.onrender.com/api/chat/recent/",
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                )
-                .then((res) => {
-                    const sorted = res.data.chats.sort((a, b) => {
-                        return (
-                            new Date(b.last_message?.timestamp) -
-                            new Date(a.last_message?.timestamp)
-                        );
-                    });
-                    setChatUsers(sorted);
-                })
-                .catch((err) => {
-                    console.error("Failed to load chat users", err);
-                })
-                .finally(() => {
-                    setLoading(false); // stop loading
-                });
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+
+                const sorted = res.data.chats.sort(
+                    (a, b) =>
+                        new Date(b.last_message?.timestamp) -
+                        new Date(a.last_message?.timestamp)
+                );
+                setChatUsers(sorted);
+
+                // Update total unseen messages in context
+                const totalUnseen = res.data.chats.reduce(
+                    (sum, chat) => sum + (chat.unseen_count || 0),
+                    0
+                );
+                setUnseenMessagesCount(totalUnseen);
+            } catch (err) {
+                console.error("Failed to load chat users", err);
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchChats();
@@ -63,10 +65,8 @@ const Message = () => {
 
         socket.addEventListener("message", handleMessage);
 
-        return () => {
-            socket.removeEventListener("message", handleMessage);
-        };
-    }, [token, socket]);
+        return () => socket.removeEventListener("message", handleMessage);
+    }, [token, socket, setUnseenMessagesCount]);
 
     const filteredUsers = chatUsers.filter((user) => {
         const fullName = `${user.first_name} ${user.last_name}`.toLowerCase();
@@ -76,12 +76,7 @@ const Message = () => {
     return (
         <MainContainer>
             <SectionTitle>
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                    }}
-                >
+                <div style={{ display: "flex", alignItems: "center" }}>
                     <BackButton onClick={() => navigate(-1)}>
                         <img src={ArrowLeft} alt="Back" />
                     </BackButton>
@@ -91,11 +86,7 @@ const Message = () => {
                     <img src={Menu} alt="menu" />
                 </MenuButton>
             </SectionTitle>
-            <div
-                style={{
-                    paddingTop: "1.7rem",
-                }}
-            >
+            <div style={{ paddingTop: "1.7rem" }}>
                 <Container>
                     <SearchBox>
                         <SearchIconCont>

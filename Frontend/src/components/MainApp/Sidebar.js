@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import axios from "axios";
@@ -7,247 +7,49 @@ import searchIcon from "../../assets/Icons/search.png";
 import messagesIcon from "../../assets/Icons/chat-bubble.png";
 import settingsIcon from "../../assets/Icons/setting.png";
 import logoutIcon from "../../assets/Icons/logout.png";
-import notifyIcon from "../../assets/Icons/heart.png";
-import personicon from "../../assets/Icons/user-profile.png";
-import redtraingle from "../../assets/Icons/redtriangle.png";
-import { useContext } from "react";
 import { useSidebar } from "../context/SidebarContext";
-import { WebSocketContext } from "../context/WebSocketProvider";
 import { AuthContext } from "../context/AuthContext";
 
 const Sidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { setUser } = useContext(AuthContext);
-    const { showSidebar, setShowSidebar } = useSidebar();
+    const { showSidebar, setShowSidebar, unseenMessagesCount } = useSidebar();
     const [isAnimatingOut, setIsAnimatingOut] = useState(false);
     const isMobile = window.innerWidth <= 480;
     const [profileImage, setProfileImage] = useState(null);
     const [username, setUsername] = useState("");
-    const [hasUnseenNotifications, setHasUnseenNotifications] = useState(false);
-    const [unseenFollowCount, setUnseenFollowCount] = useState(0);
-    const [unseenMessagesCount, setUnseenMessagesCount] = useState(0);
-    const [showRedBubble, setShowRedBubble] = useState(true);
 
-    // Track and update unseen message count for specific user on live chat
-    useEffect(() => {
-        const handleForceSeen = () => {
-            const seenUserId = localStorage.getItem("seenForUser");
-            if (!seenUserId) return;
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("refresh");
+        localStorage.removeItem("userId");
+        setUser(null);
+        navigate("/login");
+    };
 
-            setUnseenMessagesCount((prevCount) => {
-                // If unseenMessagesCount is already 0, skip
-                if (prevCount === 0) return 0;
-
-                // Optional: if you want to zero only for that user, do it in user mapping
-                return 0;
-            });
-
-            localStorage.removeItem("seenForUser");
-        };
-
-        window.addEventListener("forceSeenNow", handleForceSeen);
-        return () =>
-            window.removeEventListener("forceSeenNow", handleForceSeen);
-    }, []);
-
+    // Fetch profile info
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 const token = localStorage.getItem("token");
                 if (!token) return;
-
-                const response = await axios.get(
+                const res = await axios.get(
                     "https://coverence-backend.onrender.com/api/users/profile/",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
+                    { headers: { Authorization: `Bearer ${token}` } }
                 );
-
-                setProfileImage(response.data.profile_image || null);
-                setUsername(response.data.username || "");
+                setProfileImage(res.data.profile_image || null);
+                setUsername(res.data.username || "");
             } catch (err) {
                 console.error("Failed to fetch profile", err);
             }
         };
-
         fetchProfile();
     }, []);
-
-    useEffect(() => {
-        const fetchUnseenNotifications = async () => {
-            const token = localStorage.getItem("token");
-            if (!token) return;
-
-            try {
-                const res = await axios.get(
-                    "https://coverence-backend.onrender.com/api/users/notifications/unseen-count/",
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                );
-                setHasUnseenNotifications(res.data.unseen_count > 0);
-                setUnseenFollowCount(res.data.unseen_follow_count || 0);
-            } catch (err) {
-                console.error("Error fetching unseen notifications", err);
-            }
-        };
-
-        fetchUnseenNotifications();
-    }, [location]);
-
-    const socket = useContext(WebSocketContext);
-
-    const handleLogout = () => {
-        if (socket && socket.readyState === WebSocket.OPEN) {
-            socket.close();
-        }
-
-        localStorage.removeItem("token");
-        localStorage.removeItem("refresh");
-        localStorage.removeItem("userId");
-        setUser(null);
-
-        navigate("/login");
-    };
-
-    useEffect(() => {
-        const fetchUnseenMessages = async () => {
-            const token = localStorage.getItem("token");
-            if (!token) return;
-
-            try {
-                const res = await axios.get(
-                    "https://coverence-backend.onrender.com/api/chat/recent/",
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                );
-                setUnseenMessagesCount(res.data.total_unseen_messages || 0);
-            } catch (err) {
-                console.error("Error fetching unseen messages", err);
-            }
-        };
-
-        fetchUnseenMessages();
-    }, [location]);
-
-    const handleNotificationClick = async () => {
-        try {
-            const token = localStorage.getItem("token");
-            if (!token) return;
-
-            await axios.post(
-                "https://coverence-backend.onrender.com/api/users/notifications/mark-seen/",
-                {},
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-
-            navigate("/home/notification");
-            window.location.reload();
-        } catch (err) {
-            console.error("Failed to mark notifications as seen", err);
-            navigate("/home/notification");
-            window.location.reload();
-        }
-    };
-
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        const userId = localStorage.getItem("userId");
-        if (!token || !userId) return;
-
-        const ws = new WebSocket(
-            `wss://coverence-backend.onrender.com/ws/notifications/${userId}/?token=${token}`
-        );
-
-        ws.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-
-            if (data.type === "new_message") {
-                const currentPath = window.location.pathname;
-                const currentReceiverId = currentPath.includes("/home/chat/")
-                    ? currentPath.split("/").pop()
-                    : null;
-
-                if (String(data.sender_id) === currentReceiverId) {
-                    // User is actively chatting with the sender
-                    setUnseenMessagesCount(0); // instantly remove badge
-                } else {
-                    setUnseenMessagesCount((prev) => prev + 1);
-                }
-            }
-        };
-
-        ws.onclose = () => console.log("Sidebar notification socket closed");
-
-        return () => {
-            ws.close();
-        };
-    }, []);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const shouldRefresh = localStorage.getItem(
-                "refreshSidebarMessages"
-            );
-            if (shouldRefresh === "true") {
-                localStorage.removeItem("refreshSidebarMessages");
-                fetchUnseenMessages();
-            }
-        }, 1000); // check every second
-
-        return () => clearInterval(interval);
-    }, []);
-
-    useEffect(() => {
-        const handleImmediateRefresh = () => {
-            fetchUnseenMessages();
-            localStorage.removeItem("refreshSidebarMessages");
-        };
-
-        window.addEventListener("refreshSidebarNow", handleImmediateRefresh);
-        return () =>
-            window.removeEventListener(
-                "refreshSidebarNow",
-                handleImmediateRefresh
-            );
-    }, []);
-
-    const fetchUnseenMessages = async () => {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-
-        try {
-            const res = await axios.get(
-                "https://coverence-backend.onrender.com/api/chat/recent/",
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-            setUnseenMessagesCount(res.data.total_unseen_messages || 0);
-        } catch (err) {
-            console.error("Error fetching unseen messages", err);
-        }
-    };
 
     const navItems = [
         { label: "Home", path: "/home/homepage", icon: homeIcon },
         { label: "Search", path: "/home/search", icon: searchIcon },
-        {
-            label: "Notifications",
-            path: "/home/notification",
-            icon: notifyIcon,
-            showBadge: hasUnseenNotifications,
-            unseenFollowCount: unseenFollowCount,
-            onClick: handleNotificationClick,
-        },
         {
             label: username || "Profile",
             path: username ? `/home/${username}` : "/home/profile",
@@ -258,22 +60,11 @@ const Sidebar = () => {
             label: "Messages",
             path: "/home/message",
             icon: messagesIcon,
-            unseenMessagesCount: unseenMessagesCount,
+            unseenMessagesCount,
             showBadge: unseenMessagesCount > 0,
         },
         { label: "Settings", path: "/home/settings", icon: settingsIcon },
     ];
-
-    // useEffect(() => {
-    //     if (unseenFollowCount > 0) {
-    //         setShowRedBubble(true);
-    //         const timer = setTimeout(() => {
-    //             setShowRedBubble(false);
-    //         }, 3500);
-
-    //         return () => clearTimeout(timer);
-    //     }
-    // }, [unseenFollowCount]);
 
     const handleSidebarClose = () => {
         if (isMobile) {
@@ -297,10 +88,9 @@ const Sidebar = () => {
                             <Title>Coverence</Title>
                             {navItems.map((item, index) => {
                                 let isActive = false;
-
-                                if (item.label === "Home") {
+                                if (item.label === "Home")
                                     isActive = location.pathname === "/home";
-                                } else if (item.label === "Search") {
+                                else if (item.label === "Search")
                                     isActive =
                                         location.pathname.startsWith(
                                             "/home/search"
@@ -309,12 +99,7 @@ const Sidebar = () => {
                                             "/home/profile/"
                                         ) &&
                                             location.state?.fromSearch);
-                                } else if (item.label === "Notifications") {
-                                    isActive =
-                                        location.pathname.startsWith(
-                                            "/home/notification"
-                                        );
-                                } else if (item.label === "Messages") {
+                                else if (item.label === "Messages")
                                     isActive =
                                         location.pathname.startsWith(
                                             "/home/message"
@@ -322,36 +107,26 @@ const Sidebar = () => {
                                         location.pathname.startsWith(
                                             "/home/chat"
                                         );
-                                } else if (item.isProfile) {
+                                else if (item.isProfile) {
                                     const path = location.pathname;
-
                                     const isOwnProfilePath =
                                         path === "/home/profile" ||
                                         path === "/home/edit" ||
                                         (username &&
                                             path === `/home/${username}`);
-
                                     isActive = isOwnProfilePath;
-                                } else if (item.path) {
+                                } else if (item.path)
                                     isActive = location.pathname.startsWith(
                                         item.path
                                     );
-                                }
 
                                 return (
                                     <NavButton
                                         key={index}
                                         active={isActive}
                                         onClick={() => {
-                                            if (item.onClick) {
-                                                item.onClick();
-                                            } else {
-                                                navigate(item.path);
-                                            }
-
-                                            if (isMobile) {
-                                                setShowSidebar(false);
-                                            }
+                                            navigate(item.path);
+                                            if (isMobile) setShowSidebar(false);
                                         }}
                                     >
                                         {item.isProfile ? (
@@ -365,42 +140,13 @@ const Sidebar = () => {
                                                     src={item.icon}
                                                     alt={`${item.label} icon`}
                                                 />
-                                                {item.showBadge && <RedDot />}
-                                                {item.label === "Messages" &&
-                                                    item.unseenMessagesCount >
-                                                        0 && (
-                                                        <BubbleCount>
-                                                            {
-                                                                item.unseenMessagesCount
-                                                            }
-                                                        </BubbleCount>
-                                                    )}
-
-                                                {item.unseenFollowCount > 0 &&
-                                                    showRedBubble && (
-                                                        <RedBubble>
-                                                            <Redtraingle
-                                                                src={
-                                                                    redtraingle
-                                                                }
-                                                                alt="followers"
-                                                            />
-                                                            <ContBox>
-                                                                <Personicon
-                                                                    src={
-                                                                        personicon
-                                                                    }
-                                                                    alt="followers"
-                                                                />
-                                                                <div>
-                                                                    {
-                                                                        item.unseenFollowCount
-                                                                    }{" "}
-                                                                    Followers
-                                                                </div>
-                                                            </ContBox>
-                                                        </RedBubble>
-                                                    )}
+                                                {item.showBadge && (
+                                                    <BubbleCount>
+                                                        {
+                                                            item.unseenMessagesCount
+                                                        }
+                                                    </BubbleCount>
+                                                )}
                                             </IconWrapper>
                                         )}
                                         {item.label}
@@ -602,61 +348,6 @@ const IconWrapper = styled.div`
     position: relative;
 `;
 
-const RedDot = styled.div`
-    position: absolute;
-    top: 3px;
-    right: -3px;
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    border-radius: 50%;
-    border: 1px solid #000;
-`;
-
-const slideInFromLeft = keyframes`
-  from {
-    transform: translateX(-40px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
-
-const RedBubble = styled.div`
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 19.1rem;
-    left: 13rem;
-    animation: ${slideInFromLeft} 0.6s ease-out forwards;
-
-    @media (max-width: 1024px) {
-        top: 0rem;
-        left: 2.3rem;
-    }
-
-    @media (max-width: 768px) {
-        display: flex;
-        align-items: center;
-        position: fixed;
-        top: 0rem;
-        left: 2rem;
-        animation: ${slideInFromLeft} 0.6s ease-out forwards;
-    }
-
-    @media (max-width: 480px) {
-        top: 0rem;
-        left: 10.4rem;
-    }
-
-    @media (max-width: 385px) {
-        top: 0rem;
-        left: 3rem;
-    }
-`;
-
 const BubbleCount = styled.div`
     min-width: 16px;
     height: 16px;
@@ -672,44 +363,6 @@ const BubbleCount = styled.div`
     border-radius: 999px;
     padding: 2px 6px;
     background-color: #ff3b30;
-`;
-
-const Redtraingle = styled.img`
-    width: 16px;
-    height: 16px;
-    transform: rotate(-90deg);
-    margin-right: -4px;
-`;
-
-const ContBox = styled.div`
-    min-width: 110px;
-    height: 46px;
-    padding: 20px 10px;
-    background-color: red;
-    color: white;
-    font-weight: 700;
-    font-size: 12px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
-
-    div {
-        font-size: 14px;
-        width: 80px;
-        display: flex;
-        align-items: center;
-        font-family: "Figtree", sans-serif;
-    }
-`;
-
-const Personicon = styled.img`
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-    filter: invert(1);
 `;
 
 const ProfileImageIcon = styled.div`
