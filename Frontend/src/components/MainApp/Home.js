@@ -49,6 +49,6 @@ const MainContent = styled.div`
     width: 100%;
     background: #000;
     color: #fff;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: hidden;
 `;

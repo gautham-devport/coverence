@@ -108,7 +108,14 @@ const PublicProfile = () => {
                                 {user.first_name} {user.last_name}
                             </Name>
                         </div>
-                        <div style={{ display: "flex", alignItems: "center" }}>
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                flexWrap: "wrap",
+                                lineHeight: isMobile ? "1.4" : "2.2",
+                            }}
+                        >
                             <Field2>
                                 {user.skill_known && (
                                     <span>{user.skill_known}</span>
@@ -223,18 +230,17 @@ const MenuButton = styled.button`
 `;
 
 const ProfileContainer = styled.div`
-    width: 88%;
+    width: 60%;
     margin: auto;
     padding: 4.5rem 9rem;
     color: white;
-    border-bottom: 1px solid #2c2c2c;
 
     @media (max-width: 480px) {
         margin: auto;
         padding: 0px;
         color: white;
         border-bottom: none;
-        padding: 102px 20px 2px 20px;
+        padding: 132px 20px 2px 20px;
         transform: scale(1.28);
     }
 `;
@@ -252,30 +258,30 @@ const TopRow = styled.div`
 `;
 
 const ProfileImage = styled.img`
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 380px;
+    height: 360px;
+    border-radius: 24px;
     object-fit: cover;
     margin-bottom: 1rem;
 
     @media (max-width: 480px) {
-        width: 78px;
-        height: 78px;
+        width: 168px;
+        height: 166px;
         margin-right: 5px;
         margin-bottom: 10px;
     }
 `;
 
 const ProfileImagePlaceholder = styled.div`
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 380px;
+    height: 360px;
+    border-radius: 24px;
     background-color: #525252;
     margin-bottom: 1rem;
-    margin-right: 3rem;
+
     @media (max-width: 480px) {
-        width: 78px;
-        height: 78px;
+        width: 158px;
+        height: 156px;
         margin-right: 5px;
         margin-bottom: 10px;
     }
@@ -289,7 +295,6 @@ const Name = styled.h2`
         font-size: 17px;
         margin-right: 12px;
         font-weight: 700;
-        margin-bottom: 8px;
     }
 `;
 
@@ -299,10 +304,11 @@ const Field2 = styled.p`
         margin-right: 13px;
         margin-left: -2px;
         padding: 0.3rem 0.8rem;
-        background: #202020;
+        background: #858585;
         text-align: center;
-        border-radius: 12px;
+        border-radius: 16px;
         font-weight: 500;
+        color: #000;
         p {
             display: inline-block;
             font-weight: 600;
@@ -321,8 +327,8 @@ const Field3 = styled.p`
         font-size: 13px;
         display: inline-block;
         background: #eb922b;
-        padding: 4px 7px;
-        border-radius: 9px;
+        padding: 0px 7px;
+        border-radius: 10px;
         color: #000;
         text-align: center;
 
@@ -338,21 +344,19 @@ const Field3 = styled.p`
 const MessageButton = styled.button`
     border: none;
     margin-top: 4px;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 600;
-    font-size: 13px;
-    padding: 8px 18px;
+    font-size: 15px;
+    padding: 9px 170px;
     cursor: pointer;
-    margin-left: 1rem;
-    color: #000;
+    color: #ffffff;
+    background: #1395ff;
 
     @media (max-width: 480px) {
-        font-size: 8px;
-        padding: 4px 15px;
-        margin-left: 6px;
-        border-radius: 7px;
-        margin-top: 10px;
-        color: #000;
+        font-size: 10px;
+        padding: 5px 70px;
+        border-radius: 8px;
+        color: #fff;
     }
 `;
 

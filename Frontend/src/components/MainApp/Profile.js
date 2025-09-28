@@ -92,6 +92,9 @@ const Profile = () => {
                             alignItems: "center",
                         }}
                     >
+                        <EditButton onClick={handleEditProfile}>
+                            Edit
+                        </EditButton>
                         {user.profile_image ? (
                             <ProfileImage
                                 src={user.profile_image}
@@ -133,6 +136,8 @@ const Profile = () => {
                                 style={{
                                     display: "flex",
                                     alignItems: "center",
+                                    flexWrap: "wrap",
+                                    lineHeight: "2.2",
                                 }}
                             >
                                 <Field2>
@@ -148,9 +153,6 @@ const Profile = () => {
                                         </span>
                                     )}
                                 </Field2>
-                                <EditButton onClick={handleEditProfile}>
-                                    Edit Profile
-                                </EditButton>
                             </div>
                         </div>
                     </div>
@@ -168,11 +170,10 @@ const Profile = () => {
 export default Profile;
 
 const ProfileContainer = styled.div`
-    width: 88%;
+    width: 61%;
     margin: auto;
-    padding: 4.6rem 9rem;
+    padding: 3.6rem 9rem;
     color: white;
-    border-bottom: 1px solid #2c2c2c;
 
     @media (max-width: 480px) {
         margin: auto;
@@ -265,7 +266,7 @@ const TopRow = styled.div`
     transform: scale(1.03);
 
     @media (max-width: 480px) {
-        padding: 99px 20px 2px 20px;
+        padding: 106px 20px 2px 20px;
         justify-content: center;
         transform: scale(1.33);
         margin-right: 0;
@@ -273,30 +274,31 @@ const TopRow = styled.div`
 `;
 
 const ProfileImage = styled.img`
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 400px;
+    height: 362px;
+    border-radius: 24px;
     object-fit: cover;
     margin-bottom: 1rem;
 
     @media (max-width: 480px) {
-        width: 78px;
-        height: 78px;
+        width: 168px;
+        height: 167px;
         margin-right: 5px;
         margin-bottom: 10px;
+        border-radius: 20px;
     }
 `;
 
 const ProfileImagePlaceholder = styled.div`
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 400px;
+    height: 362px;
+    border-radius: 24px;
     background-color: #525252;
     margin-bottom: 1rem;
-    margin-right: 1rem;
+
     @media (max-width: 480px) {
-        width: 78px;
-        height: 78px;
+        width: 168px;
+        height: 167px;
         margin-right: 5px;
         margin-bottom: 10px;
     }
@@ -310,6 +312,7 @@ const Name = styled.h2`
         font-size: 17px;
         margin-right: 12px;
         font-weight: 700;
+        margin-bottom: -13px;
     }
 `;
 
@@ -341,43 +344,50 @@ const Field2 = styled.p`
         margin-right: 13px;
         margin-left: -2px;
         padding: 0.3rem 0.8rem;
-        background: #202020;
+        background: #858585;
         text-align: center;
-        border-radius: 12px;
+        border-radius: 16px;
         font-weight: 500;
+        color: #000;
         p {
             display: inline-block;
             font-weight: 600;
         }
 
         @media (max-width: 480px) {
-            font-size: 7.7px;
-            padding: 3px 7px;
+            font-size: 8.3px;
+            padding: 2px 6px;
             margin-right: 6px;
-            border-radius: 6px;
+            border-radius: 10px;
         }
     }
 `;
 
 const EditButton = styled.button`
+    position: relative;
+    left: 10.5rem;
+    top: 31px;
     display: inline-block;
-    padding: 0.5rem 0.6rem;
-    background-color: rgb(198, 198, 198);
+    padding: 2px 10px;
     color: #000;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 12px;
+    border-radius: 16px;
+    background-color: #ffffff52;
+    backdrop-filter: blur(5px);
+    cursor: default;
+    font-size: 13px;
     font-weight: 700;
-    border: 1.6px solid #272727;
+    border: 1px solid #ffffff38;
     font-family: "Figtree", sans-serif;
     transition: 0.3s ease;
 
     &:hover {
-        background-color: #fff;
+        background-color: #ffffffb4;
     }
     @media (max-width: 480px) {
-        font-size: 6.5px;
-        padding: 5px 7px;
+        top: 15px;
+        left: 3.8rem;
+        font-size: 6.6px;
+        padding: 2px 7px;
         border-radius: 7.6px;
         margin-bottom: -5px;
     }
@@ -390,23 +400,24 @@ const ErrorMessage = styled.p`
 `;
 
 const Field = styled.p`
-    font-size: 18px;
-    font-weight: 600;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
     color: #b9b9b9;
-    margin: 35px auto;
-    max-width: 26rem;
+    margin: 22px auto;
+    max-width: 27rem;
     line-height: 1.3;
     font-family: "Figtree", sans-serif;
 
     @media (max-width: 480px) {
-        max-width: 13.8rem;
+        margin: 8px auto;
     }
 
     div {
         margin-top: 0px;
 
         @media (max-width: 480px) {
-            font-size: 11px;
+            font-size: 10px;
         }
     }
 `;
