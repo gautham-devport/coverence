@@ -114,6 +114,7 @@ const PublicProfile = () => {
                                 alignItems: "center",
                                 flexWrap: "wrap",
                                 lineHeight: isMobile ? "1.4" : "2.2",
+                                // justifyContent: isMobile ? "center" : "start",
                             }}
                         >
                             <Field2>
@@ -128,11 +129,6 @@ const PublicProfile = () => {
                                     </span>
                                 )}
                             </Field2>
-                            <Field3>
-                                {user.available_time && (
-                                    <span>{user.available_time}</span>
-                                )}
-                            </Field3>
                         </div>
                         <div>
                             <MessageButton onClick={handleMessage}>
@@ -240,8 +236,8 @@ const ProfileContainer = styled.div`
         padding: 0px;
         color: white;
         border-bottom: none;
-        padding: 132px 20px 2px 20px;
-        transform: scale(1.28);
+        padding: 152px 24px 2px 25px;
+        transform: scale(1.4);
     }
 `;
 
@@ -318,25 +314,6 @@ const Field2 = styled.p`
             padding: 3px 7px;
             margin-right: 6px;
             border-radius: 6px;
-        }
-    }
-`;
-
-const Field3 = styled.p`
-    span {
-        font-size: 13px;
-        display: inline-block;
-        background: #eb922b;
-        padding: 0px 7px;
-        border-radius: 10px;
-        color: #000;
-        text-align: center;
-
-        @media (max-width: 480px) {
-            font-size: 7.2px;
-            padding: 3px 7px;
-            font-weight: 600;
-            border-radius: 8px;
         }
     }
 `;

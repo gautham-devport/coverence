@@ -251,22 +251,13 @@ const EditProfile = () => {
                         placeholder="Type your known Skill"
                     />
 
-                    <Title2>Something you want to learn</Title2>
+                    <Title2>Something you like</Title2>
                     <Input
                         type="text"
                         name="skill_wanted"
                         value={formData.skill_wanted}
                         onChange={handleChange}
                         placeholder="Type skill you wanted"
-                    />
-
-                    <Title2>Available Time</Title2>
-                    <Input
-                        type="text"
-                        name="available_time"
-                        value={formData.available_time}
-                        onChange={handleChange}
-                        placeholder="eg: 7pm to 9pm"
                     />
 
                     <Button type="submit" disabled={isConverting || isLoading}>
