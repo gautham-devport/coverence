@@ -266,9 +266,9 @@ const TopRow = styled.div`
     transform: scale(1.03);
 
     @media (max-width: 480px) {
-        padding: 106px 20px 2px 20px;
+        padding: 110px 20px 2px 20px;
         justify-content: center;
-        transform: scale(1.33);
+        transform: scale(1.45);
         margin-right: 0;
     }
 `;

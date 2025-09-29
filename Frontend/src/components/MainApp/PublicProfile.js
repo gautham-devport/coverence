@@ -233,7 +233,6 @@ const ProfileContainer = styled.div`
 
     @media (max-width: 480px) {
         margin: auto;
-        padding: 0px;
         color: white;
         border-bottom: none;
         padding: 152px 24px 2px 25px;
@@ -351,6 +350,7 @@ const Field = styled.p`
     max-width: 26rem;
     line-height: 1.3;
     font-family: "Figtree", sans-serif;
+    margin-bottom: 3rem;
 
     div {
         margin-top: 4px;
@@ -362,5 +362,6 @@ const Field = styled.p`
         max-width: 12.9rem;
         margin: 11px auto;
         font-weight: 500;
+        margin-bottom: 3rem;
     }
 `;
