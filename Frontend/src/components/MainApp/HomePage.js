@@ -170,7 +170,6 @@ const Heading = styled.h2`
     font-family: "Figtree", sans-serif;
 `;
 
-// 480
 const SectionTitle2 = styled.div`
     display: none;
     @media (max-width: 480px) {

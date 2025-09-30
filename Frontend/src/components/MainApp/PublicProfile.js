@@ -114,7 +114,6 @@ const PublicProfile = () => {
                                 alignItems: "center",
                                 flexWrap: "wrap",
                                 lineHeight: isMobile ? "1.4" : "2.2",
-                                // justifyContent: isMobile ? "center" : "start",
                             }}
                         >
                             <Field2>
@@ -125,7 +124,7 @@ const PublicProfile = () => {
                             <Field2>
                                 {user.skill_wanted && (
                                     <span>
-                                        like to learn <p>{user.skill_wanted}</p>
+                                        I like <p>{user.skill_wanted}</p>
                                     </span>
                                 )}
                             </Field2>
@@ -237,6 +236,7 @@ const ProfileContainer = styled.div`
         border-bottom: none;
         padding: 152px 24px 2px 25px;
         transform: scale(1.4);
+        -webkit-overflow-scrolling: touch;
     }
 `;
 

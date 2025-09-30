@@ -15,7 +15,7 @@ const Profile = () => {
         bio: "",
         skill_known: "",
         skill_wanted: "",
-        available_time: "",
+
         profile_image: "",
     });
 
@@ -123,13 +123,6 @@ const Profile = () => {
                                 <Name>
                                     {user.first_name} {user.last_name}
                                 </Name>
-                                <Field3>
-                                    {user.available_time ? (
-                                        <span>{user.available_time}</span>
-                                    ) : (
-                                        <div style={{ color: "blue" }}></div>
-                                    )}
-                                </Field3>
                             </div>
 
                             <div
@@ -148,8 +141,7 @@ const Profile = () => {
                                 <Field2>
                                     {user.skill_wanted && (
                                         <span style={{ fontWeight: "300" }}>
-                                            like to learn{" "}
-                                            <p>{user.skill_wanted}</p>
+                                            I like <p>{user.skill_wanted}</p>
                                         </span>
                                     )}
                                 </Field2>
@@ -313,28 +305,6 @@ const Name = styled.h2`
         margin-right: 12px;
         font-weight: 700;
         margin-bottom: -13px;
-    }
-`;
-
-const Field3 = styled.p`
-    span {
-        font-size: 12px;
-        display: inline-block;
-        background: #eb922b;
-        padding: 2px 5px;
-        border-radius: 7px;
-        color: #000;
-        text-align: center;
-        margin-top: 6px;
-        @media (max-width: 480px) {
-            font-size: 6px;
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
-    }
-    div {
-        margin-top: 4px;
-        white-space: pre-wrap;
     }
 `;
 
