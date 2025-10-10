@@ -19,13 +19,13 @@ The app provides a responsive and modern interface built with React, while Djang
 
 This project demonstrates full-stack development skills, including:
 
-    REST API design using Django REST Framework
+- REST API design using Django REST Framework
   
-    Real-time messaging with Django Channels and Redis
+- Real-time messaging with Django Channels and Redis
   
-    Secure JWT-based authentication
+- Secure JWT-based authentication
   
-    Frontend integration with React and Axios
+- Frontend integration with React and Axios
 
 
 
