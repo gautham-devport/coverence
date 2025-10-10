@@ -19,13 +19,13 @@ The app provides a responsive and modern interface built with React, while Djang
 
 This project demonstrates full-stack development skills, including:
 
-  REST API design using Django REST Framework
-
-  Real-time messaging with Django Channels and Redis
-
-  Secure JWT-based authentication
-
-  Frontend integration with React and Axios
+    REST API design using Django REST Framework
+  
+    Real-time messaging with Django Channels and Redis
+  
+    Secure JWT-based authentication
+  
+    Frontend integration with React and Axios
 
 
 
@@ -75,29 +75,29 @@ Tech Stack
 
 Frontend
   
-  React
+  - React
   
-  Styled-Components
+  - Styled-Components
   
-  Axios
+  - Axios
   
-  WebSockets (native browser API)
+  - WebSockets (native browser API)
 
 Backend
 
-  Django REST Framework
+  - Django REST Framework
 
-  Django Channels
+  - Django Channels
 
-  Daphne (ASGI server for WebSockets)
+  - Daphne (ASGI server for WebSockets)
 
-  Redis (message broker)
+  - Redis (message broker)
 
-  Simple JWT (authentication)
+  - Simple JWT (authentication)
 
 
 Hosting
 
-Frontend: Vercel
-Backend & WebSocket Server: Render
-Redis Server: Upstash / Render Redis instance
+- Frontend: Vercel
+- Backend & WebSocket Server: Render
+- Redis Server: Upstash / Render Redis instance
