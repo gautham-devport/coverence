@@ -28,6 +28,38 @@ This project demonstrates full-stack development skills, including:
 - Frontend integration with React and Axios
 
 
+Tech Stack
+
+Frontend
+  
+  - React
+  - 
+  - Styled-Components
+  
+  - Axios
+  
+  - WebSockets (native browser API)
+
+Backend
+
+  - Django REST Framework
+
+  - Django Channels
+
+  - Daphne (ASGI server for WebSockets)
+
+  - Redis (message broker)
+
+  - Simple JWT (authentication)
+
+
+Hosting
+
+- Frontend: Vercel
+- Backend & WebSocket Server: Render
+- Redis Server: Upstash / Render Redis instance
+
+
 
 Key Features
 
@@ -70,34 +102,3 @@ Responsive Design:
   - Fully responsive layout built with React and styled-components for a consistent experience on all devices.
 
 
-
-Tech Stack
-
-Frontend
-  
-  - React
-  
-  - Styled-Components
-  
-  - Axios
-  
-  - WebSockets (native browser API)
-
-Backend
-
-  - Django REST Framework
-
-  - Django Channels
-
-  - Daphne (ASGI server for WebSockets)
-
-  - Redis (message broker)
-
-  - Simple JWT (authentication)
-
-
-Hosting
-
-- Frontend: Vercel
-- Backend & WebSocket Server: Render
-- Redis Server: Upstash / Render Redis instance
