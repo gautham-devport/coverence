@@ -33,7 +33,7 @@ Tech Stack
 Frontend
   
   - React
-  - 
+
   - Styled-Components
   
   - Axios
