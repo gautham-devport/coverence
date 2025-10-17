@@ -3,11 +3,12 @@ Coverence – Real-Time Social Media Messaging Platform
 Coverence is a full-stack social media messaging application that allows users to connect, search for other users, view public profiles, and exchange real-time messages.
 The application is built using React for the frontend and Django for the backend, with WebSockets and Redis enabling live communication.
 
-🔗 Live Demo
+🔗 Live
 Website: https://coverence-r586.vercel.app/
 
 Frontend Hosted on: Vercel
 Backend Hosted on: Render
+
 
 
 
