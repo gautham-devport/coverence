@@ -2,6 +2,7 @@ from pathlib import Path
 from datetime import timedelta
 from pillow_heif import register_heif_opener
 import os
+import ssl
 import urllib.parse
 import dj_database_url
 
@@ -54,18 +55,21 @@ INSTALLED_APPS = [
 ASGI_APPLICATION = 'coverence.asgi.application'
 
 
-redis_url = os.environ.get("REDIS_URL", "redis://127.0.0.1:6379")
-url = urllib.parse.urlparse(redis_url)
+
+REDIS_URL = os.environ.get("REDIS_URL", "rediss://127.0.0.1:6379")
 
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [{
-                "host": url.hostname,
-                "port": url.port,
-                "password": url.password, 
-            }],
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [
+                {
+                    "address": REDIS_URL,
+                    "ssl": True,                  # Enable SSL
+                    "ssl_cert_reqs": ssl.CERT_NONE, # Ignore certificate verification
+                    "ssl_check_hostname": False,   # Prevent hostname verification
+                }
+            ],
         },
     },
 }
